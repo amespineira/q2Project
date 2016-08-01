@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var cookieSession = require('cookie-session')
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var auth = require('./routes/auth');
 var userbouncer= require('./routes/userbouncer')
 var app = express();
 
@@ -28,7 +28,7 @@ app.use(cookieSession({
 }))
 
 app.use('/', routes);
-app.use('/auth', users);
+app.use('/auth', auth);
 app.use('/', userbouncer.loggedIn);
 
 // catch 404 and forward to error handler
