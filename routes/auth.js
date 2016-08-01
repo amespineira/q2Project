@@ -9,7 +9,7 @@ router.post('/signup', function(req, res, next) {
     Auth.getUser(req.body.username).then(function(exists){
       if(exists.rows.length>0){
         error='Username is taken'
-        res.render('signup', {error:error})
+        res.render('auth/signup', {error:error})
       }
       else{
       bcrypt.hash(req.body.password, 10, function(err, hash) {
@@ -25,7 +25,7 @@ router.post('/signup', function(req, res, next) {
     })
   }
   else{
-    res.render('signup', {error:error})
+    res.render('auth/signup', {error:error})
   }
 });
 router.post('/signin', function(req, res, next){
@@ -40,12 +40,5 @@ router.post('/signin', function(req, res, next){
     }
   })
 })
-router.get('/test', function(req, res, next){
-  if(req.session.loggedin===true){
-    res.render('worked')
-  }
-  else{
-    res.render('didnt')
-  }
-})
+
 module.exports = router;
