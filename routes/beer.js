@@ -4,9 +4,9 @@ var Beer=require('../queries/beer.js')
 var Ing=require('../queries/ingredients.js')
 var defaults=[ //these are the default beers to display on the page, the ingredients refrence ids in the ingredients table, these are used as templates for the user to edit
   {
-    type:'ale',
-    style:'dark',
-    description:'what a thing',
+    type:'Lager',
+    style:'Light',
+    description:'Light bodied, pale, fizzy lagers made popular by the large macro-breweries (large breweries) of America after prohibition. Low bitterness,thin malts, and moderate alcohol. Focus is less on flavor and more on mass-production and consumption, cutting flavor and sometimes costs with adjunct cereal grains, like rice and corn.',
     ingredients:[1,2]
   },
   {
