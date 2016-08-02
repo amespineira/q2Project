@@ -3,13 +3,13 @@ var router = express.Router();
 var knex = require('../db/knex');
 
 function Batch(){
-  return knex('batch');
+return knex('batch');
 }
 function Beer(){
   return knex('beer');
 }
 function Beer_ingredients(){
-  return knex('beer_ingredients');
+  return ('beer_ingredients');
 }
 
 router.post('/:id', function(req, res, next){
