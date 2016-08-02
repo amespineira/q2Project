@@ -3,10 +3,14 @@
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
-
+.B{
+  color: green;
+}
 .brew{
   margin-left: -4vw;
-
+}
+.loginSize{
+  font-size: 2em;
 }
 
 body {
