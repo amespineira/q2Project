@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add a Piece of Equipment</title>
+  </head>
+  <body>
+    <form class="" action="/equipment" method="post">
+      <label for="equipment_name">
+        <div>
+          Name of Equipment:<input type="text" name="equipment_name" value="">
+        </div>
+      </label>
+      <label for="batch_id">
+        <div class="">
+          <input type="text" name="batch_id" value="">
+        </div>
+      </label>
+      <label for="clean">
+        <div class="">
+          <p></p>
+          Yes<input type="radio" name="clean" value="yes">
+          No<input type="radio" name="clean" value="no">
+        </div>
+      </label>
+      <label for="cleaning_notes">
+        <div>
+          <p>
+            Please leave cleaning instructions/notes here:
+          </p>
+          <textarea name="cleaning_notes" cols="50" rows="10" placeholder="Cleaning Notes"></textarea>
+        </div>
+      </label>
+      <button type="submit" name="submit">Submit</button>
+    </form>
+  </body>
+</html>

@@ -9,5 +9,9 @@
     <%for(i=0;i<equipment.length;i++){%>
       <p><%=equipment[i].equipment_name%></p>
     <%}%>
+    <form class="" action="/equipment/add" method="get">
+      <button type="submit" name="button">Add a Piece of Equipment</button>
+
+    </form>
   </body>
 </html>
