@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sign in</title>
+    <link rel='stylesheet' href='/stylesheets/beer.css' />
+  </head>
+  <body>
+
+  <div>Your Beers
+    <%for(var i=0; i<beers.length; i++){%>
+      <p>
+      <a href=<%='/beer/'+beers[i].id%>><%=beers[i].beer_name%></a>
+      </p>
+    <%}%>
+  </div>
+  </body>
+</html>
