@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var knex = require('../db/knex');
+var Queries_batch = require('../queries/batch');
 
 function Batch(){
   return knex('batch');
@@ -12,14 +13,26 @@ function Beer_ingredients(){
   return knex('beer_ingredients');
 }
 
-router.post('/:id', function(req, res, next){
-  //will be req.params.id instead of hardcode
-  Beer().where({id: req.params.id}).select().then(function(beer){
-    knex.raw(`INSERT into batch values(default, ${req.session.id}, ${beer[0].user_id}, ${beer[0].id}, default, )`)
-      console.log(beer);
+//recieving the beer id in req.params.id
+router.get('/', function(req, res, next){
+  Batch().join('beer', 'beer.id', '=', 'batch.beer_id').then(function(batches){
+    res.render('batch/index', {batches: batches})
   })
-  console.log(req.session.id);
 })
+
+router.post('/:id', function(req, res, next){
+  Queries_batch.createBatch(req.body, req.session.id, req.params.id).then(function(){
+      res.redirect('/batch')
+  })
+})
+
+router.get('/:id', function(req, res, next){
+  Queries_batch.ingredientData(req.params.id).then(function(data){
+    console.log(data.rows);
+    res.render('batch/show', {batch: data.rows})
+  })
+})
+
 
 
 

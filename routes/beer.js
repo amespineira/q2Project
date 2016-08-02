@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Beer=require('../queries/beer.js')
 var Ing=require('../queries/ingredients.js')
+var Batch=require('../queries/batch.js')
 var defaults=[ //these are the default beers to display on the page, the ingredients refrence ids in the ingredients table, these are used as templates for the user to edit
   {
     type:'ale',
@@ -79,9 +80,9 @@ router.get('/create/:id', function(req, res, next){
   })
 })
 router.get('/:id', function(req, res, next){
-  Beer.getOne(req.params.id).then(function(beers){
-    if(beers.rows[0].user_id===req.session.id){
-    res.render('beer/showbeer', {beers:beers.rows})
+  Promise.all([Beer.getOne(req.params.id),Ing.getBeersIng(req.params.id)]).then(function(results){
+    if(results[0].rows[0].user_id===req.session.id){
+    res.render('beer/showbeer', {beers:results[0].rows, ingredients:results[1].rows})
     }
     else{
       res.send('not your beer, get out of here')

@@ -1,0 +1,30 @@
+<% include ../layout %>
+
+<section>
+  <h2>Batches</h2>
+
+  <div class="table">
+    <table>
+      <thead>
+        <tr>
+          <th>Beer Name</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Expected Yield</th>
+          <th>Gravity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%for(var i = 0; i < batches.length; i++){ %>
+          <tr>
+            <td><a href="/batch/<%= batches[i].id %>"><%=  batches[i].beer_name %></a></td>
+            <td><%= batches[i].start_date %></td>
+            <td><%= batches[i].end_date %></td>
+            <td><%= batches[i].expected_yield %></td>
+            <td><%= batches[i].gravity %></td>
+          </tr>
+          <%} %>
+      </tbody>
+    </table>
+  </div>
+</section>

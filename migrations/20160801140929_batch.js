@@ -10,6 +10,7 @@ exports.up = function(knex, Promise) {
     table.integer('expected_yield');
     table.integer('actual_yield');
     table.float('gravity');
+
   })
 };
 

@@ -8,6 +8,9 @@ module.exports={
     }
     return knex.raw(query)
   },
+  getBeersIng:function(id){
+    return knex.raw(`SELECT * FROM ingredients JOIN beer_ingredients ON beer_ingredients.ingredient_id=ingredients.id WHERE beer_ingredients.beer_id=${id}`)
+  },
   createIfMissing:function(ingredients){
     var curr=ingredients.pop()
     var query=`SELECT * FROM ingredients WHERE ingredient_name='${curr.name}' AND ingredient_type='${curr.type}' AND units='${curr.units}'`
