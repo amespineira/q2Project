@@ -1,0 +1,19 @@
+<% include ../layout %>
+<section>
+  <div class="header-content">
+      <div class="header-content-inner">
+        <div class="row">
+          <div class="col-xs-6 col-sm-4">
+              <%for(var i=0; i<defaults.length; i++){%>
+                <div>
+                  <a href=<%= 'create/'+i%>><%=defaults[i].type%></a>
+                  <p>Style: <%= defaults[i].style%></p>
+                  <p><%= defaults[i].description %></p>
+                </div>
+                <%}%>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
