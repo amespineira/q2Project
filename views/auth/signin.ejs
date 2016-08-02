@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="/loginstylesheets/loginstyle.css">
   </head>
   <body>
+    <h1 class="signup">Sign Up</h1>
 
         <!-- Top content -->
         <div class="top-content">
@@ -35,6 +36,9 @@
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3 form-box">
                         	<div class="form-top">
+                            <%if(error){%>
+                                <p class='error'><%= error%></p>
+                            <%}%>
                         		<div class="form-top-left">
                         			<h3>Login to Brew<span class="B">B</span>uddy</h3>
                             		<p>Enter your username and password to log on:</p>
@@ -44,7 +48,7 @@
                         		</div>
                             </div>
                             <div class="form-bottom">
-			                    <form action="auth/signin/" method="post" class="login-form">
+			                    <form action="/auth/signin/" method="post" class="login-form">
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="form-username">Username</label>
 			                        	<input type="text" name="username" placeholder="Username..." class="form-username form-control" id="form-username">
