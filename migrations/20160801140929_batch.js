@@ -9,6 +9,7 @@ exports.up = function(knex, Promise) {
     table.dateTime('end_date');
     table.integer('expected_yeild');
     table.integer('actual_yeild');
+    table.integer('gravity');
   })
 };
 
