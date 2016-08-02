@@ -1,0 +1,38 @@
+<% include ../layout %>
+<section>
+  <div class="header-content">
+    <form action='/beer' method=post>
+      <p>
+      Type: <input type="text" name="type" value=<%=template.type%> class="inputText"></input>
+      </p>
+      <p>
+      Style: <input type="text" name="style" value=<%=template.style%> class="inputText"></input>
+      </p>
+      <p>
+      Name: <input type="text" name="name" value='My Beer' class="inputText"></input>
+      </p>
+      <table class="table table-bordered" >
+        <tbody id="form-table">
+        <tr>
+          <th>Ingredients</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Units</th>
+        </tr>
+        <% for(var i=0; i<ingredients.length; i++){%>
+          <tr>
+            <th><input class="inputText" type="text" name=<%='ingredientName'%> value='<%= ingredients[i].ingredient_name%>'></input></th>
+            <th><input class="inputText" type="text" name=<%='ingredientType'%> value='<%= ingredients[i].ingredient_type%>'></input></th>
+            <th><input class="inputText" type="number" name=<%='ingredientAmount'%> value='<%= template.amounts[i] %>'></input></th>
+            <th><input class="inputText" type="text" name=<%='ingredientUnits'%> value='<%= ingredients[i].units %>'></input></th>
+          </tr>
+        <%}%>
+      </tbody>
+      </table>
+      <button type="submit" class="btn">Save Recipe</button>
+    </form>
+    <button class="btn" id="addIng">Add Ingredient</button>
+    <script src="/js/beerCreate.js"></script>
+
+  </div>
+</section>
