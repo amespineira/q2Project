@@ -415,3 +415,49 @@ img::-moz-selection {
 body {
   webkit-tap-highlight-color: #222222;
 }
+
+
+.container_batch{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.item {
+  border: 1px solid black;
+  flex: 1;
+  background: lightblue;
+  border-radius: 5px;
+}
+
+.item:nth-child(odd){
+  background: lightgreen;
+}
+
+table {
+  border-radius: 7px;
+  width: 100%;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+}
+
+table, th, td {
+  border-collapse: collapse;
+}
+
+td {
+  height: 2em;
+}
+
+thead {
+  font-size: 16px;
+  background: grey;
+}
+th{
+  height: 1em;
+}
+
+tbody {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.75);
+}

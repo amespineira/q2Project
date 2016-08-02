@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var knex = require('../db/knex');
+var Queries_batch = require('../queries/batch');
 
 function Batch(){
   return knex('batch');
@@ -21,18 +22,16 @@ router.get('/', function(req, res, next){
 
 router.post('/:id', function(req, res, next){
   //will be req.params.id instead of hardcode
-  Beer().where({id: req.params.id}).select().then(function(beer){
-    knex.raw(`INSERT into batch values(default, ${req.session.id}, ${req.params.id}, ${Date()}, ${req.body.end_date}, ${req.body.expected_yeild}, ${null}, ${1})`)
-    res.redirect('/batch')
+  Queries_batch.createBatch(req.body, req.session.id, req.params.id).then(function(){
+      res.redirect('/batch')
   })
 })
 
 router.get('/:id', function(req, res, next){
-  
-})
-
-router.get('/', function(req, res, next){
-  res.render('batch/show')
+  Queries_batch.ingredientData(req.params.id).then(function(data){
+    console.log(data.rows);
+    res.render('batch/show', {batch: data.rows})
+  })
 })
 
 
