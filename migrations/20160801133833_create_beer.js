@@ -6,7 +6,6 @@ exports.up = function(knex, Promise) {
     table.string('beer_name');
     table.string('type');
     table.string('style');
-    table.integer('gravity');
   })
 };
 
