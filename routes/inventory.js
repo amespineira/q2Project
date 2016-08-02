@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/equipment', function(req, res, next){
-  res.render('equipment');
+router.get('/inventory', function(req, res, next){
+  res.render('inventory');
 })
 
 
