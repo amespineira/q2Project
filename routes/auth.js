@@ -30,14 +30,20 @@ router.post('/signup', function(req, res, next) {
 });
 router.post('/signin', function(req, res, next){
   Auth.getUser(req.body.username).then(function(user){
-    if(bcrypt.compareSync(req.body.password, user.rows[0].password)){
-      req.session.id=user.rows[0].id
-      req.session.loggedin=true;
-      res.redirect('/main')
+    if(user.rows.length>0){
+      if(bcrypt.compareSync(req.body.password, user.rows[0].password)){
+        req.session.id=user.rows[0].id
+        req.session.loggedin=true;
+        res.redirect('/main')
+      }
+      else{
+        res.render('auth/signin', {error: 'Invalid Password'})
+      }
     }
     else{
-      res.redirect('/signin')
+      res.render('auth/signin', {error: 'Invalid Username'})
     }
+
   })
 })
 
