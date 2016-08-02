@@ -6,10 +6,10 @@ router.get('/', function(req, res, next) {
   res.render('splashpage')
 });
 router.get('/signup', function(req, res, next){
-  res.render('signup', {error: null})
+  res.render('auth/signup', {error: null})
 })
 router.get('/signin', function(req, res, next){
-  res.render('signin')
+  res.render('auth/signin')
 });
 router.get('/login', function(req, res, next){
   res.render('login')
