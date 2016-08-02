@@ -7,8 +7,8 @@ exports.up = function(knex, Promise) {
     table.foreign('beer_id').references('id').inTable('beer');
     table.dateTime('start_date');
     table.dateTime('end_date');
-    table.integer('expected_yeild');
-    table.integer('actual_yeild');
+    table.integer('expected_yield');
+    table.integer('actual_yield');
     table.integer('gravity');
   })
 };
