@@ -32,7 +32,7 @@ router.get('/create/:id', function(req, res, next){
     console.log(defaults[req.params.id]);
     console.log(ingredients.rows);
 
-    res.render('beer/create', {specs:defaults[req.params.id], ingredients:ingredients.rows})
+    res.render('beer/create', {template:defaults[req.params.id], ingredients:ingredients.rows})
   })
 })
 router.get('/:id', function(req, res, next){

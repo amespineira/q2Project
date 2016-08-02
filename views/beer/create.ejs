@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Sign in</title>
-    <link rel='stylesheet' href='/stylesheets/beer.css' />
-  </head>
-  <body>
-
-  <a href="/beer/create">Add New Beer</a>
-  <div>
-    
+<% include ../layout %>
+<section>
+  <div class="header-content">
+    <form action='/beer' method=post>
+      <p>
+      Type: <input type="text" name="type" value=<%=template.type%> class="inputText"></input>
+      </p>
+      <p>
+      Style: <input type="text" name="type" value=<%=template.style%> class="inputText"></input>
+      </p>
+      <
+    </form>
   </div>
-  </body>
-</html>
+</section>
