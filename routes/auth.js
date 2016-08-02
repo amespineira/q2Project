@@ -33,7 +33,7 @@ router.post('/signin', function(req, res, next){
     if(bcrypt.compareSync(req.body.password, user.rows[0].password)){
       req.session.id=user.rows[0].id
       req.session.loggedin=true;
-      res.redirect('/')
+      res.redirect('/main')
     }
     else{
       res.redirect('/signin')
