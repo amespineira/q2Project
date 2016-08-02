@@ -9,7 +9,7 @@ router.get('/signup', function(req, res, next){
   res.render('auth/signup', {error: null})
 })
 router.get('/signin', function(req, res, next){
-  res.render('auth/signin')
+  res.render('auth/signin', {error: null})
 });
 router.get('/login', function(req, res, next){
   res.render('login')
