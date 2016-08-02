@@ -1,1 +1,52 @@
+<% include ../layout %>
 
+<section>
+  <h2><%= batch[0].beer_name %></h2>
+  <h6><%= batch[0].type %></h6>
+  <h6><%= batch[0].style %></h6>
+  <div class="container_batch">
+    <div class="item">
+      <h6>Stage 1: Brew Day</h6>
+    </div>
+    <div class="item">
+      <h6>Stage 2: Fermentation Monitoring</h6>
+    </div>
+    <div class="item">
+      <h6>Stage 3: Bottling Day</h6>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="col-sm-4">
+    <h4><%= batch[0].beer_name %> Ingredients</h4>
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Ingredient Name</th>
+            <th>Ingredient Type</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%for(var i = 0; i < batch.length; i++){ %>
+            <tr>
+              <td><%= batch[i].ingredient_name %></td>
+              <td><%= batch[i].ingredient_type %></td>
+              <td><%= batch[i].amount %> <%= batch[i].units %></td>
+            </tr>
+            <%} %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <h4>Equipment</h4>
+  </div>
+  <div class="col-sm-4">
+    <h4>Brewer's Notes</h4>
+    <h6><%= batch[0].notes %></h6>
+  </div>
+</div>
+
+</section>
