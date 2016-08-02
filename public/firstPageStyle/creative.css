@@ -3,9 +3,21 @@
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
+/*GOOGLE MAPS INPUTS*/
+
+#inputMap1{
+  float: right;
+  margin-top: 10vh;
+  margin-right: 5vw;
+}
+#buttonMap1{
+  float: right;
+  margin-top: 10vh;
+  margin-right: 2vw;
+}
+
 .inputText{
   color:black;
-
 }
 
 html,
