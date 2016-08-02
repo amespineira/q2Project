@@ -10,7 +10,14 @@ body {
     background-size: 100% 200vh;
     background-repeat: no-repeat;
 }
+.fa-beer{
+  color: green;
 
+}
+
+.B{
+  color: green;
+}
 .brewB{
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 4em;
