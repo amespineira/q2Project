@@ -9,12 +9,9 @@ var cookieSession = require('cookie-session')
 var routes = require('./routes/index');
 var auth = require('./routes/auth');
 var userbouncer= require('./routes/userbouncer')
-<<<<<<< HEAD
 var equipment = require('./routes/equipment')
-=======
 var batch = require('./routes/batch')
 var beer= require('./routes/beer')
->>>>>>> master
 var app = express();
 
 // view engine setup
@@ -37,14 +34,12 @@ console.log("got to here");
 app.use('/', routes);
 app.use('/auth', auth);
 app.use('/', userbouncer.loggedIn);
-<<<<<<< HEAD
 app.use('/', equipment);
 
 
-=======
+
 app.use('/batch', batch);
 app.use('/beer', beer)
->>>>>>> master
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
