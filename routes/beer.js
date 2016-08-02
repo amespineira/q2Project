@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Beer=require('../queries/beer.js')
 var Ing=require('../queries/ingredients.js')
+var Batch=require('../queries/batch.js')
 var defaults=[ //these are the default beers to display on the page, the ingredients refrence ids in the ingredients table, these are used as templates for the user to edit
   {
     type:'ale',
@@ -14,7 +15,9 @@ var defaults=[ //these are the default beers to display on the page, the ingredi
     type:'Lager',
     style:'Light',
     description:'Light bodied, pale, fizzy lagers made popular by the large macro-breweries (large breweries) of America after prohibition. Low bitterness,thin malts, and moderate alcohol. Focus is less on flavor and more on mass-production and consumption, cutting flavor and sometimes costs with adjunct cereal grains, like rice and corn.',
-    ingredients:[1,2]
+    ingredients:[1,2],
+    amounts:[10,10]
+
   }
 ]
 /* GET home page. */
@@ -26,7 +29,6 @@ router.get('/', function(req, res, next) {
   })
 })
 router.post('/', function(req, res, next){
-  //check ingredients, add any not found
   var ingredients=[];
   var ingredients2=[];
   for(var i=0; i<req.body.ingredientName.length; i++){
@@ -39,10 +41,10 @@ router.post('/', function(req, res, next){
       name:req.body.ingredientName[i],
       type:req.body.ingredientType[i],
       units:req.body.ingredientUnits[i],
-      units:req.body.ingredientAmount[i],
+      amount:req.body.ingredientAmount[i],
     })
   }
-  var create=Ing.createIfMissing(ingredients).then(function(){
+  Ing.createIfMissing(ingredients).then(function(){
     var specs={
       user_id:req.session.id,
       name:req.body.name,
@@ -50,8 +52,11 @@ router.post('/', function(req, res, next){
       style:req.body.style
     }
     Beer.create(specs).then(function(){
-      Beer.getMatch(specs).then(function(matches){
-        Ing.createBeerIngredients(ingredients2, matches.rows[0].id)
+      Beer.getLatestBeer(req.session.id).then(function(userBeer){
+        Ing.createBITest2(ingredients2, userBeer.rows[0].max).then(function(result){
+          res.redirect('/beer')
+        })
+
       })
     })
   })
@@ -75,9 +80,9 @@ router.get('/create/:id', function(req, res, next){
   })
 })
 router.get('/:id', function(req, res, next){
-  Beer.getOne(req.params.id).then(function(beers){
-    if(beers.rows[0].user_id===req.session.id){
-    res.render('beer/showbeer', {beers:beers.rows})
+  Promise.all([Beer.getOne(req.params.id),Ing.getBeersIng(req.params.id)]).then(function(results){
+    if(results[0].rows[0].user_id===req.session.id){
+    res.render('beer/showbeer', {beers:results[0].rows, ingredients:results[1].rows})
     }
     else{
       res.send('not your beer, get out of here')
