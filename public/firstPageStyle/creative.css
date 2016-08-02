@@ -439,6 +439,7 @@ table {
   border-radius: 7px;
   width: 100%;
   box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  margin: 20px;
 }
 
 table, th, td {
@@ -451,7 +452,7 @@ td {
 
 thead {
   font-size: 16px;
-  background: grey;
+  background: lightblue;
 }
 th{
   height: 1em;

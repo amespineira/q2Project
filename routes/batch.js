@@ -15,13 +15,13 @@ function Beer_ingredients(){
 
 //recieving the beer id in req.params.id
 router.get('/', function(req, res, next){
-  Batch().select().then(function(batches){
+  Batch().join('beer', 'beer.id', '=', 'batch.beer_id').then(function(batches){
+    console.log(batches);
     res.render('batch/index', {batches: batches})
   })
 })
 
 router.post('/:id', function(req, res, next){
-  //will be req.params.id instead of hardcode
   Queries_batch.createBatch(req.body, req.session.id, req.params.id).then(function(){
       res.redirect('/batch')
   })
