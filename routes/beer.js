@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Beer=require('../queries/beer.js')
-var defaults=[
+var Ing=require('../queries/ingredients.js')
+var defaults=[ //these are the default beers to display on the page, the ingredients refrence ids in the ingredients table, these are used as templates for the user to edit
   {
     type:'ale',
     style:'dark',
@@ -27,7 +28,12 @@ router.get('/create', function(req, res, next){
   res.render('beer/select', {defaults:defaults})
 })
 router.get('/create/:id', function(req, res, next){
-  res.render('beer/create', {defaults:defaults})
+  Ing.getDefaultIng(defaults[req.params.id].ingredients).then(function(ingredients){
+    console.log(defaults[req.params.id]);
+    console.log(ingredients.rows);
+
+    res.render('beer/create', {specs:defaults[req.params.id], ingredients:ingredients.rows})
+  })
 })
 router.get('/:id', function(req, res, next){
   Beer.getOne(req.params.id).then(function(beers){
