@@ -13,7 +13,7 @@ function Beer_ingredients(){
 }
 
 router.post('/:id', function(req, res, next){
-  //will be req.params.id instead of hardcode
+  will be req.params.id instead of hardcode
   Beer().where({id: req.params.id}).select().then(function(beer){
     knex.raw(`INSERT into batch values(default, ${req.session.id}, ${beer[0].user_id}, ${beer[0].id}, default, )`)
       console.log(beer);

@@ -1,3 +1,4 @@
+
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
   return knex('brewer_notes').del()
@@ -19,8 +20,7 @@ exports.seed = function(knex, Promise) {
         knex('brewer_notes').insert({id: 13, user_id:4 , beer_id:7 , notes:'good' }),
         knex('brewer_notes').insert({id: 14, user_id:4 , beer_id:7 , notes:'meh' }),
         knex('brewer_notes').insert({id: 15, user_id:4 , beer_id:8 , notes:'good' }),
-        knex('brewer_notes').insert({id: 16, user_id:4 , beer_id:8 , notes:'meh' }),
-
+        knex('brewer_notes').insert({id: 16, user_id:4 , beer_id:8 , notes:'meh' })
       ]);
     });
 };
