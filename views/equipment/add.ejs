@@ -1,37 +1,40 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Add a Piece of Equipment</title>
-  </head>
-  <body>
+<% include ../layout %>
+
+<section>
+
     <form class="" action="/equipment" method="post">
-      <label for="equipment_name">
-        <div>
-          Name of Equipment:<input type="text" name="equipment_name" value="">
-        </div>
-      </label>
-      <label for="batch_id">
-        <div class="">
-          <input type="text" name="batch_id" value="">
-        </div>
-      </label>
-      <label for="clean">
-        <div class="">
-          <p></p>
-          Yes<input type="radio" name="clean" value="yes">
-          No<input type="radio" name="clean" value="no">
-        </div>
-      </label>
-      <label for="cleaning_notes">
-        <div>
-          <p>
-            Please leave cleaning instructions/notes here:
-          </p>
-          <textarea name="cleaning_notes" cols="50" rows="10" placeholder="Cleaning Notes"></textarea>
-        </div>
-      </label>
-      <button type="submit" name="submit">Submit</button>
+        <label for="equipment_name">
+            <div>
+                Name of Equipment:<input type="text" name="equipment_name" value="">
+            </div>
+        </label>
+        <label for="batch_id">
+            <p></p>
+            <div class="">
+                Batch ID: <input type="text" name="batch_id" value="">
+            </div>
+        </label>
+        <label for="clean">
+            <div class="">
+                <p></p>
+                Yes<input type="radio" name="clean" value="yes">
+                No<input type="radio" name="clean" value="no">
+            </div>
+        </label>
+        <label for="clean_time">
+            <div class="">
+                <p>How long does it take to clean?</p>
+                <input type="number" name="cleaning_time" placeholder="0"> minutes
+            </div>
+        </label>
+        <label for="cleaning_notes">
+            <div>
+                <p>
+                    Please leave cleaning instructions/notes here:
+                </p>
+                <textarea name="cleaning_notes" cols="50" rows="10" placeholder="Cleaning Notes"></textarea>
+            </div>
+        </label>
+        <button type="submit" name="submit">Submit</button>
     </form>
-  </body>
-</html>
+</section>

@@ -1,17 +1,46 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Equipment</title>
-  </head>
-  <body>
-    Here is a list of all your equipment
-    <%for(i=0;i<equipment.length;i++){%>
-      <p><%=equipment[i].equipment_name%></p>
-    <%}%>
+<% include ../layout %>
+
+
+
+<section>
+  <h2>Equipment</h2>
+
+  <div class="table">
+    <table>
+      <thead>
+        <tr>
+          <th>Equipment Name</th>
+          <th>User Id</th>
+          <th>Batch Id</th>
+          <th>Clean?</th>
+          <th>Clean Time</th>
+          <th>Clean Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%for(var i = 0; i < equipment.length; i++){ %>
+          <tr>
+            <td><a href="/equipment/<%= equipment[i].id %>"><%=  equipment[i].equipment_name %></a></td>
+            <td><%= equipment[i].user_id %></td>
+            <td><%= equipment[i].batch_id %></td>
+            <td><%= equipment[i].clean %></td>
+            <td><%= equipment[i].clean_time %></td>
+            <td><%= equipment[i].clean_notes %></td>
+          </tr>
+          <%} %>
+      </tbody>
+    </table>
+
     <form class="" action="/equipment/add" method="get">
       <button type="submit" name="button">Add a Piece of Equipment</button>
 
     </form>
-  </body>
-</html>
+  </div>
+
+  <!-- Here is a list of all your equipment
+  <%for(i=0;i<equipment.length;i++){%>
+    <p><%=equipment[i].equipment_name%></p>
+    <%}%> -->
+
+
+</section>
