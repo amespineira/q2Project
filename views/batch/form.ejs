@@ -1,7 +1,11 @@
-<form action="/batch/time" method="post">
-  <label for="end_date">End Date</label>
-  <input type="date" name="end_date" value="<%= Date() %>">
-  <label for="expected_yield">Expected Yield</label>
-  <input type="number" name="expected_yield">
-  <input type="submit" value=">">
-</form>
+<% include ../layout %>
+
+<section>
+    <form action="/batch/<%=  %>" method="post">
+      <label for="end_date">End Date</label>
+      <input type="date" name="end_date" value="<%= Date() %>">
+      <label for="expected_yield">Expected Yield</label>
+      <input type="number" name="expected_yield">
+      <input type="submit" value=">">
+    </form>
+</section>

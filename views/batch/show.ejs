@@ -16,7 +16,7 @@
     </div>
   </div>
 
-<div class="container">
+<div class="containerC">
   <div class="col-sm-4">
     <h4><%= batch[0].beer_name %> Ingredients</h4>
     <div class="table">
@@ -42,10 +42,34 @@
   </div>
   <div class="col-sm-4">
     <h4>Equipment</h4>
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Equiptment</th>
+            <th>Clean Status</th>
+            <th>Clean Time</th>
+            <th>Clean Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%for(var i = 0; i < equipment.length; i++){ %>
+            <tr>
+              <td><%= equipment[i].equipment_name %></td>
+              <td><%= equipment[i].clean %></td>
+              <td><%= equipment[i].clean_time %></td>
+              <td><%= equipment[i].clean_notes %></td>
+            </tr>
+            <%} %>
+        </tbody>
+      </table>
+    </div>
   </div>
   <div class="col-sm-4">
     <h4>Brewer's Notes</h4>
-    <h6><%= batch[0].notes %></h6>
+    <%for(var i =0; i< notes.length; i++){ %>
+    <h6><%= notes[i].notes %></h6>
+    <% } %>
   </div>
 </div>
 
