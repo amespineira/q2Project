@@ -22,10 +22,8 @@ router.get('/', function(req, res, next){
 })
 
 router.post('/:id', function(req, res, next){
-
   Queries_batch.createBatch(req.body, req.session.id, req.params.id).then(function(){
       res.redirect('/batch')
-
   })
 })
 

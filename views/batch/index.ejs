@@ -7,9 +7,7 @@
     <table>
       <thead>
         <tr>
-          <th>Batch ID</th>
-          <th>User ID</th>
-          <th>Beer ID</th>
+          <th>Beer Name</th>
           <th>Start Date</th>
           <th>End Date</th>
           <th>Expected Yield</th>
@@ -19,12 +17,10 @@
       <tbody>
         <%for(var i = 0; i < batches.length; i++){ %>
           <tr>
-            <td><a href="/batch/<%= batches[i].id %>"><%=  batches[i].id %></a></td>
-            <td><%= batches[i].user_id %></td>
-            <td><%= batches[i].beer_id %></td>
+            <td><a href="/batch/<%= batches[i].id %>"><%=  batches[i].beer_name %></a></td>
             <td><%= batches[i].start_date %></td>
             <td><%= batches[i].end_date %></td>
-            <td><%= batches[i].expected_yeild %></td>
+            <td><%= batches[i].expected_yield %></td>
             <td><%= batches[i].gravity %></td>
           </tr>
           <%} %>
