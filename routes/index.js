@@ -5,10 +5,10 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('splashpage')
 });
-router.get('/auth/signup', function(req, res, next){
+router.get('/signup', function(req, res, next){
   res.render('auth/signup', {error: null})
 })
-router.get('/auth/signin', function(req, res, next){
+router.get('/signin', function(req, res, next){
   res.render('auth/signin')
 });
 router.get('/login', function(req, res, next){
