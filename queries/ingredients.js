@@ -19,5 +19,14 @@ module.exports={
       }
     })
     return (ingredients.length>0)? this.createIfMissing(ingredients) : Promise.resolve(true);
-  }
+  },
+  createBeerIngredients:function(ingredients, beerid){
+    var curr=ingredients.pop()
+    var query=`SELECT * FROM ingredients WHERE ingredient_name='${curr.name}' AND ingredient_type='${curr.type}' AND units='${curr.units}'`
+    knex.raw(query).then(function(matches){
+      console.log(matches);
+      knex.raw(`INSERT INTO beer_ingredients VALUES (${beerid}, ${matches.rows[0].id}, ${curr.amount})`)
+    })
+    return (ingredients.length>0)? this.createBeerIngredients(ingredients) : Promise.resolve(true);
+  },
 }

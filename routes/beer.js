@@ -14,7 +14,9 @@ var defaults=[ //these are the default beers to display on the page, the ingredi
     type:'lager',
     style:'dark',
     description:'what a lager',
-    ingredients:[1,2]
+    ingredients:[1,2],
+    amounts:[10,10]
+
   }
 ]
 /* GET home page. */
@@ -38,11 +40,22 @@ router.post('/', function(req, res, next){
     ingredients2.push({
       name:req.body.ingredientName[i],
       type:req.body.ingredientType[i],
-      units:req.body.ingredientUnits[i]
+      units:req.body.ingredientUnits[i],
+      units:req.body.ingredientAmount[i],
     })
   }
   var create=Ing.createIfMissing(ingredients).then(function(){
-    
+    var specs={
+      user_id:req.session.id,
+      name:req.body.name,
+      type:req.body.type,
+      style:req.body.style
+    }
+    Beer.create(specs).then(function(){
+      Beer.getMatch(specs).then(function(matches){
+        Ing.createBeerIngredients(ingredients2, matches.rows[0].id)
+      })
+    })
   })
 
 })
