@@ -3,7 +3,10 @@ var router = express.Router();
 var Equipment = require('../queries/equipment')
 
 router.get('/', function(req, res, next){
-      res.render('equipment')
+    Equipment.getAllEquipment(req.session.id).then(function(equipment){
+        console.log(equipment)
+        res.render('equipment', {equipment: equipment.rows});
+    })
 });
 
 router.get('/add', function(req, res, next){
