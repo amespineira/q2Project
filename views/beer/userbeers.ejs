@@ -1,18 +1,16 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Sign in</title>
-    <link rel='stylesheet' href='/stylesheets/beer.css' />
-  </head>
-  <body>
-
-  <a href="/beer/create">Add New Beer</a>
-  <div>Your Beers
-    <%for(var i=0; i<beers.length; i++){%>
-      <p>
-      <a href=<%='/beer/'+beers[i].id%>><%=beers[i].beer_name%></a>
-      </p>
-    <%}%>
-  </div>
-  </body>
-</html>
+<% include ../layout %>
+<section>
+  <div class="header-content">
+        <div class="header-content-inner">
+            <h1 id="homeHeading">Add New Beer Page</h1>
+          </div>
+          <a href="/beer/create">Add New Beer</a>
+            <div>Your Beers
+              <%for(var i=0; i<beers.length; i++){%>
+                <p>
+                <a href=<%='/beer/'+beers[i].id%>><%=beers[i].beer_name%></a>
+                </p>
+              <%}%>
+            </div>
+    </div>
+  </section>
