@@ -6,5 +6,8 @@ module.exports={
   },
   getOne:function(id){
     return knex.raw(`SELECT * FROM beer WHERE id='${id}'`)
-  }
+  },
+  // create:function(specs){
+  //   return knex.raw(`INSERT INTO beer VALUES(DEFAULT, )`)
+  // }
 }

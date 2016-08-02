@@ -7,7 +7,8 @@ var defaults=[ //these are the default beers to display on the page, the ingredi
     type:'ale',
     style:'dark',
     description:'what a thing',
-    ingredients:[1,2]
+    ingredients:[1,2],
+    amounts:[10,10]
   },
   {
     type:'lager',
@@ -24,6 +25,33 @@ router.get('/', function(req, res, next) {
     res.render('beer/userbeers', {beers:beers.rows})
   })
 })
+router.post('/', function(req, res, next){
+  //check ingredients, add any not found
+  var ingredients=[];
+  var ingredients2=[];
+  for(var i=0; i<req.body.ingredientName.length; i++){
+    ingredients.push({
+      name:req.body.ingredientName[i],
+      type:req.body.ingredientType[i],
+      units:req.body.ingredientUnits[i]
+    })
+    ingredients2.push({
+      name:req.body.ingredientName[i],
+      type:req.body.ingredientType[i],
+      units:req.body.ingredientUnits[i]
+    })
+  }
+  var create=Ing.createIfMissing(ingredients).then(function(){
+    
+  })
+
+})
+
+
+// ingredientName: [ 'citra', 'ipa', 'water', 'chocolate' ],
+// ingredientType: [ 'hop', 'grain', 'water', 'misc' ],
+// ingredientAmount: [ '10', '10', '20', '10' ],
+// ingredientUnits: [ 'ounces', 'grams', 'liters', 'ounces' ] }
 router.get('/create', function(req, res, next){
   res.render('beer/select', {defaults:defaults})
 })
@@ -31,7 +59,7 @@ router.get('/create/:id', function(req, res, next){
   Ing.getDefaultIng(defaults[req.params.id].ingredients).then(function(ingredients){
     console.log(defaults[req.params.id]);
     console.log(ingredients.rows);
-
+    console.log(ingredients.rows[1].ingredient_name);
     res.render('beer/create', {template:defaults[req.params.id], ingredients:ingredients.rows})
   })
 })

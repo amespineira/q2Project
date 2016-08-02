@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Sign in</title>
-    <link rel='stylesheet' href='/stylesheets/beer.css' />
-  </head>
-  <body>
-
-    <%for(var i=0; i<defaults.length; i++){%>
+<% include ../layout %>
+<section>
+  <div class="header-content">
+        <div class="header-content-inner">
+  <%for(var i=0; i<defaults.length; i++){%>
       <div>
         <a href=<%= 'create/'+i%>><%=defaults[i].type%></a>
         <p>Style: <%= defaults[i].style%>
@@ -16,5 +12,5 @@
       </div>
     <%}%>
   </div>
-  </body>
-</html>
+</div>
+</section>
