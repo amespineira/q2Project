@@ -11,7 +11,15 @@ body {
     background-repeat: no-repeat;
 }
 
+.brewB{
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 4em;
+}
 
+.brewB2{
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 2em;
+}
 strong { font-weight: 500; }
 
 a, a:hover, a:focus {
@@ -160,8 +168,13 @@ img { max-width: 100%; }
 	margin-top: 35px;
 }
 
-.social-login h3 {
+/*.social-login h3 {
 	color: #fff;
+}*/
+.color{
+  color: #fff;
+  font-size: 2em;
+  font-weight:300;
 }
 
 .social-login-buttons {
