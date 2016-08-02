@@ -9,6 +9,7 @@ var cookieSession = require('cookie-session')
 var routes = require('./routes/index');
 var auth = require('./routes/auth');
 var userbouncer= require('./routes/userbouncer')
+var inventory = require('./routes/inventory')
 var equipment = require('./routes/equipment')
 var batch = require('./routes/batch')
 var beer= require('./routes/beer')
@@ -34,10 +35,9 @@ console.log("got to here");
 app.use('/', routes);
 app.use('/auth', auth);
 app.use('/', userbouncer.loggedIn);
-app.use('/', equipment);
 
-
-
+app.use('/inventory', inventory);
+app.use('/equipment', equipment);
 app.use('/batch', batch);
 app.use('/beer', beer)
 // catch 404 and forward to error handler
