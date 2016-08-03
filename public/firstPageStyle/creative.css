@@ -14,7 +14,10 @@
 #buttonMap1{
   color:black;
 }
-
+.text-field{
+  width:80%;
+  height:100%;
+}
 
 /*IDS FOR THE CREATE.EJS PAGE */
 #inputBeer{

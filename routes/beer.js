@@ -32,17 +32,32 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next){
   var ingredients=[];
   var ingredients2=[];
-  for(var i=0; i<req.body.ingredientName.length; i++){
+  if(Array.isArray(req.body.ingredientName)){
+    for(var i=0; i<req.body.ingredientName.length; i++){
+      ingredients.push({
+        name:req.body.ingredientName[i],
+        type:req.body.ingredientType[i],
+        units:req.body.ingredientUnits[i]
+      })
+      ingredients2.push({
+        name:req.body.ingredientName[i],
+        type:req.body.ingredientType[i],
+        units:req.body.ingredientUnits[i],
+        amount:req.body.ingredientAmount[i],
+      })
+    }
+  }
+  else{
     ingredients.push({
-      name:req.body.ingredientName[i],
-      type:req.body.ingredientType[i],
-      units:req.body.ingredientUnits[i]
+      name:req.body.ingredientName,
+      type:req.body.ingredientType,
+      units:req.body.ingredientUnits
     })
     ingredients2.push({
-      name:req.body.ingredientName[i],
-      type:req.body.ingredientType[i],
-      units:req.body.ingredientUnits[i],
-      amount:req.body.ingredientAmount[i],
+      name:req.body.ingredientName,
+      type:req.body.ingredientType,
+      units:req.body.ingredientUnits,
+      amount:req.body.ingredientAmount,
     })
   }
   Ing.createIfMissing(ingredients).then(function(){
@@ -55,7 +70,9 @@ router.post('/', function(req, res, next){
     Beer.create(specs).then(function(){
       Beer.getLatestBeer(req.session.id).then(function(userBeer){
         Ing.createBITest2(ingredients2, userBeer.rows[0].max).then(function(result){
+          Batch.add_notes(req.session.id, userBeer.rows[0].max, req.body.notes).then(function(){
           res.redirect('/beer')
+          })
         })
 
       })
