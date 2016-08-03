@@ -4,13 +4,13 @@ var knex = require('../db/knex');
 var Queries_batch = require('../queries/batch');
 
 function Batch(){
-  return knex('batch');
+return knex('batch');
 }
 function Beer(){
   return knex('beer');
 }
 function Beer_ingredients(){
-  return knex('beer_ingredients');
+  return ('beer_ingredients');
 }
 
 //recieving the beer id in req.params.id
