@@ -5,6 +5,18 @@
  */
 /*GOOGLE MAPS INPUTS*/
 
+#inputBeer{
+  float: right;
+  margin-top: 25vh;
+  margin-right: -27vw;
+}
+#buttonBeer{
+  float: right;
+  margin-top: 25vh;
+}
+
+
+
 #inputMap1{
   float: right;
   margin-top: 10vh;
