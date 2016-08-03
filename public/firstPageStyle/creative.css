@@ -8,15 +8,13 @@
 #inputBeer{
   float: right;
   margin-top: 25vh;
-  margin-right: -27vw;
+  color:black;
 }
 #buttonBeer{
   float: right;
   margin-top: 25vh;
+  color:black;
 }
-
-
-
 #inputMap1{
   float: right;
   margin-top: 10vh;
