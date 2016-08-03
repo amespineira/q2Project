@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Auth=require('../queries/auth.js')
+var passport = require('passport');
+
 var bcrypt=require('bcrypt')
 /* GET users listing. */
 router.post('/signup', function(req, res, next) {
@@ -46,5 +48,20 @@ router.post('/signin', function(req, res, next){
 
   })
 })
+router.get('/facebook', passport.authenticate('facebook'));
+router.get('/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/' }), function(req, res, next){
+  res.locals.user = req.user
+  console.log(req.user);
+  knex.raw(`SELECT * FROM users WHERE linkedin_id='${req.user._json.id}'`).then(function(matches){
+    if(matches.rows.length!=0){
+      res.redirect('/')
+    }
+    else{
+      knex.raw(`INSERT INTO users VALUES (DEFAULT, '${req.user._json.firstName}', '${req.user._json.lastName}', '${req.user._json.id}')`).then(function(thing){
+        res.redirect('/')
+      })
+    }
+  })
+});
 
 module.exports = router;
