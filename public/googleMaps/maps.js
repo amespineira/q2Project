@@ -17,8 +17,8 @@ button.addEventListener("click", function(event) {
       long = (object.results[0].geometry.location.lng)
       lat = (object.results[0].geometry.location.lat);
       getLocations(lat, long)
-      console.log(long);
-      console.log(lat);
+      // console.log(long);
+      // console.log(lat);
         }
       }    //here I am getting the latitude and Longitude from the location that requested.
     }
@@ -31,10 +31,10 @@ button2.addEventListener("click", function(event) {
   if(httpRequest.readyState === 4){
     if(httpRequest.status < 400){
       var object = JSON.parse(httpRequest.responseText)
-      console.log(object.data[0].name);
-      console.log(object.data[0].style.description);
-      console.log(object.data[0].style.ibuMax);
-      console.log(object.data[0].style.ibuMin);
+      // console.log(object.data[0].name);
+      // console.log(object.data[0].style.description);
+      // console.log(object.data[0].style.ibuMax);
+      // console.log(object.data[0].style.ibuMin);
 
         }
       }
@@ -52,9 +52,6 @@ function getLocations(lat, long){
     }
   }
 }
-  httpRequest.open('GET', 'https://galvanize-cors-proxy.herokuapp.com/http://api.brewerydb.com/v2/search/geo/point?=lat= '35.772096' + & +'lng='+ -78.638614& +'+&key=72a6164778f5d2d0b5bf3858c894bbbf')
+  httpRequest.open('GET', 'https://galvanize-cors-proxy.herokuapp.com/http://api.brewerydb.com/v2/search/geo/point?=lat=' '35.772096' + & +lng=+ -78.638614& +'+&key=72a6164778f5d2d0b5bf3858c894bbbf')
   httpRequest.send();
 });
-
-
-key=72a6164778f5d2d0b5bf3858c894bbbf
