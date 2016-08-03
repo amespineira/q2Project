@@ -16,7 +16,6 @@ function Beer_ingredients(){
 //recieving the beer id in req.params.id
 router.get('/', function(req, res, next){
   Batch().join('beer', 'beer.id', '=', 'batch.beer_id').then(function(batches){
-    console.log(batches);
     res.render('batch/index', {batches: batches})
   })
 })

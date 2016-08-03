@@ -32,7 +32,6 @@ app.use(cookieSession({
   name: 'session',
   keys: ['id', 'loggedin']
 }))
-console.log("got to here");
 
 app.use('/', routes);
 app.use('/auth', auth);
@@ -51,7 +50,6 @@ app.use(function(req, res, next) {
   next(err);
 });
 // error handlers
-console.log("got to here2");
 
 // development error handler
 // will print stacktrace
