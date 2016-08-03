@@ -76,17 +76,27 @@ router.get('/create/:id', function(req, res, next){
   console.log(res);
   console.log("******************");
   var ingredients;
-  http.get('http://api.brewerydb.com/v2/beer/'+req.params.id+'/ingredients?key=72a6164778f5d2d0b5bf3858c894bbbf', (htres) => {
+  http.get('http://api.brewerydb.com/v2/style/'+req.params.id+'?key=72a6164778f5d2d0b5bf3858c894bbbf', (htres) => {
     htres.setEncoding('utf8')
     htres.on('data', (chunk) =>{
-      ingredients=chunk;
-      res.send(chunk)
+      ingredients=JSON.parse(chunk);
+      console.log(typeof(ingredients));
+      style=ingredients.data
+      var type='';
+      switch (style.name) {
+        case style.name.indexOf('Ale'):
+          type='Ale'
+          break;
+        default:
+
+      }
+      res.render('beer/create', {style:style, type:type})
     })
     htres.resume();
     }).on('error', (e) => {
     console.log(`Got error: ${e.message}`);
   });
-
+  console.log(ingredients);
 })
 router.get('/:id/delete', function(req, res, next){
   Promise.all([Beer.getOne(req.params.id),Beer.getBatchesUsingBeer(req.params.id)]).then(function(results){

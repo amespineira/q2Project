@@ -49,7 +49,7 @@ function addStyles(styles){
     var div=document.createElement('div');
     console.log(div);
     var name=document.createElement('a');
-    name.setAttribute('href', '/beer/create/'+id);
+    name.setAttribute('href', '/beer/create/'+style.id);
     name.innerHTML=style.name
     div.appendChild(name);
     var description=document.createElement('p');
