@@ -18,6 +18,10 @@
 .fixed{
   position: fixed;
 }
+.margin-containers{
+  margin-top: 2vh;
+
+}
 
 /*IDS FOR THE CREATE.EJS PAGE */
 #inputBeer{
