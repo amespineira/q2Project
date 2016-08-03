@@ -1,6 +1,35 @@
 <% include ../layout %>
 
 <section>
+  <!-- Button trigger modal -->
+  <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    Add new batch
+  </button> -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        </div>
+          <div class="modal-body">
+            <form action="/batch/<%= beer_id %>" method="post">
+              <label for="end_date">End Date</label>
+              <input type="date" name="end_date" value="<%= Date() %>">
+              <label for="expected_yield">Expected Yield (liters)</label>
+              <input type="number" name="expected_yield">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+      </form>
+      </div>
+    </div>
+  </div>
+
   <h2>Batches</h2>
 
   <div class="table">
@@ -28,3 +57,11 @@
     </table>
   </div>
 </section>
+
+<script type="text/javascript">
+    $(window).load(function(){
+      if (<%= modalVar %> === 1) {
+      $('#myModal').modal('show');
+      }
+    });
+</script>

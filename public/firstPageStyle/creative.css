@@ -498,3 +498,14 @@ textarea {
   color: black;
   border-radius: 7px;
 }
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+label, input {
+  color: grey;
+  margin: 10px;
+}

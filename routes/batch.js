@@ -18,7 +18,7 @@ function Beer_ingredients(){
 //recieving the beer id in req.params.id
 router.get('/', function(req, res, next){
   Batch().join('beer', 'beer.id', '=', 'batch.beer_id').where({'beer.user_id': req.session.id}).then(function(batches){
-    res.render('batch/index', {batches: batches})
+    res.render('batch/index', {batches: batches, modalVar: 0, beer_id: ''})
   })
 })
 
@@ -29,7 +29,9 @@ router.post('/:id', function(req, res, next){
 })
 
 router.get('/create/:id', function(req, res, next){
-  res.render('batch/form')
+  Batch().join('beer', 'beer.id', '=', 'batch.beer_id').where({'beer.user_id': req.session.id}).then(function(batches){
+    res.render('batch/index', {batches: batches, modalVar: 1, beer_id: req.params.id})
+  })
 })
 
 router.post('/notes/:id', function(req, res, next){

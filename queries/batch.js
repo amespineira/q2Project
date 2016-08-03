@@ -2,7 +2,8 @@ var knex = require('../db/knex');
 
 module.exports = {
   createBatch: function(body, id1, id2){
-    return knex.raw(`INSERT into batch values(default, ${id1}, ${id2}, ${Date()}, ${body.end_date}, ${body.expected_yeild}, ${null}, ${1});`)
+    var date = dateSplit(Date());
+    return knex.raw(`INSERT into batch values(default, ${id1}, ${id2}, '${date}', '${body.end_date}', ${body.expected_yield}, ${null}, ${1});`)
   },
   beer_id: function(id){
     return knex.raw(`SELECT beer_id from batch where id=${id}`);
@@ -17,4 +18,15 @@ module.exports = {
     return knex.raw(`INSERT into brewer_notes values(default, ${user}, ${beer}, '${text}');`)
 
   }
+}
+
+
+function dateSplit(date){
+var res = date.split(' ')
+//5th space
+var res2 = '';
+for (var i = 0; i < 5; i++) {
+  res2 += (' ' + res[i]);
+  }
+  return res2;
 }
