@@ -1,8 +1,14 @@
 var userInput = document.getElementById('inputBeer')
 var button = document.getElementById('buttonBeer');
 var httpRequest = new XMLHttpRequest();
-var container= document.getElementById('style-container')
+var col1= document.getElementById('col1')
+var col2= document.getElementById('col2')
+var col3= document.getElementById('col3')
+
 button.addEventListener("click", function(event) {
+  col1.innerHTML="";
+  col2.innerHTML="";
+  col3.innerHTML="";
   httpRequest.onreadystatechange = function(){
     if(httpRequest.readyState === 4){
       if(httpRequest.status < 400){
@@ -25,7 +31,7 @@ function uniqueStyles(recipeJson){
         console.log("style not found");
         console.log(beer.style);
         console.log("*****");
-        styles[beer.style.id]=beer.style;
+        styles[beer.style.id]={style:beer.style, beerid:beer.id};
       }
     }
   })
@@ -34,21 +40,35 @@ function uniqueStyles(recipeJson){
   return styles;
 }
 function addStyles(styles){
-  console.log(styles);
-}
-function addRecipe(recipeJson){
-  var div=document.createElement('div');
-  console.log(div);
-  var name=document.createElement('a');
-  name.setAttribute('href', '/#');
-  name.innerHTML=recipeJson.style.name
-  div.appendChild(name);
-  var type=document.createElement('p');
-  type.innerHTML=recipeJson.name;
-  div.appendChild(type);
-  var description=document.createElement('p');
-  description.innerHTML=recipeJson.style.description
-  div.appendChild(description);
-  container.appendChild(div);
-
+  var count=1;
+  var style;
+  var id;
+  for(var key in styles){
+    id=styles[key].beerid
+    style=styles[key].style
+    var div=document.createElement('div');
+    console.log(div);
+    var name=document.createElement('a');
+    name.setAttribute('href', '/beer/create/'+id);
+    name.innerHTML=style.name
+    div.appendChild(name);
+    var description=document.createElement('p');
+    description.innerHTML=style.description
+    div.appendChild(description);
+    switch(count){
+      case 1:
+        col1.appendChild(div)
+      break;
+      case 2:
+        col2.appendChild(div)
+      break;
+      case 3:
+        col3.appendChild(div)
+      break;
+    }
+    count++;
+    if(count>3){
+      count=1;
+    }
+  }
 }

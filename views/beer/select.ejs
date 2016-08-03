@@ -1,24 +1,18 @@
 <% include ../layout %>
-
+<div class="container">
+  <div class="row">
+    <input class="btn" id="buttonBeer" type="button" name="name" value="Submit">
+    <input id="inputBeer" type="text" name="beername" value="" placeholder="search for beer">
+  </div>
+</div>
 <section>
-  <div class="header-content">
-      <div class="header-content-inner">
-        <div class="row">
-
-
-          <div class="col-xs-6 col-sm-4">
-            <input class="btn" id="buttonBeer" type="button" name="name" value="Submit">
-            <input id="inputBeer" type="text" name="beername" value="" placeholder="search for beer">
-            <div id="style-container">
-              <%for(var i=0; i<defaults.length; i++){%>
-                  <div>
-                    <a href=<%= 'create/'+i%>><%=defaults[i].type%></a>
-                    <p>Style: <%= defaults[i].style%></p>
-                    <p><%= defaults[i].description %></p>
-                  </div>
-                  <%}%>
-            </div>
-        </div>
+<div class="container">
+    <div class="row">
+      <div id='col1' class="col-sm-4">
+      </div>
+      <div id='col2' class="col-sm-4">
+      </div>
+      <div id='col3' class="col-sm-4">
       </div>
     </div>
   </div>
