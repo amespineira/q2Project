@@ -16,6 +16,7 @@ button.addEventListener("click", function(event) {
       var object = JSON.parse(httpRequest.responseText)
       long = (object.results[0].geometry.location.lng)
       lat = (object.results[0].geometry.location.lat);
+      getLocations(lat, long)
       console.log(long);
       console.log(lat);
         }
@@ -41,9 +42,19 @@ button2.addEventListener("click", function(event) {
       httpRequest.open('GET', 'https://galvanize-cors-proxy.herokuapp.com/http://api.brewerydb.com/v2/beers?name='+userInput2.value+'&key=72a6164778f5d2d0b5bf3858c894bbbf')
       httpRequest.send();
   });
-
+function getLocations(lat, long){
   button3.addEventListener("click", function(event) {
     httpRequest.onreadystatechange = function(){
     if(httpRequest.readyState === 4){
       if(httpRequest.status < 400){
         var object = JSON.parse(httpRequest.responseText)
+      }
+    }
+  }
+}
+  httpRequest.open('GET', 'https://galvanize-cors-proxy.herokuapp.com/http://api.brewerydb.com/v2/search/geo/point?=lat= '35.772096' + & +'lng='+ -78.638614& +'+&key=72a6164778f5d2d0b5bf3858c894bbbf')
+  httpRequest.send();
+});
+
+
+key=72a6164778f5d2d0b5bf3858c894bbbf

@@ -15,14 +15,23 @@
   color:black;
 }
 
+.fixed{
+  position: fixed;
+}
 
 /*IDS FOR THE CREATE.EJS PAGE */
 #inputBeer{
-  margin-top: 15vh;
   color:black;
+  z-index: 2;
+  margin-top: 10vh;
+  display: inline-block;
 }
 #buttonBeer{
   color:black;
+  z-index: 2;
+  margin-top: 10vh;
+  margin-right: 2px;
+  display: inline-block;
 }
 .inputText{
   color:black;
