@@ -20,10 +20,17 @@ function uniqueStyles(recipeJson){
   var styles={};
   recipeJson.forEach(function(beer){
     console.log(beer);
-    if(!styles[beer.style.styleId]){
-      styles[beer.style.srtyleId]=beer.style;
+    if(beer.style){
+      if(!styles[beer.style.id]){
+        console.log("style not found");
+        console.log(beer.style);
+        console.log("*****");
+        styles[beer.style.id]=beer.style;
+      }
     }
   })
+  console.log("logging styles");
+  console.log(styles);
   return styles;
 }
 function addStyles(styles){
