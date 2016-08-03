@@ -79,6 +79,25 @@ router.get('/create/:id', function(req, res, next){
     res.render('beer/create', {template:defaults[req.params.id], ingredients:ingredients.rows})
   })
 })
+router.get('/:id/delete', function(req, res, next){
+  Promise.all([Beer.getOne(req.params.id),Beer.getBatchesUsingBeer(req.params.id)]).then(function(results){
+    if(results[0].rows[0].user_id===req.session.id){
+      if(results[1].rows.length===0){
+        Beer.deleteBeersIng(req.params.id).then(function(){
+          Beer.deleteBeersNotes(req.params.id).then(function(){
+            Beer.deleteOne(req.params.id).then(function(){
+              res.redirect('/beer')
+            })
+          })
+        })
+      }
+      res.send('This beer is in a batch')
+    }
+    else{
+      res.send('not your beer, get out of here')
+    }
+  })
+})
 router.get('/:id', function(req, res, next){
   Promise.all([Beer.getOne(req.params.id),Ing.getBeersIng(req.params.id)]).then(function(results){
     if(results[0].rows[0].user_id===req.session.id){
