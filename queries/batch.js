@@ -15,5 +15,6 @@ module.exports = {
   },
   add_notes: function(user, beer, text){
     return knex.raw(`INSERT into brewer_notes values(default, ${user}, ${beer}, '${text}');`)
+
   }
 }

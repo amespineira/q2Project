@@ -1,0 +1,41 @@
+
+
+<<% include ../layout %>
+<input id="inputMap1" type="text" name="name" value="" placeholder="search for location">
+<input class="btn" id="buttonMap1" type="button" name="name" value="Submit">
+<input class="btn" id="buttonBeer" type="button" name="name" value="Submit">
+<input id="inputBeer" type="text" name="beername" value="" placeholder="search for beer">
+
+
+<html dir="left">
+<style>
+      html, body {
+        height: 100%;
+        margin-top: 2vh;
+        padding: 0; 
+      }
+      #map {
+        height: 95%;
+        width: 50%;
+      }
+</style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+             var denver = {lat:39.7392, lng:-104.9903 };
+
+             var map = new google.maps.Map(document.getElementById('map'), {
+               scaleControl: true,
+               center: denver,
+               zoom: 10
+             });
+           }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnexUKDWyuPXKzbOjxIxDRGv4SN5hkn_I&callback=initMap"
+    async defer></script>
+    <script src="/googleMaps/maps.js"  type="text/javascript"></script>
+  </body>
+</html>

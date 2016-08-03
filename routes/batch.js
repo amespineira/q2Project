@@ -6,13 +6,13 @@ var Beer = require('../queries/beer')
 var Ing=require('../queries/ingredients.js')
 
 function Batch(){
-  return knex('batch');
+return knex('batch');
 }
 function Beer(){
   return knex('beer');
 }
 function Beer_ingredients(){
-  return knex('beer_ingredients');
+  return ('beer_ingredients');
 }
 
 //recieving the beer id in req.params.id

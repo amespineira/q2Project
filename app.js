@@ -14,6 +14,7 @@ var equipment = require('./routes/equipment')
 var batch = require('./routes/batch')
 var beer= require('./routes/beer')
 var main = require('./routes/main')
+var help = require('./routes/help')
 var app = express();
 
 // view engine setup
@@ -31,7 +32,6 @@ app.use(cookieSession({
   name: 'session',
   keys: ['id', 'loggedin']
 }))
-console.log("got to here");
 
 app.use('/', routes);
 app.use('/auth', auth);
@@ -42,14 +42,13 @@ app.use('/equipment', equipment);
 app.use('/batch', batch);
 app.use('/beer', beer)
 app.use('/main', main)
+app.use('/help', help)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
-// error handlers
-console.log("got to here2");
 
 // development error handler
 // will print stacktrace
