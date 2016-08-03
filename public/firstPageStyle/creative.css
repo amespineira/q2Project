@@ -24,18 +24,14 @@
 /*IDS FOR THE CREATE.EJS PAGE */
 #inputBeer{
   color:black;
-  z-index: 2;
   margin-top: 10vh;
-  /*display: inline-block;*/
+  height:4.1vh;
+  width:15vw;
 }
 #buttonBeer{
   color:black;
-  z-index: 2;
-  /*margin-top: 10vh;*/
   margin-right: 2px;
-  /*display: inline-block;*/
-  background-color: red;
-
+  
 }
 .inputText{
   color:black;
