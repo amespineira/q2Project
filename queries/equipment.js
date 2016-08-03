@@ -6,5 +6,8 @@ module.exports={
   },
   createEquipment: function(equip, userId){
     return knex.raw(`INSERT INTO equipment VALUES (DEFAULT, '${equip.equipment_name}', ${userId}, '${equip.batch_id}', '${equip.clean}', '${equip.cleaning_time}', '${equip.cleaning_notes}')`)
+  },
+  findOneEquipment: function(id){
+    return knex.raw(`SELECT * FROM equipment WHERE id= ${id}`)
   }
 }
