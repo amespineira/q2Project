@@ -1,9 +1,9 @@
 <% include ../layout %>
 
 <section>
-  <h2><%= batch[0].beer_name %></h2>
-  <h6><%= batch[0].type %></h6>
-  <h6><%= batch[0].style %></h6>
+  <h2><%= beer[0].beer_name %></h2>
+  <h6><%= beer[0].type %></h6>
+  <h6><%= beer[0].style %></h6>
   <div class="container_batch">
     <div class="item">
       <h6>Stage 1: Brew Day</h6>
@@ -18,7 +18,7 @@
 
 <div class="containerC">
   <div class="col-sm-4">
-    <h4><%= batch[0].beer_name %> Ingredients</h4>
+    <h4><%= beer[0].beer_name %> Ingredients</h4>
     <div class="table">
       <table>
         <thead>
@@ -29,11 +29,11 @@
           </tr>
         </thead>
         <tbody>
-          <%for(var i = 0; i < batch.length; i++){ %>
+          <%for(var i = 0; i < ing.length; i++){ %>
             <tr>
-              <td><%= batch[i].ingredient_name %></td>
-              <td><%= batch[i].ingredient_type %></td>
-              <td><%= batch[i].amount %> <%= batch[i].units %></td>
+              <td><%= ing[i].ingredient_name %></td>
+              <td><%= ing[i].ingredient_type %></td>
+              <td><%= ing[i].amount %> <%= ing[i].units %></td>
             </tr>
             <%} %>
         </tbody>
@@ -70,6 +70,12 @@
     <%for(var i =0; i< notes.length; i++){ %>
     <h6><%= notes[i].notes %></h6>
     <% } %>
+    <form action="/batch/notes/<%= beer[0].user_id %>" method="post">
+      <input type="number" name="beer_id" value="<%= ing[0].beer_id %>" hidden>
+      <input type="number" name="batch_id" value="<%= equipment[0].batch_id %>" hidden>
+      <textarea rows="4" name="notes" cols="50" placeholder="enter notes here"></textarea>
+      <input type="submit" value="add note">
+    </form>
   </div>
 </div>
 
