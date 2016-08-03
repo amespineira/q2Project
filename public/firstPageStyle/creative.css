@@ -1,10 +1,22 @@
-/*!
- * Start Bootstrap - Creative v1.1.1 (http://startbootstrap.com/template-overviews/creative)
- * Copyright 2013-2016 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
- */
-/*GOOGLE MAPS INPUTS*/
 
+#inputBeer1{
+  color:black;
+  margin-top:4vh;
+}
+#buttonBeer1{
+  color:black;
+  /*margin-top:4vh;*/
+}
+#inputMap1{
+  color: black;
+  margin-top:4vh;
+}
+#buttonMap1{
+  color:black;
+}
+
+
+/*IDS FOR THE CREATE.EJS PAGE */
 #inputBeer{
   margin-top: 15vh;
   color:black;
@@ -12,17 +24,6 @@
 #buttonBeer{
   color:black;
 }
-#inputMap1{
-  float: right;
-  margin-top: 10vh;
-  margin-right: 5vw;
-}
-#buttonMap1{
-  float: right;
-  margin-top: 10vh;
-  margin-right: 2vw;
-}
-
 .inputText{
   color:black;
 }
