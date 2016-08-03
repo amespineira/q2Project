@@ -100,13 +100,6 @@ router.get('/create/:id', function(req, res, next){
       console.log(typeof(ingredients));
       style=ingredients.data
       var type='';
-      switch (style.name) {
-        case style.name.indexOf('Ale'):
-          type='Ale'
-          break;
-        default:
-
-      }
       res.render('beer/create', {style:style, type:type})
     })
     htres.resume();
