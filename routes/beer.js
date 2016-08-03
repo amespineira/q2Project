@@ -32,17 +32,32 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next){
   var ingredients=[];
   var ingredients2=[];
-  for(var i=0; i<req.body.ingredientName.length; i++){
+  if(Array.isArray(req.body.ingredientName)){
+    for(var i=0; i<req.body.ingredientName.length; i++){
+      ingredients.push({
+        name:req.body.ingredientName[i],
+        type:req.body.ingredientType[i],
+        units:req.body.ingredientUnits[i]
+      })
+      ingredients2.push({
+        name:req.body.ingredientName[i],
+        type:req.body.ingredientType[i],
+        units:req.body.ingredientUnits[i],
+        amount:req.body.ingredientAmount[i],
+      })
+    }
+  }
+  else{
     ingredients.push({
-      name:req.body.ingredientName[i],
-      type:req.body.ingredientType[i],
-      units:req.body.ingredientUnits[i]
+      name:req.body.ingredientName,
+      type:req.body.ingredientType,
+      units:req.body.ingredientUnits
     })
     ingredients2.push({
-      name:req.body.ingredientName[i],
-      type:req.body.ingredientType[i],
-      units:req.body.ingredientUnits[i],
-      amount:req.body.ingredientAmount[i],
+      name:req.body.ingredientName,
+      type:req.body.ingredientType,
+      units:req.body.ingredientUnits,
+      amount:req.body.ingredientAmount,
     })
   }
   Ing.createIfMissing(ingredients).then(function(){
@@ -55,7 +70,9 @@ router.post('/', function(req, res, next){
     Beer.create(specs).then(function(){
       Beer.getLatestBeer(req.session.id).then(function(userBeer){
         Ing.createBITest2(ingredients2, userBeer.rows[0].max).then(function(result){
+          Batch.add_notes(req.session.id, userBeer.rows[0].max, req.body.notes).then(function(){
           res.redirect('/beer')
+          })
         })
 
       })
@@ -76,17 +93,27 @@ router.get('/create/:id', function(req, res, next){
   console.log(res);
   console.log("******************");
   var ingredients;
-  http.get('http://api.brewerydb.com/v2/beer/'+req.params.id+'/ingredients?key=72a6164778f5d2d0b5bf3858c894bbbf', (htres) => {
+  http.get('http://api.brewerydb.com/v2/style/'+req.params.id+'?key=72a6164778f5d2d0b5bf3858c894bbbf', (htres) => {
     htres.setEncoding('utf8')
     htres.on('data', (chunk) =>{
-      ingredients=chunk;
-      res.send(chunk)
+      ingredients=JSON.parse(chunk);
+      console.log(typeof(ingredients));
+      style=ingredients.data
+      var type='';
+      switch (style.name) {
+        case style.name.indexOf('Ale'):
+          type='Ale'
+          break;
+        default:
+
+      }
+      res.render('beer/create', {style:style, type:type})
     })
     htres.resume();
     }).on('error', (e) => {
     console.log(`Got error: ${e.message}`);
   });
-
+  console.log(ingredients);
 })
 router.get('/:id/delete', function(req, res, next){
   Promise.all([Beer.getOne(req.params.id),Beer.getBatchesUsingBeer(req.params.id)]).then(function(results){

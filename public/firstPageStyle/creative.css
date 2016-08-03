@@ -12,13 +12,15 @@
 #buttonMap1{
   color:black;
 }
+.text-field{
+  width:80%;
+  height:100%;
 
 .fixed{
   position: fixed;
 }
 .margin-containers{
   margin-top: 2vh;
-
 }
 
 /*IDS FOR THE CREATE.EJS PAGE */
