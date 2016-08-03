@@ -14,6 +14,6 @@ button.addEventListener("click", function(event) {
         }
       }
     }
-      httpRequest.open('GET', 'http://api.brewerydb.com/v2/beers?name='+userInput.value+'&key=72a6164778f5d2d0b5bf3858c894bbbf')
+      httpRequest.open('GET', 'https://galvanize-cors-proxy.herokuapp.com/http://api.brewerydb.com/v2/beers?name='+userInput.value+'&key=72a6164778f5d2d0b5bf3858c894bbbf')
       httpRequest.send();
   });

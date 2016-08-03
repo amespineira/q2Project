@@ -19,7 +19,7 @@ button.addEventListener("click", function(event) {
         }
       }    //here I am getting the latitude and Longitude from the location that requested.
     }
-    httpRequest.open('GET', 'https://maps.googleapis.com/maps/api/geocode/json?address=' + userInput.value +'&key=AIzaSyA42x7FNCeCrCZZiLRep6SE2sVWjT_dDrA')
+    httpRequest.open('GET', 'https://galvanize-cors-proxy.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json?address=' + userInput.value +'&key=AIzaSyA42x7FNCeCrCZZiLRep6SE2sVWjT_dDrA')
     httpRequest.send();
 });
 
@@ -32,10 +32,10 @@ button2.addEventListener("click", function(event) {
       console.log(object.data[0].style.description);
       console.log(object.data[0].style.ibuMax);
       console.log(object.data[0].style.ibuMin);
-      
+
         }
       }
     }
-      httpRequest.open('GET', 'http://api.brewerydb.com/v2/beers?name='+userInput2.value+'&key=72a6164778f5d2d0b5bf3858c894bbbf')
+      httpRequest.open('GET', 'https://galvanize-cors-proxy.herokuapp.com/http://api.brewerydb.com/v2/beers?name='+userInput2.value+'&key=72a6164778f5d2d0b5bf3858c894bbbf')
       httpRequest.send();
   });
