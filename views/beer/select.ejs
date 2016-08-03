@@ -12,20 +12,11 @@
 <section>
 <div class="container margin-containers">
     <div class="row">
-      <div class="col-sm-4">
-            <%for(var i=0; i<defaults.length; i++){%>
-                <div>
-                  <a href=<%= 'create/'+i%>><%=defaults[i].type%></a>
-                    <p>Style: <%= defaults[i].style%></p>
-                      <p><%= defaults[i].description %></p>
-                  </div>
-                      <%}%>
+      <div id='col1' class="col-sm-4">
       </div>
-      <div class="col-sm-4">
-        One of three columns
+      <div id='col2' class="col-sm-4">
       </div>
-      <div class="col-sm-4">
-        One of three columns
+      <div id='col3' class="col-sm-4">
       </div>
     </div>
   </div>

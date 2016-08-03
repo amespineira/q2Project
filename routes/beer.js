@@ -3,6 +3,7 @@ var router = express.Router();
 var Beer=require('../queries/beer.js')
 var Ing=require('../queries/ingredients.js')
 var Batch=require('../queries/batch.js')
+var http=require('http')
 var defaults=[ //these are the default beers to display on the page, the ingredients refrence ids in the ingredients table, these are used as templates for the user to edit
   {
     type:'ale',
@@ -72,12 +73,20 @@ router.get('/create', function(req, res, next){
   res.render('beer/select', {defaults:defaults})
 })
 router.get('/create/:id', function(req, res, next){
-  Ing.getDefaultIng(defaults[req.params.id].ingredients).then(function(ingredients){
-    console.log(defaults[req.params.id]);
-    console.log(ingredients.rows);
-    console.log(ingredients.rows[1].ingredient_name);
-    res.render('beer/create', {template:defaults[req.params.id], ingredients:ingredients.rows})
-  })
+  console.log(res);
+  console.log("******************");
+  var ingredients;
+  http.get('http://api.brewerydb.com/v2/beer/'+req.params.id+'/ingredients?key=72a6164778f5d2d0b5bf3858c894bbbf', (htres) => {
+    htres.setEncoding('utf8')
+    htres.on('data', (chunk) =>{
+      ingredients=chunk;
+      res.send(chunk)
+    })
+    htres.resume();
+    }).on('error', (e) => {
+    console.log(`Got error: ${e.message}`);
+  });
+
 })
 router.get('/:id/delete', function(req, res, next){
   Promise.all([Beer.getOne(req.params.id),Beer.getBatchesUsingBeer(req.params.id)]).then(function(results){
