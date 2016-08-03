@@ -4,7 +4,7 @@ var Equipment = require('../queries/equipment')
 
 router.get('/', function(req, res, next){
     Equipment.getAllEquipment(req.session.id).then(function(equipment){
-        res.render('equipment', {equipment: equipment.rows});
+        res.render('equipment/index', {equipment: equipment.rows});
     })
 });
 
@@ -17,7 +17,10 @@ router.post('/', function(req, res, next) {
     })
 })
 router.get('/:id', function(req, res, next){
-    res.render('equipment/show')
+    Equipment.findOneEquipment(req.params.id).then(function(equipment){
+        console.log(equipment)
+        res.render('equipment/show', {equipment: equipment.rows});
+    })
 })
 router.get('/:id/edit', function(req, res, next){
     res.render('equipment/edit')
