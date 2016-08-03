@@ -18,7 +18,7 @@ function Beer_ingredients(){
 //recieving the beer id in req.params.id
 router.get('/', function(req, res, next){
   Batch().join('beer', 'beer.id', '=', 'batch.beer_id').where({'beer.user_id': req.session.id}).then(function(batches){
-    res.render('batch/index', {batches: batches, modalVar: 0, beer_id: ''})
+    res.render('batch/index', {batches: batches, modalVar: 0, beer_id: '', date: ''})
   })
 })
 
@@ -29,8 +29,9 @@ router.post('/:id', function(req, res, next){
 })
 
 router.get('/create/:id', function(req, res, next){
+  var fortnightAway = new Date(+new Date + 12096e5);
   Batch().join('beer', 'beer.id', '=', 'batch.beer_id').where({'beer.user_id': req.session.id}).then(function(batches){
-    res.render('batch/index', {batches: batches, modalVar: 1, beer_id: req.params.id})
+    res.render('batch/index', {batches: batches, modalVar: 1, beer_id: req.params.id, date: fortnightAway.toISOString().split('T')[0]})
   })
 })
 

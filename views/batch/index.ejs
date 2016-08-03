@@ -16,8 +16,8 @@
         </div>
           <div class="modal-body">
             <form action="/batch/<%= beer_id %>" method="post">
-              <label for="end_date">End Date</label>
-              <input type="date" name="end_date" value="<%= Date() %>">
+              <label for="end_date">End Date<br><span style="font-size: 12px;">(recommended 2 weeks)</span></label>
+              <input type="date" name="end_date" value="<%= date %>">
               <label for="expected_yield">Expected Yield (liters)</label>
               <input type="number" name="expected_yield">
           </div>
@@ -33,24 +33,22 @@
   <h2>Batches</h2>
 
   <div class="table">
-    <table>
+    <table class="batch">
       <thead>
         <tr>
           <th>Beer Name</th>
           <th>Start Date</th>
           <th>End Date</th>
           <th>Expected Yield</th>
-          <th>Gravity</th>
         </tr>
       </thead>
       <tbody>
         <%for(var i = 0; i < batches.length; i++){ %>
           <tr>
             <td><a href="/batch/<%= batches[i].id %>"><%=  batches[i].beer_name %></a></td>
-            <td><%= batches[i].start_date %></td>
-            <td><%= batches[i].end_date %></td>
-            <td><%= batches[i].expected_yield %></td>
-            <td><%= batches[i].gravity %></td>
+            <td><%= batches[i].start_date.toISOString().split('T')[0] %></td>
+            <td><%= batches[i].end_date.toISOString().split('T')[0] %></td>
+            <td><%= batches[i].expected_yield %> liters</td>
           </tr>
           <%} %>
       </tbody>
