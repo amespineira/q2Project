@@ -91,7 +91,9 @@ router.get('/:id/delete', function(req, res, next){
           })
         })
       }
-      res.send('This beer is in a batch')
+      else{
+        res.send('This beer is in a batch')
+      }
     }
     else{
       res.send('not your beer, get out of here')
