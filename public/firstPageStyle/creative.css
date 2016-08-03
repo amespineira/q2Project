@@ -5,11 +5,9 @@
 }
 #buttonBeer1{
   color:black;
-  /*margin-top:4vh;*/
 }
 #inputMap1{
   color: black;
-  margin-top:4vh;
 }
 #buttonMap1{
   color:black;
@@ -28,14 +26,16 @@
   color:black;
   z-index: 2;
   margin-top: 10vh;
-  display: inline-block;
+  /*display: inline-block;*/
 }
 #buttonBeer{
   color:black;
   z-index: 2;
-  margin-top: 10vh;
+  /*margin-top: 10vh;*/
   margin-right: 2px;
-  display: inline-block;
+  /*display: inline-block;*/
+  background-color: red;
+
 }
 .inputText{
   color:black;
