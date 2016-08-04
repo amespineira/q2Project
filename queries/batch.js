@@ -3,7 +3,7 @@ var knex = require('../db/knex');
 module.exports = {
   createBatch: function(body, id1, id2){
     var date = dateSplit(Date());
-    return knex.raw(`INSERT into batch values(default, ${id1}, ${id2}, '${date}', '${body.end_date}', ${body.expected_yield}, ${null}, ${null}, ${1});`)
+    return knex.raw(`INSERT into batch values(default, ${id1}, ${id2}, '${date}', '${body.end_date}', ${body.expected_yield}, ${null}, ${null});`)
   },
   beer_id: function(id){
     return knex.raw(`SELECT beer_id from batch where id=${id}`);
