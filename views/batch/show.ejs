@@ -5,7 +5,7 @@
   <aside class="aside_batch">
     <div class="containerC">
       <div class="item text-center">
-        <h4><%= beer[0].beer_name %> Ingredients</h4>
+        <h4><%= beer[0].beer_name %> Ingredients </h4>
         <hr>
         <div class="table">
           <table>
@@ -14,18 +14,25 @@
                 <th>Name</th>
                 <th>Type</th>
                 <th>Amount</th>
+                <th>Units</th>
               </tr>
             </thead>
-            <tbody id="form-table">
+            <tbody>
               <%for(var i = 0; i < ing.length; i++){ %>
-                <tr >
+                <tr style="width: 4px">
                   <td ><%= ing[i].ingredient_name %></td>
                   <td><%= ing[i].ingredient_type %></td>
-                  <td><%= ing[i].amount %> <%= ing[i].units %></td>
+                  <td><%= ing[i].amount %></td>
+                  <td><%= ing[i].units %></td>
                 </tr>
                 <%} %>
             </tbody>
           </table>
+          <form action="/batch/ingredient/<%= beer_id %>" method="post">
+            <input type="number" name="beer_id" value="<%= beer_id %>" hidden>
+            <input type="number" name="batch_id" value="<%= batch_id %>" hidden>
+            <input type="submit" class="btn btn-default" value="add ingredient">
+          </form>
         </div>
       </div>
       <div class="item text-center">
@@ -50,6 +57,11 @@
                 <%} %>
             </tbody>
           </table>
+          <form action="/batch/equipment/<%= batch_id %>" method="post">
+            <input type="number" name="beer_id" value="<%= beer_id %>" hidden>
+            <input type="number" name="batch_id" value="<%= batch_id %>" hidden>
+            <input type="submit" class="btn btn-default" value="add equipment">
+          </form>
         </div>
       </div>
       <div class="item">
@@ -59,8 +71,8 @@
         <h6><%= notes[i].notes %></h6>
         <% } %>
         <form action="/batch/notes/<%= beer[0].user_id %>" method="post">
-          <input type="number" name="beer_id" value="<%= ing[0].beer_id %>" hidden>
-          <input type="number" name="batch_id" value="<%= equipment[0].batch_id %>" hidden>
+          <input type="number" name="beer_id" value="<%= beer_id %>" hidden>
+          <input type="number" name="batch_id" value="<%= batch_id %>" hidden>
           <textarea rows="4" name="notes" cols="50" placeholder="enter new note"></textarea>
           <input type="submit" class="btn btn-default" value="add note">
         </form>
@@ -73,29 +85,55 @@
   <h3><%= beer[0].beer_name %> | <%= beer[0].type %> | <%= beer[0].style %></h3>
   <div class="container">
             <div class="row bs-wizard" style="border-bottom:0;">
-
-                <div class="col-xs-3 bs-wizard-step active">
+              <%var states=[]%>
+              <%switch(curr_stage){
+                case 1:
+                  states[0]='active'
+                  states[1]='disabled'
+                  states[2]='disabled'
+                  states[3]='disabled'
+                  break;
+                case 2:
+                  states[0]='complete'
+                  states[1]='active'
+                  states[2]='disabled'
+                  states[3]='disabled'
+                  break;
+                case 3:
+                  states[0]='complete'
+                  states[1]='complete'
+                  states[2]='active'
+                  states[3]='disabled'
+                  break;
+                case 4:
+                  states[0]='complete'
+                  states[1]='complete'
+                  states[2]='complete'
+                  states[3]='complete'
+                  break;
+              }%>
+                <div class="col-xs-3 bs-wizard-step <%=states[0]%>">
                   <div class="text-center bs-wizard-stepnum">&nbsp</div>
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="#" class="bs-wizard-dot"></a>
                   <div class="bs-wizard-info text-center">Brew Day</div>
                 </div>
 
-                <div class="col-xs-3 bs-wizard-step disabled"><!-- complete -->
+                <div class="col-xs-3 bs-wizard-step <%=states[1]%>"><!-- complete -->
                   <div class="text-center bs-wizard-stepnum">&nbsp</div>
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="#" class="bs-wizard-dot"></a>
                   <div class="bs-wizard-info text-center">Fermentation Monitoring</div>
                 </div>
 
-                <div class="col-xs-3 bs-wizard-step disabled"><!-- complete -->
+                <div class="col-xs-3 bs-wizard-step <%=states[2]%>"><!-- complete -->
                   <div class="text-center bs-wizard-stepnum">&nbsp</div>
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="#" class="bs-wizard-dot"></a>
                   <div class="bs-wizard-info text-center">Bottling Day</div>
                 </div>
 
-                <div class="col-xs-3 bs-wizard-step disabled"><!-- active -->
+                <div class="col-xs-3 bs-wizard-step <%=states[3]%>"><!-- active -->
                   <div class="text-center bs-wizard-stepnum">&nbsp</div>
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="#" class="bs-wizard-dot"></a>
@@ -107,7 +145,6 @@
   <div class="steps">
 
   </div>
-<script src="/javascripts/js/batchShow.js"></script>
 
 </main>
 
