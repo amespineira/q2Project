@@ -1,33 +1,40 @@
-/*!
- * Start Bootstrap - Creative v1.1.1 (http://startbootstrap.com/template-overviews/creative)
- * Copyright 2013-2016 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
- */
-/*GOOGLE MAPS INPUTS*/
 
-#inputBeer{
-  float: right;
-  margin-top: 25vh;
-  margin-right: -27vw;
+#inputBeer1{
+  color:black;
+  margin-top:4vh;
 }
-#buttonBeer{
-  float: right;
-  margin-top: 25vh;
+#buttonBeer1{
+  color:black;
 }
-
-
-
 #inputMap1{
-  float: right;
-  margin-top: 10vh;
-  margin-right: 5vw;
+  color: black;
 }
 #buttonMap1{
-  float: right;
-  margin-top: 10vh;
-  margin-right: 2vw;
+  color:black;
+}
+.text-field{
+  width:80%;
+  height:100%;
+}
+.fixed{
+  position: fixed;
+}
+.margin-containers{
+  margin-top: 2vh;
 }
 
+/*IDS FOR THE CREATE.EJS PAGE */
+#inputBeer{
+  color:black;
+  margin-top: 10vh;
+  height:4.1vh;
+  width:15vw;
+}
+#buttonBeer{
+  color:black;
+  margin-right: 2px;
+
+}
 .inputText{
   color:black;
 }
@@ -42,7 +49,7 @@ body {
   background-image: url('../images/Wood.jpg');
 }
 hr {
-  border-color: #F05F40;
+  border-color: #FBB100;
   border-width: 3px;
   max-width: 100%;
 }
@@ -500,6 +507,7 @@ textarea {
   color: black;
   width: 100%;
   border-radius: 7px;
+  border: none;
 }
 
 form {
@@ -527,8 +535,9 @@ input[name=button]{
   margin: 0 auto;
 }
 .aside_batch{
-  background: white;
+  background: rgba(255, 255, 255, 0.8);
   display: inline-block;
+  margin-top: -10px;
   width: 30%;
   height: 150vh;
   float: left;
@@ -536,15 +545,29 @@ input[name=button]{
   color: grey;
 }
 .main_batch{
-  background: rgba(255, 255, 255, 0.5);
+  /*background: rgba(255, 255, 255, 0.6);*/
   display: inline-block;
+  margin-top: -10px;
   width: 70%;
+  height: 150vh;
   float: left;
 }
 
 hr {
   width: 200%;
   margin-top: -5px;
+}
+
+.container {
+  width: 80%;
+}
+
+.steps{
+  width: 70%;
+  height: 80%;
+  background: rgba(255, 255, 255, 0.5);;
+  border-radius: 5px;
+  margin: 0 auto;
 }
 
 .bs-wizard {margin-top: -20px;}
@@ -555,9 +578,9 @@ hr {
 .bs-wizard > .bs-wizard-step + .bs-wizard-step {}
 .bs-wizard > .bs-wizard-step .bs-wizard-stepnum {color: #595959; font-size: 12px; margin-bottom: 5px;}
 .bs-wizard > .bs-wizard-step .bs-wizard-info {color: white; font-size: 12px;}
-.bs-wizard > .bs-wizard-step > .bs-wizard-dot {position: absolute; width: 30px; height: 30px; display: block; background: #fbe8aa; top: 45px; left: 50%; margin-top: -15px; margin-left: -15px; border-radius: 50%;}
-.bs-wizard > .bs-wizard-step > .bs-wizard-dot:after {content: ' '; width: 14px; height: 14px; background: #fbbd19; border-radius: 50px; position: absolute; top: 8px; left: 8px; }
-.bs-wizard > .bs-wizard-step > .progress {position: relative; border-radius: 0px; height: 8px; box-shadow: none; margin: 20px 0;}
+.bs-wizard > .bs-wizard-step > .bs-wizard-dot {position: absolute; width: 20px; height: 20px; display: block; background: #fbe8aa; top: 45px; left: 50%; margin-top: -15px; margin-left: -15px; border-radius: 50%;}
+.bs-wizard > .bs-wizard-step > .bs-wizard-dot:after {content: ' '; width: 8px; height: 8px; background: #fbbd19; border-radius: 50px; position: absolute; top: 6px; left: 6px; }
+.bs-wizard > .bs-wizard-step > .progress {position: relative; border-radius: 0px; height: 5px; box-shadow: none; margin: 20px 0;}
 .bs-wizard > .bs-wizard-step > .progress > .progress-bar {width:0px; box-shadow: none; background: #fbe8aa;}
 .bs-wizard > .bs-wizard-step.complete > .progress > .progress-bar {width:100%;}
 .bs-wizard > .bs-wizard-step.active > .progress > .progress-bar {width:50%;}
