@@ -8,7 +8,7 @@ module.exports = {
   beer_id: function(id){
     return knex.raw(`SELECT beer_id from batch where id=${id}`);
   },
-  equiptment: function(id){
+  equipment: function(id){
     return knex.raw(`SELECT * from equipment where batch_id = ${id};`)
   },
   brewer_notes: function(id){
@@ -16,7 +16,9 @@ module.exports = {
   },
   add_notes: function(user, beer, text){
     return knex.raw(`INSERT into brewer_notes values(default, ${user}, ${beer}, '${text}');`)
-
+  },
+  batchInfo: function(id){
+    return knex.raw(`SELECT * from batch where id = ${id};`)
   }
 }
 
