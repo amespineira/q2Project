@@ -15,6 +15,7 @@ var batch = require('./routes/batch')
 var beer= require('./routes/beer')
 var main = require('./routes/main')
 var help = require('./routes/help')
+var finished_batches = require('./routes/finished_batches')
 var app = express();
 
 // view engine setup
@@ -40,9 +41,10 @@ app.use('/', userbouncer.loggedIn);
 app.use('/inventory', inventory);
 app.use('/equipment', equipment);
 app.use('/batch', batch);
-app.use('/beer', beer)
-app.use('/main', main)
-app.use('/help', help)
+app.use('/beer', beer);
+app.use('/main', main);
+app.use('/help', help);
+app.use('/finished_batches', finished_batches);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
