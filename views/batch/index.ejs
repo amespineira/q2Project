@@ -15,9 +15,17 @@
           <h4 class="modal-title" id="myModalLabel">Modal title</h4>
         </div>
           <div class="modal-body">
-            <form action="/batch/<%= beer_id %>" method="post">
+            <form action="/batch/create" method="post">
+              <label for="beer_name">Name</label>
+              <input type="text" name="beer_name">
+              <label for="type">Beer Type</label>
+              <input type="text" name="type">
+              <label for="Style">Style</label>
+              <input type="text" name="style">
+              <label for="start_date">Start Date</label>
+              <input type="date" name="start_date">
               <label for="end_date">End Date<br><span style="font-size: 12px;">(recommended 2 weeks)</span></label>
-              <input type="date" name="end_date" value="<%= date %>">
+              <input type="date" name="end_date">
               <label for="expected_yield">Expected Yield (liters)</label>
               <input type="number" name="expected_yield">
           </div>
@@ -54,12 +62,13 @@
       </tbody>
     </table>
   </div>
+  <div class="button">
+    <input type="button" id="btnMode" class="btn" value="+ Add new batch">
+  </div>
 </section>
 
 <script type="text/javascript">
-    $(window).load(function(){
-      if (<%= modalVar %> === 1) {
+    $('#btnMode').click(function(){
       $('#myModal').modal('show');
-      }
     });
 </script>
