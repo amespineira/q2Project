@@ -5,7 +5,7 @@
   <aside class="aside_batch">
     <div class="containerC">
       <div class="item text-center">
-        <h4><%= beer[0].beer_name %> Ingredients</h4>
+        <h4><%= beer[0].beer_name %> Ingredients </h4>
         <hr>
         <div class="table">
           <table>
@@ -14,18 +14,25 @@
                 <th>Name</th>
                 <th>Type</th>
                 <th>Amount</th>
+                <th>Units</th>
               </tr>
             </thead>
             <tbody>
               <%for(var i = 0; i < ing.length; i++){ %>
-                <tr>
-                  <td><%= ing[i].ingredient_name %></td>
+                <tr style="width: 4px">
+                  <td ><%= ing[i].ingredient_name %></td>
                   <td><%= ing[i].ingredient_type %></td>
-                  <td><%= ing[i].amount %> <%= ing[i].units %></td>
+                  <td><%= ing[i].amount %></td>
+                  <td><%= ing[i].units %></td>
                 </tr>
                 <%} %>
             </tbody>
           </table>
+          <form action="/batch/ingredient/<%= beer_id %>" method="post">
+            <input type="number" name="beer_id" value="<%= beer_id %>" hidden>
+            <input type="number" name="batch_id" value="<%= batch_id %>" hidden>
+            <input type="submit" class="btn btn-default" value="add ingredient">
+          </form>
         </div>
       </div>
       <div class="item text-center">
@@ -50,6 +57,11 @@
                 <%} %>
             </tbody>
           </table>
+          <form action="/batch/equipment/<%= batch_id %>" method="post">
+            <input type="number" name="beer_id" value="<%= beer_id %>" hidden>
+            <input type="number" name="batch_id" value="<%= batch_id %>" hidden>
+            <input type="submit" class="btn btn-default" value="add equipment">
+          </form>
         </div>
       </div>
       <div class="item">
