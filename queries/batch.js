@@ -24,6 +24,9 @@ module.exports = {
     }
     return Promise.all(promiseArray)
   },
+  steps: function(id){
+    return knex.raw(`SELECT * from steps where id = ${id}`)
+  },
   getLatestBatch:function(userid){
     return knex.raw(`SELECT MAX (id) FROM batch WHERE user_id=${userid}`)
   },

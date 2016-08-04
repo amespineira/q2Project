@@ -103,6 +103,9 @@ router.get('/:id', function(req, res, next){
       Queries_batch.equipment(req.params.id).then(function(equip){
         Queries_batch.brewer_notes(id.rows[0].beer_id).then(function(notes){
           Queries_batch.batchInfo(req.params.id).then(function(batch){
+            Queries_batch.steps(req.params.id).then(function(steps){
+              console.log('*************'); 
+              console.log(steps.rows);
           if(results[0].rows.length === 0){
             res.redirect('/beer')
           }else if (results[0].rows[0].user_id === req.session.id){
@@ -111,6 +114,7 @@ router.get('/:id', function(req, res, next){
           } else {
             res.redirect('/');
           }
+            })
           })
         })
       })
