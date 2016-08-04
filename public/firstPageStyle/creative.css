@@ -22,7 +22,11 @@
 .margin-containers{
   margin-top: 2vh;
 }
-
+.batch-input{
+  width: 90%;
+  font-size:90%;
+  color:black;
+}
 /*IDS FOR THE CREATE.EJS PAGE */
 #inputBeer{
   color:black;

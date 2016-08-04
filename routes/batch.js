@@ -4,7 +4,7 @@ var knex = require('../db/knex');
 var Queries_batch = require('../queries/batch');
 var Beer = require('../queries/beer')
 var Ing=require('../queries/ingredients.js')
-
+var Equip=require('../queries/equipment.js')
 function Batch(){
 return knex('batch');
 }
@@ -18,9 +18,69 @@ function Beer_ingredients(){
 //recieving the beer id in req.params.id
 
 
-router.post('/:id', function(req, res, next){
-  Queries_batch.createBatch(req.body, req.session.id, req.params.id).then(function(){
-      res.redirect('/batch')
+router.post('/create', function(req, res, next){
+  var specs={
+    user_id:req.session.id,
+    name:req.body.beer_name,
+    type:req.body.type,
+    style:req.body.style
+  }
+  Beer.create(specs).then(function(){
+    Beer.getLatestBeer(req.session.id).then(function(beerid){
+      Beer.getOne(beerid.rows[0].max).then(function(userBeer){
+        Equip.getAllEquipment(req.session.id).then(function(equipment){
+          Queries_batch.createBatch(req.body, req.session.id, beerid.rows[0].max).then(function(){
+            Queries_batch.getLatestBatch(req.session.id).then(function(newBatch){
+              console.log(newBatch);
+              res.render('batch/create', {beer:userBeer.rows, equipment:equipment.rows, beerid:beerid.rows[0].max, batchid:newBatch.rows[0].max})
+            })
+          })
+        })
+      })
+    })
+  })
+})
+router.post('/:beerid/:batchid', function(req, res, next){
+  console.log("what the fuck is happening");
+  var ingredients=[];
+  var ingredients2=[];
+  if(Array.isArray(req.body.ingredientName)){
+    for(var i=0; i<req.body.ingredientName.length; i++){
+      ingredients.push({
+        name:req.body.ingredientName[i],
+        type:req.body.ingredientType[i],
+        units:req.body.ingredientUnits[i]
+      })
+      ingredients2.push({
+        name:req.body.ingredientName[i],
+        type:req.body.ingredientType[i],
+        units:req.body.ingredientUnits[i],
+        amount:req.body.ingredientAmount[i],
+      })
+    }
+  }
+  else{
+    ingredients.push({
+      name:req.body.ingredientName,
+      type:req.body.ingredientType,
+      units:req.body.ingredientUnits
+    })
+    ingredients2.push({
+      name:req.body.ingredientName,
+      type:req.body.ingredientType,
+      units:req.body.ingredientUnits,
+      amount:req.body.ingredientAmount,
+    })
+  }
+  Ing.createIfMissing(ingredients).then(function(){
+    console.log("here");
+    Ing.createBITest2(ingredients2, req.params.beerid).then(function(result){
+      console.log("here now");
+      Queries_batch.addManyNotes(req.session.id, req.params.beerid, req.body.notes).then(function(){
+        console.log("here again");
+        res.redirect('/batch/'+req.params.batchid)
+      })
+    })
   })
 })
 

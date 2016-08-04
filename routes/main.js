@@ -17,8 +17,9 @@ function Beer_ingredients(){
 
 
 router.get('/', function(req, res, next){
-  Batch().join('beer', 'beer.id', '=', 'batch.beer_id').where({'beer.user_id': req.session.id}).then(function(batches){
-    res.render('batch/index', {batches: batches, modalVar: 0, beer_id: '', date: ''})
+  knex.raw(`SELECT batch.id AS id, batch.start_date, batch.end_date, batch.expected_yield, beer.beer_name FROM batch JOIN beer ON beer.id=batch.beer_id WHERE batch.user_id=${req.session.id}`).then(function(batches){
+    console.log(batches);
+    res.render('batch/index', {batches: batches.rows, modalVar: 0, beer_id: '', date: ''})
   })
 })
 
