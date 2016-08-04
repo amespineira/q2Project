@@ -40,49 +40,7 @@ router.post('/create', function(req, res, next){
     })
   })
 })
-router.post('/:beerid/:batchid', function(req, res, next){
-  console.log("what the fuck is happening");
-  var ingredients=[];
-  var ingredients2=[];
-  if(Array.isArray(req.body.ingredientName)){
-    for(var i=0; i<req.body.ingredientName.length; i++){
-      ingredients.push({
-        name:req.body.ingredientName[i],
-        type:req.body.ingredientType[i],
-        units:req.body.ingredientUnits[i]
-      })
-      ingredients2.push({
-        name:req.body.ingredientName[i],
-        type:req.body.ingredientType[i],
-        units:req.body.ingredientUnits[i],
-        amount:req.body.ingredientAmount[i],
-      })
-    }
-  }
-  else{
-    ingredients.push({
-      name:req.body.ingredientName,
-      type:req.body.ingredientType,
-      units:req.body.ingredientUnits
-    })
-    ingredients2.push({
-      name:req.body.ingredientName,
-      type:req.body.ingredientType,
-      units:req.body.ingredientUnits,
-      amount:req.body.ingredientAmount,
-    })
-  }
-  Ing.createIfMissing(ingredients).then(function(){
-    console.log("here");
-    Ing.createBITest2(ingredients2, req.params.beerid).then(function(result){
-      console.log("here now");
-      Queries_batch.addManyNotes(req.session.id, req.params.beerid, req.body.notes).then(function(){
-        console.log("here again");
-        res.redirect('/batch/'+req.params.batchid)
-      })
-    })
-  })
-})
+
 
 router.get('/create/:id', function(req, res, next){
   var fortnightAway = new Date(+new Date + 12096e5);
@@ -117,7 +75,58 @@ router.get('/:id', function(req, res, next){
     })
   })
 })
-
+router.post('/:beerid/:batchid', function(req, res, next){
+  console.log("what the fuck is happening");
+  var ingredients=[];
+  var ingredients2=[];
+  if(Array.isArray(req.body.ingredientName)){
+    for(var i=0; i<req.body.ingredientName.length; i++){
+      ingredients.push({
+        name:req.body.ingredientName[i],
+        type:req.body.ingredientType[i],
+        units:req.body.ingredientUnits[i]
+      })
+      ingredients2.push({
+        name:req.body.ingredientName[i],
+        type:req.body.ingredientType[i],
+        units:req.body.ingredientUnits[i],
+        amount:req.body.ingredientAmount[i],
+      })
+    }
+  }
+  else{
+    ingredients.push({
+      name:req.body.ingredientName,
+      type:req.body.ingredientType,
+      units:req.body.ingredientUnits
+    })
+    ingredients2.push({
+      name:req.body.ingredientName,
+      type:req.body.ingredientType,
+      units:req.body.ingredientUnits,
+      amount:req.body.ingredientAmount,
+    })
+  }
+  var notesOut=[]
+  if(Array.isArray(req.body.notes)){
+    for(var i=0; i<req.body.notes.length; i++){
+      notesOut.push(req.body.notes[i])
+    }
+  }
+  else{
+    notesOut.push(req.body.notes)
+  }
+  Ing.createIfMissing(ingredients).then(function(){
+    console.log("here");
+    Ing.createBITest2(ingredients2, req.params.beerid).then(function(result){
+      console.log("here now");
+      Queries_batch.addManyNotes(req.session.id, req.params.beerid, notesOut).then(function(){
+        console.log("here again");
+        res.redirect('/batch/'+req.params.batchid)
+      })
+    })
+  })
+})
 
 
 

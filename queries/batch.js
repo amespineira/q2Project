@@ -18,11 +18,10 @@ module.exports = {
     return knex.raw(`INSERT into brewer_notes values(default, ${user}, ${beer}, '${text}');`)
   },
   addManyNotes: function(user, beer, notes){
-    var promiseArray=[];
-    for(var i=0; i<notes.length; i++){
-      promiseArray[i]=knex.raw(`INSERT into brewer_notes values(default, ${user}, ${beer}, '${notes[i]}');`)
-    }
-    return Promise.all(promiseArray)
+    console.log(notes);
+    var note=notes.pop()
+    knex.raw(`INSERT into brewer_notes values(default, ${user}, ${beer}, '${note}');`)
+    return (notes.length>0)? addManyNotes(user, beer, notes) : Promise.resolve(true)
   },
   getLatestBatch:function(userid){
     return knex.raw(`SELECT MAX (id) FROM batch WHERE user_id=${userid}`)
