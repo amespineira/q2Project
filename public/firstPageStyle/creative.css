@@ -573,6 +573,10 @@ hr {
   margin: 0 auto;
 }
 
+.show{
+  background: grey;
+}
+
 .bs-wizard {margin-top: -20px;}
 
 /*Form Wizard*/
