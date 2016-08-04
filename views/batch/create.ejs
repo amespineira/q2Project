@@ -1,0 +1,104 @@
+<% include ../layout %>
+
+<section class="batch_show">
+
+  <aside class="aside_batch">
+    <div class="containerC">
+      <div class="item text-center">
+        <h4><%= beer.beer_name %> Ingredients</h4>
+        <hr>
+        <div class="table">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody id="form-table">
+              <tr>
+                <th><input class="inputText" type="text" name=<%='ingredientName'%> ></input></th>
+                <th><input class="inputText" type="text" name=<%='ingredientType'%> ></input></th>
+                <th><input class="inputText" type="number" name=<%='ingredientAmount'%> ></input></th>
+                <th><input class="inputText" type="text" name=<%='ingredientUnits'%> ></input></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="item text-center">
+        <h4>Equipment</h4>
+        <hr>
+        <div class="table">
+          <table>
+            <thead>
+              <tr>
+                <th>Equipment</th>
+                <th>Clean?</th>
+                <th>Clean Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%for(var i = 0; i < equipment.length; i++){ %>
+                <tr>
+                  <td><%= equipment[i].equipment_name %></td>
+                  <td><%= equipment[i].clean %></td>
+                  <td><%= equipment[i].clean_time %></td>
+                </tr>
+              <%} %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="item">
+        <h4>Brewer's Notes</h4>
+        <hr>
+    
+      </div>
+    </div>
+
+  </aside>
+  <main class="main_batch">
+
+  <h3><%= beer[0].beer_name %> | <%= beer[0].type %> | <%= beer[0].style %></h3>
+  <div class="container">
+            <div class="row bs-wizard" style="border-bottom:0;">
+
+                <div class="col-xs-3 bs-wizard-step active">
+                  <div class="text-center bs-wizard-stepnum">&nbsp</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <div class="bs-wizard-info text-center">Brew Day</div>
+                </div>
+
+                <div class="col-xs-3 bs-wizard-step disabled"><!-- complete -->
+                  <div class="text-center bs-wizard-stepnum">&nbsp</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <div class="bs-wizard-info text-center">Fermentation Monitoring</div>
+                </div>
+
+                <div class="col-xs-3 bs-wizard-step disabled"><!-- complete -->
+                  <div class="text-center bs-wizard-stepnum">&nbsp</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <div class="bs-wizard-info text-center">Bottling Day</div>
+                </div>
+
+                <div class="col-xs-3 bs-wizard-step disabled"><!-- active -->
+                  <div class="text-center bs-wizard-stepnum">&nbsp</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <div class="bs-wizard-info text-center">Drink!</div>
+                </div>
+            </div>
+	      </div>
+  </div>
+  <div class="steps">
+
+  </div>
+
+</main>
+
+</section>

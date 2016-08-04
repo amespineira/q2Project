@@ -21,7 +21,20 @@ router.get('/', function(req, res, next){
     res.render('batch/index', {batches: batches, modalVar: 0, beer_id: '', date: ''})
   })
 })
+router.post('/create', function(req, res, next){
+  var specs={
+    user_id:req.session.id,
+    name:req.body.name,
+    type:req.body.type,
+    style:req.body.style
+  }
+  Beer.create(specs).then(function(){
+    Beer.getLatestBeer(req.session.id).then(function(userBeer){
+      res.render('batch/create', {beer:userBeer.rows[0]})
 
+    })
+  })
+})
 router.post('/:id', function(req, res, next){
   Queries_batch.createBatch(req.body, req.session.id, req.params.id).then(function(){
       res.redirect('/batch')
