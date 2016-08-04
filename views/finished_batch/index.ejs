@@ -1,0 +1,32 @@
+<% include ../layout %>
+
+
+<section>
+<h2></h2>
+<div class="table">
+  <table class="batch">
+    <thead>
+      <tr>
+        <th>Taste</th>
+        <th>Aftertaste</th>
+        <th>Appearance</th>
+        <th>Smell</th>
+        <th>Mouth Feel</th>
+        <th>Drinkability</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%for(var i = 0; i < finished_batch.length; i++){ %>
+        <tr>
+          <td><%= finished_batch[i].taste%></td>
+          <td><%= finished_batch[i].aftertaste%></td>
+          <td><%= finished_batch[i].appearance%></td>
+          <td><%= finished_batch[i].smell%></td>
+          <td><%= finished_batch[i]['mouth feel']%></td>
+          <td><%= finished_batch[i].drinkability%></td>
+        </tr>
+        <%} %>
+    </tbody>
+  </table>
+</div>
+</section>
