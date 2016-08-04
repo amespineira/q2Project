@@ -22,7 +22,11 @@
 .margin-containers{
   margin-top: 2vh;
 }
-
+.batch-input{
+  width: 90%;
+  font-size:90%;
+  color:black;
+}
 /*IDS FOR THE CREATE.EJS PAGE */
 #inputBeer{
   color:black;
@@ -488,6 +492,7 @@ table, th, td {
 
 td {
   height: 2em;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
 thead {
@@ -496,6 +501,7 @@ thead {
 }
 th{
   height: 1em;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
 tbody {
@@ -504,6 +510,7 @@ tbody {
 }
 
 textarea {
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   color: black;
   width: 100%;
   border-radius: 7px;
@@ -570,6 +577,10 @@ hr {
   margin: 0 auto;
 }
 
+.show{
+  background: grey;
+}
+
 .bs-wizard {margin-top: -20px;}
 
 /*Form Wizard*/
@@ -577,7 +588,7 @@ hr {
 .bs-wizard > .bs-wizard-step {padding: 0; position: relative;}
 .bs-wizard > .bs-wizard-step + .bs-wizard-step {}
 .bs-wizard > .bs-wizard-step .bs-wizard-stepnum {color: #595959; font-size: 12px; margin-bottom: 5px;}
-.bs-wizard > .bs-wizard-step .bs-wizard-info {color: white; font-size: 12px;}
+.bs-wizard > .bs-wizard-step .bs-wizard-info {color: white; font-size: 12px;font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;}
 .bs-wizard > .bs-wizard-step > .bs-wizard-dot {position: absolute; width: 20px; height: 20px; display: block; background: #fbe8aa; top: 45px; left: 50%; margin-top: -15px; margin-left: -15px; border-radius: 50%;}
 .bs-wizard > .bs-wizard-step > .bs-wizard-dot:after {content: ' '; width: 8px; height: 8px; background: #fbbd19; border-radius: 50px; position: absolute; top: 6px; left: 6px; }
 .bs-wizard > .bs-wizard-step > .progress {position: relative; border-radius: 0px; height: 5px; box-shadow: none; margin: 20px 0;}
