@@ -40,6 +40,41 @@ router.post('/create', function(req, res, next){
     })
   })
 })
+
+
+router.get('/create/:id', function(req, res, next){
+  var fortnightAway = new Date(+new Date + 12096e5);
+  Batch().join('beer', 'beer.id', '=', 'batch.beer_id').where({'beer.user_id': req.session.id}).then(function(batches){
+    res.render('batch/index', {batches: batches, modalVar: 1, beer_id: req.params.id, date: fortnightAway.toISOString().split('T')[0]})
+  })
+})
+
+router.post('/notes/:id', function(req, res, next){
+  Queries_batch.add_notes(req.params.id, req.body.beer_id, req.body.notes).then(function(){
+    res.redirect(`/batch/${req.body.batch_id}`)
+  })
+})
+
+router.get('/:id', function(req, res, next){
+  Queries_batch.beer_id(req.params.id).then(function(id){
+    Promise.all([Beer.getOne(id.rows[0].beer_id),Ing.getBeersIng(id.rows[0].beer_id)]).then(function(results){
+      Queries_batch.equipment(req.params.id).then(function(equip){
+        Queries_batch.brewer_notes(id.rows[0].beer_id).then(function(notes){
+          Queries_batch.batchInfo(req.params.id).then(function(batch){
+          if(results[0].rows.length === 0){
+            res.redirect('/beer')
+          }else if (results[0].rows[0].user_id === req.session.id){
+            res.render('batch/show', {beer: results[0].rows, ing: results[1].rows, beer_id: id.rows[0].beer_id, batch_id: req.params.id,
+              equipment: equip.rows, notes: notes.rows, curr_stage: batch.rows[0].curr_stage})
+          } else {
+            res.redirect('/');
+          }
+          })
+        })
+      })
+    })
+  })
+})
 router.post('/:beerid/:batchid', function(req, res, next){
   console.log("what the fuck is happening");
   var ingredients=[];
@@ -72,17 +107,27 @@ router.post('/:beerid/:batchid', function(req, res, next){
       amount:req.body.ingredientAmount,
     })
   }
+  var notesOut=[]
+  if(Array.isArray(req.body.notes)){
+    for(var i=0; i<req.body.notes.length; i++){
+      notesOut.push(req.body.notes[i])
+    }
+  }
+  else{
+    notesOut.push(req.body.notes)
+  }
   Ing.createIfMissing(ingredients).then(function(){
     console.log("here");
     Ing.createBITest2(ingredients2, req.params.beerid).then(function(result){
       console.log("here now");
-      Queries_batch.addManyNotes(req.session.id, req.params.beerid, req.body.notes).then(function(){
+      Queries_batch.addManyNotes(req.session.id, req.params.beerid, notesOut).then(function(){
         console.log("here again");
         res.redirect('/batch/'+req.params.batchid)
       })
     })
   })
 })
+
 
 router.get('/create/:id', function(req, res, next){
   var fortnightAway = new Date(+new Date + 12096e5);
@@ -104,7 +149,7 @@ router.get('/:id', function(req, res, next){
         Queries_batch.brewer_notes(id.rows[0].beer_id).then(function(notes){
           Queries_batch.batchInfo(req.params.id).then(function(batch){
             Queries_batch.steps(req.params.id).then(function(steps){
-              console.log('*************'); 
+              console.log('*************');
               console.log(steps.rows);
           if(results[0].rows.length === 0){
             res.redirect('/beer')
