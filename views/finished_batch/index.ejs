@@ -1,8 +1,7 @@
 <% include ../layout %>
 
-
 <section>
-<h2></h2>
+<h1><%= finished_batch.beer_name %>- Batch #<%=finished_batch.batch_id%></h1>
 <div class="table">
   <table class="batch">
     <thead>
@@ -16,17 +15,15 @@
       </tr>
     </thead>
     <tbody>
-      <%for(var i = 0; i < finished_batch.length; i++){ %>
-        <tr>
-          <td><%= finished_batch[i].taste%></td>
-          <td><%= finished_batch[i].aftertaste%></td>
-          <td><%= finished_batch[i].appearance%></td>
-          <td><%= finished_batch[i].smell%></td>
-          <td><%= finished_batch[i]['mouth feel']%></td>
-          <td><%= finished_batch[i].drinkability%></td>
+      <tr>
+          <td><%= finished_batch.taste%></td>
+          <td><%= finished_batch.aftertaste%></td>
+          <td><%= finished_batch.appearance%></td>
+          <td><%= finished_batch.smell%></td>
+          <td><%= finished_batch['mouth feel']%></td>
+          <td><%= finished_batch.drinkability%></td>
         </tr>
-        <%} %>
-    </tbody>
+      </tbody>
   </table>
 </div>
 </section>
