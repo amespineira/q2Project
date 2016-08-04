@@ -4,6 +4,7 @@
 
   <aside class="aside_batch">
     <div class="containerC">
+    <form action=<%='/batch/'+beerid+'/'+batchid%> method="post">
       <div class="item text-center">
         <h4><%= beer.beer_name %> Ingredients</h4>
         <hr>
@@ -14,17 +15,19 @@
                 <th>Name</th>
                 <th>Type</th>
                 <th>Amount</th>
+                <th>Units</th>
               </tr>
             </thead>
             <tbody id="form-table">
-              <tr>
-                <th><input class="inputText" type="text" name=<%='ingredientName'%> ></input></th>
-                <th><input class="inputText" type="text" name=<%='ingredientType'%> ></input></th>
-                <th><input class="inputText" type="number" name=<%='ingredientAmount'%> ></input></th>
-                <th><input class="inputText" type="text" name=<%='ingredientUnits'%> ></input></th>
+              <tr >
+                <th><input class="batch-input" type="text" name=<%='ingredientName'%> ></input></th>
+                <th><input class="batch-input" type="text" name=<%='ingredientType'%> ></input></th>
+                <th><input class="batch-input" type="number" name=<%='ingredientAmount'%> ></input></th>
+                <th><input class="batch-input" type="text" name=<%='ingredientUnits'%> ></input></th>
               </tr>
             </tbody>
           </table>
+          <input type=button class="btn" id="addIng" value='Add Ingredient'</input>
         </div>
       </div>
       <div class="item text-center">
@@ -51,10 +54,16 @@
           </table>
         </div>
       </div>
-      <div class="item">
+      <div class="item" id='note-con'>
         <h4>Brewer's Notes</h4>
-        <hr>
-    
+
+
+        <textarea name='notes' class="text-field" rows="5">
+        </textarea>
+
+        </div>
+        <input type=button class="btn" id="addNote" value='Add Note'></input>
+
       </div>
     </div>
 
@@ -98,6 +107,9 @@
   <div class="steps">
 
   </div>
+  <button type="submit" class="btn">Save Batch</button>
+</form>
+  <script src="/javascripts/js/batchCreate.js"></script>
 
 </main>
 
