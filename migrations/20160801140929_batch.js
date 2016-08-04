@@ -10,7 +10,7 @@ exports.up = function(knex, Promise) {
     table.integer('expected_yield');
     table.integer('actual_yield');
     table.integer('total_stages');
-    table.integer('curr_stage')
+    table.integer('curr_stage').notNullable(); 
 
   })
 };

@@ -8,7 +8,7 @@ module.exports = {
   beer_id: function(id){
     return knex.raw(`SELECT beer_id from batch where id=${id}`);
   },
-  equiptment: function(id){
+  equipment: function(id){
     return knex.raw(`SELECT * from equipment where batch_id = ${id};`)
   },
   brewer_notes: function(id){
@@ -16,11 +16,20 @@ module.exports = {
   },
   add_notes: function(user, beer, text){
     return knex.raw(`INSERT into brewer_notes values(default, ${user}, ${beer}, '${text}');`)
-
+  },
+  addManyNotes: function(user, beer, notes){
+    var promiseArray=[];
+    for(var i=0; i<notes.length; i++){
+      promiseArray[i]=knex.raw(`INSERT into brewer_notes values(default, ${user}, ${beer}, '${notes[i]}');`)
+    }
+    return Promise.all(promiseArray)
   },
   getLatestBatch:function(userid){
     return knex.raw(`SELECT MAX (id) FROM batch WHERE user_id=${userid}`)
   },
+  batchInfo: function(id){
+    return knex.raw(`SELECT * from batch where id = ${id};`)
+  }
 }
 
 
