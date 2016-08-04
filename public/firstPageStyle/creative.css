@@ -581,6 +581,16 @@ hr {
   background: grey;
 }
 
+.stepBody {
+  height: 100%;
+  width: 100%;
+  background: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .bs-wizard {margin-top: -20px;}
 
 /*Form Wizard*/
