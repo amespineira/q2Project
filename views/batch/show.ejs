@@ -7,6 +7,8 @@
       <div class="item text-center">
         <h4><%= beer[0].beer_name %> Ingredients </h4>
         <hr>
+        <form id="ing-form" action="/batch/ingredient/<%= beer_id %>/<%= batch_id %>" method="post">
+
         <div class="table">
           <table>
             <thead>
@@ -17,7 +19,7 @@
                 <th>Units</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="form-table">
               <%for(var i = 0; i < ing.length; i++){ %>
                 <tr style="width: 4px">
                   <td ><%= ing[i].ingredient_name %></td>
@@ -26,18 +28,25 @@
                   <td><%= ing[i].units %></td>
                 </tr>
                 <%} %>
+                <tr>
+                  <th><input class="batch-input" type="text" name=<%='ingredientName'%> ></input></th>
+                  <th><input class="batch-input" type="text" name=<%='ingredientType'%> ></input></th>
+                  <th><input class="batch-input" type="number" name=<%='ingredientAmount'%> ></input></th>
+                  <th><input class="batch-input" type="text" name=<%='ingredientUnits'%> ></input></th>
+                </tr>
             </tbody>
           </table>
-          <form action="/batch/ingredient/<%= beer_id %>" method="post">
-            <input type="number" name="beer_id" value="<%= beer_id %>" hidden>
-            <input type="number" name="batch_id" value="<%= batch_id %>" hidden>
-            <input type="submit" class="btn btn-default" value="add ingredient">
-          </form>
+          <button type="submit" class="btn">Add Ingredient</button>
+
+        </form>
+
         </div>
       </div>
       <div class="item text-center">
         <h4>Equipment</h4>
         <hr>
+        <form id="equ-form" action="/batch/equipment/<%= batch_id %>" method="post">
+
         <div class="table">
           <table>
             <thead>
@@ -55,13 +64,16 @@
                   <td><%= equipment[i].clean_time %></td>
                 </tr>
                 <%} %>
+                <tr>
+                  <th><input class="batch-input" type="text" name=<%='equipmentName'%> ></input></th>
+                  <th><input class="batch-input" type="checkbox" name=<%='clean'%> ></input></th>
+                  <th><input class="batch-input" type="number" name=<%='cleanTime'%> ></input></th>
+                </tr>
             </tbody>
           </table>
-          <form action="/batch/equipment/<%= batch_id %>" method="post">
-            <input type="number" name="beer_id" value="<%= beer_id %>" hidden>
-            <input type="number" name="batch_id" value="<%= batch_id %>" hidden>
-            <input type="submit" class="btn btn-default" value="add equipment">
-          </form>
+          <button type="submit" class="btn">Add Equipment</button>
+        </form>
+
         </div>
       </div>
       <div class="item">
