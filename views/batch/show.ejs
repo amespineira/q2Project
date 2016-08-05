@@ -187,11 +187,13 @@
   <div class="steps">
     <input type="button" id="addStep" class="btn btn-default" value="Add Step +"> || <input type='button' id="backStep" class="btn btn-default" value="< Back Stage"> || <input type="button" id="nextStep" class="btn btn-default" value="Next Stage >"> || <input type="button" id="finishedB" class="btn btn-default" value="Finished Stage">
     <div class="stepBody">
+      <%if(steps){ %>
       <% var order = [[], [], [], []] %>
       <% steps.forEach(function(step){
         order[step.stage-1].push(step);
         })
         %>
+        <% } %>
 
         <div class="step" id="hide1">
           <% for(var i = 0; i < order[0].length; i++ ){ %>
