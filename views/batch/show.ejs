@@ -324,12 +324,14 @@ $('#backStep').click(function(){
     stage--;
   })
 
+  var test = $('#testy').val();
+  console.log(test);
 
   var stepNum = [1, 1, 1, 1];
   $('#close').click(function(){
     $('#myModal').modal('hide');
     var test = $('select[name=stage]').val();
-    $(`#hide${test}`).append(`<input type='number' name='stage' value='${stage}' hidden><input type='number' name='order' value='${stepNum[(stage-1)]}' hidden><h3>Step ${stepNum[(stage-1)]}: <input type='text' name='name' value='${$('input[name=name]').val()}'></h3><p><input type='text' name='step_notes' value='${$('textarea').val()}'></p>`)
+    $(`#hide${test}`).append(`<input type='number' name='stage' value='${stage}' hidden><input type='number' name='order' value='${stepNum[(stage-1)]}' hidden><h3>Step ${stepNum[(stage-1)]}: <input type='text' name='name' value='${$('input[name=name]').val()}'></h3><textarea type='text' name='step_notes' value='${$('textarea').val()}'>${$('textarea').val()}</textarea>`)
     stepNum[(stage-1)]++;
   })
 
