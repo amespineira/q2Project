@@ -40,6 +40,7 @@ router.post('/create', function(req, res, next){
     })
   })
 })
+
 router.post('/step/:id', function(req, res, next){
   //recieving batch.id
   Queries_batch.step(req.params.id, req.body).then(function(steps){
@@ -48,12 +49,46 @@ router.post('/step/:id', function(req, res, next){
   })
 })
 
-router.get('/create/:id', function(req, res, next){
-  var fortnightAway = new Date(+new Date + 12096e5);
-  Batch().join('beer', 'beer.id', '=', 'batch.beer_id').where({'beer.user_id': req.session.id}).then(function(batches){
-    res.render('batch/index', {batches: batches, modalVar: 1, beer_id: req.params.id, date: fortnightAway.toISOString().split('T')[0]})
+router.post('/equipment/:batchid', function(req, res, next){
+    var specs={
+      equipment_name:req.body.equipmentName,
+      batch_id:req.params.batchid,
+      clean:req.body.clean,
+      cleaning_time:req.body.cleanTime,
+      cleaning_notes:''
+    }
+    console.log("in equipment thing");
+  Equip.createEquipment(specs, req.session.id).then(function() {
+    console.log("about to redirect");
+    res.redirect(`/batch/${req.params.batchid}`)
   })
 })
+router.post('/ingredient/:beerid/:batchid', function(req,res,next){
+  console.log("request recived");
+  var ingredients=[]
+  var ingredients2=[]
+  ingredients.push({
+    name:req.body.ingredientName,
+    type:req.body.ingredientType,
+    units:req.body.ingredientUnits
+  })
+  ingredients2.push({
+    name:req.body.ingredientName,
+    type:req.body.ingredientType,
+    units:req.body.ingredientUnits,
+    amount:req.body.ingredientAmount,
+  })
+  console.log("arrays made");
+  Ing.createIfMissing(ingredients).then(function(){
+    console.log('made missing');
+    Ing.createBeerIngredients(ingredients2, req.params.beerid).then(function(result){
+      'inserted into bi table'
+      res.redirect(`/batch/${req.params.batchid}`)
+
+    })
+  })
+})
+
 
 router.post('/notes/:id', function(req, res, next){
   Queries_batch.add_notes(req.params.id, req.body.beer_id, req.body.notes).then(function(){
@@ -81,7 +116,21 @@ router.get('/:id', function(req, res, next){
     })
   })
 })
-router.post('/:beerid/:batchid', function(req, res, next){
+
+
+router.get('/create/:id', function(req, res, next){
+  var fortnightAway = new Date(+new Date + 12096e5);
+  Batch().join('beer', 'beer.id', '=', 'batch.beer_id').where({'beer.user_id': req.session.id}).then(function(batches){
+    res.render('batch/index', {batches: batches, modalVar: 1, beer_id: req.params.id, date: fortnightAway.toISOString().split('T')[0]})
+  })
+})
+
+router.post('/notes/:id', function(req, res, next){
+  Queries_batch.add_notes(req.params.id, req.body.beer_id, req.body.notes).then(function(){
+    res.redirect(`/batch/${req.body.batch_id}`)
+  })
+})
+router.post('/submit/:beerid/:batchid', function(req, res, next){
   console.log("what the fuck is happening");
   console.log(req.body);
   console.log(req.params.beerid);
@@ -127,27 +176,13 @@ router.post('/:beerid/:batchid', function(req, res, next){
   }
   Ing.createIfMissing(ingredients).then(function(){
     console.log("here");
-    Ing.createBITest2(ingredients2, req.params.beerid).then(function(result){
+    Ing.createBeerIngredients(ingredients2, req.params.beerid).then(function(result){
       console.log("here now");
       Queries_batch.addManyNotes(req.session.id, req.params.beerid, notesOut).then(function(){
         console.log("here again");
         res.redirect('/batch/'+req.params.batchid)
       })
     })
-  })
-})
-
-
-router.get('/create/:id', function(req, res, next){
-  var fortnightAway = new Date(+new Date + 12096e5);
-  Batch().join('beer', 'beer.id', '=', 'batch.beer_id').where({'beer.user_id': req.session.id}).then(function(batches){
-    res.render('batch/index', {batches: batches, modalVar: 1, beer_id: req.params.id, date: fortnightAway.toISOString().split('T')[0]})
-  })
-})
-
-router.post('/notes/:id', function(req, res, next){
-  Queries_batch.add_notes(req.params.id, req.body.beer_id, req.body.notes).then(function(){
-    res.redirect(`/batch/${req.body.batch_id}`)
   })
 })
 
