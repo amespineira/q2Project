@@ -41,7 +41,7 @@ app.use(passport.session());
 passport.use(new twitterStrat({
     consumerKey: '1CpCacLEGagk7ODCvJgLukVGE',
     consumerSecret: 'KN6SUAHoYLfHWBbFgVvkkMGh2pZGU4SM9jdCnViQOqSk8CKUc9',
-    callbackURL: process.env.HOST+ "auth/twitter/callback"
+    callbackURL: "http://localhost:3000/auth/twitter/callback"
   },authQ.authTwit
 
 
