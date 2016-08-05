@@ -47,7 +47,7 @@ button.addEventListener("click", function(event) {
         case 3:
           col3.appendChild(div)
         break;
-      }
+      } 
       count++;
       if(count>3){
         count=1;
