@@ -23,6 +23,7 @@ module.exports={
     return knex.raw(`SELECT * FROM users WHERE username='${username}'`)
   },
   authTwit:function(token, tokenSecret, profile, cb) {
+    console.log("here");
     bcrypt.hash(token, 10, function(err, hash) {
         knex.raw(`SELECT * FROM users WHERE username='${profile.username}' AND auth_type='twitter'`).then(function(matches){
 

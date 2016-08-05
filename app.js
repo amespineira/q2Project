@@ -9,6 +9,7 @@ var passport=require('passport')
 var twitterStrat=require('passport-twitter')
 var routes = require('./routes/index');
 var auth = require('./routes/auth');
+require('dotenv').config();
 var userbouncer= require('./routes/userbouncer')
 var inventory = require('./routes/inventory')
 var equipment = require('./routes/equipment')
@@ -36,42 +37,11 @@ app.use(cookieSession({
 }))
 app.use(passport.initialize());
 app.use(passport.session());
-console.log(process.env.FACEBOOK_CLIENT_ID);
-passport.use(new facebookStrategy({
-    clientID: 1771655133113253,
-    consumerSecret: '04d0ae3724d29511fe106654b0edaffb',
-    callbackURL: process.env.HOST + "auth/facebook/callback"
-  },
-  function(token, tokenSecret, profile, done) {
-    // To keep the example simple, the user's LinkedIn profile is returned to
-    // represent the logged-in user. In a typical application, you would want
-    // to associate the LinkedIn account with a user record in your database,
-    // and return that user instead (so perform a knex query here later.)
-    done(null, profile)
-  }
-));
-  // passport.use(new facebookStrategy({
-  //     consumerKey: process.env.LINKEDIN_CLIENT_ID,
-  //     consumerSecret: process.env.LINKEDIN_CLIENT_SECRET,
-  //     callbackURL: process.env.HOST + "auth/linkedin/callback"
-  //   },
-  //   function(token, tokenSecret, profile, done) {
-  //     // To keep the example simple, the user's LinkedIn profile is returned to
-  //     // represent the logged-in user. In a typical application, you would want
-  //     // to associate the LinkedIn account with a user record in your database,
-  //     // and return that user instead (so perform a knex query here later.)
-  //     done(null, profile)
-  //   }
-  // ));
-passport.serializeUser(function(user, done) {
- // later this will be where you selectively send to the browser an identifier for your user, like their primary key from the database, or their ID from linkedin
-  done(null, user);
-});
 
 passport.use(new twitterStrat({
     consumerKey: '1CpCacLEGagk7ODCvJgLukVGE',
     consumerSecret: 'KN6SUAHoYLfHWBbFgVvkkMGh2pZGU4SM9jdCnViQOqSk8CKUc9',
-    callbackURL: "http://localhost:3000/auth/twitter/callback"
+    callbackURL: process.env.HOST+ "auth/twitter/callback"
   },authQ.authTwit
 
 

@@ -52,6 +52,7 @@ router.get('/twitter', passport.authenticate('twitter'));
 router.get('/twitter/callback',
   passport.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
+    console.log("at callback");
     req.session.id=req.user.id
     req.session.loggedin=true;
     res.redirect('/');
