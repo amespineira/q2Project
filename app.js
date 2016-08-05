@@ -41,7 +41,7 @@ var config = require('./host.js')[environment];
 passport.use(new twitterStrat({
     consumerKey: '1CpCacLEGagk7ODCvJgLukVGE',
     consumerSecret: 'KN6SUAHoYLfHWBbFgVvkkMGh2pZGU4SM9jdCnViQOqSk8CKUc9',
-    callbackURL: "http://localhost:3000/"+"auth/twitter/callback"
+    callbackURL: config.url+"auth/twitter/callback"
   },authQ.authTwit
 
 
