@@ -1,7 +1,12 @@
 <% include ../layout %>
+<div class="jumbotron text-center">
+    <h1><%= finished_batch.beer_name %>- Batch #<%=finished_batch.batch_id%></h1>
 
-    <section>
-        <h1><%= finished_batch.beer_name %>- Batch #<%=finished_batch.batch_id%></h1>
+</div>
+
+
+
+
         <div>
             <h1>Beer Notes</h1>
             <table class="batch">
@@ -70,11 +75,10 @@
                 <h2>Beer Size</h2>
                 <ul>
                     <li class="finished_batch">
-                        <%=beer_stats[i].wort_collection %>
+                        <%=beer_stats.wort_collection %>
 
                     </li>
                 </ul>
             </div>
             </div>
         </div>
-    </section>

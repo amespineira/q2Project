@@ -1,5 +1,6 @@
 var knex=require('../db/knex');
 var bcrypt=require('bcrypt')
+
 module.exports={
   getUsersBeers:function(id){
     return knex.raw(`SELECT * FROM beer WHERE user_id=${id}`)
