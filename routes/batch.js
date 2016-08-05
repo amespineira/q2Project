@@ -114,12 +114,6 @@ router.get('/:id', function(req, res, next){
 })
 
 
-router.get('/create/:id', function(req, res, next){
-  var fortnightAway = new Date(+new Date + 12096e5);
-  Batch().join('beer', 'beer.id', '=', 'batch.beer_id').where({'beer.user_id': req.session.id}).then(function(batches){
-    res.render('batch/index', {batches: batches, modalVar: 1, beer_id: req.params.id, date: fortnightAway.toISOString().split('T')[0]})
-  })
-})
 
 router.post('/notes/:id', function(req, res, next){
   Queries_batch.add_notes(req.params.id, req.body.beer_id, req.body.notes).then(function(){
@@ -178,7 +172,18 @@ router.post('/submit/:beerid/:batchid', function(req, res, next){
     })
   })
 })
-
+router.post('/create/beer/:beerid', function(req,res,next){
+  Beer.copyRecipie(req.params.beerid, req.session.id).then(function(){
+    Beer.getLatestBeer(req.session.id).then(function(latest){
+      Queries_batch.createBatch(req.body, req.session.id, latest.rows[0].max).then(function(){
+        Queries_batch.getLatestBatch(req.session.id).then(function(newBatch){
+          console.log(newBatch);
+          res.redirect('/batch/'+newBatch.rows[0].max)
+        })
+      })
+    })
+  })
+})
 router.get('/:id', function(req, res, next){
   Queries_batch.beer_id(req.params.id).then(function(id){
     Promise.all([Beer.getOne(id.rows[0].beer_id),Ing.getBeersIng(id.rows[0].beer_id)]).then(function(results){
