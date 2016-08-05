@@ -1,3 +1,12 @@
+
+.show-table{
+  color: lightgrey;
+  font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
+  margin-left: 4vw;
+}
+.spacer{
+  padding: 23%;
+}
 .footer-help-page{
   color: black;
   font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
