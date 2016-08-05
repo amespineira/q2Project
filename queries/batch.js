@@ -33,6 +33,9 @@ module.exports = {
   },
   batchInfo: function(id){
     return knex.raw(`SELECT * from batch where id = ${id};`)
+  },
+  allStages: function(){
+    return knex.raw(`SELECT * FROM batch`)
   }
 }
 

@@ -65,6 +65,35 @@
   <div class="button">
     <input type="button" id="btnMode" class="btn" value="+ Add new batch">
   </div>
+
+  <h2>Finished Batches</h2>
+  <div class="table">
+    <table class="finished_batch">
+      <thead>
+        <tr>
+          <th>Beer Name</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Actual Yield</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%if(finished_batches === []){
+
+        }else{
+          for(i=0;i< finished_batches.length; i++){%>
+            <tr>
+              <td><a href="/finished_batches/<%=finished_batches[i].id %>"><%= finished_batches[i].beer_name%></a></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          <%}
+        }%>
+      </tbody>
+    </table>
+
+  </div>
 </section>
 
 <script type="text/javascript">

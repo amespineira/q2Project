@@ -1,3 +1,10 @@
+.finished_batch{
+   list-style-type: none;
+}
+.brewer_notes_finished_batch{
+  margin-top: 2vh;
+  color:black;
+}
 
 #inputBeer1{
   color:black;

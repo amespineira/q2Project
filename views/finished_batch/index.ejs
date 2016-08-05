@@ -1,29 +1,84 @@
 <% include ../layout %>
+<div class="jumbotron text-center">
+    <h1><%= finished_batch.beer_name %>- Batch #<%=finished_batch.batch_id%></h1>
 
-<section>
-<h1><%= finished_batch.beer_name %>- Batch #<%=finished_batch.batch_id%></h1>
-<div class="table">
-  <table class="batch">
-    <thead>
-      <tr>
-        <th>Taste</th>
-        <th>Aftertaste</th>
-        <th>Appearance</th>
-        <th>Smell</th>
-        <th>Mouth Feel</th>
-        <th>Drinkability</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-          <td><%= finished_batch.taste%></td>
-          <td><%= finished_batch.aftertaste%></td>
-          <td><%= finished_batch.appearance%></td>
-          <td><%= finished_batch.smell%></td>
-          <td><%= finished_batch['mouth feel']%></td>
-          <td><%= finished_batch.drinkability%></td>
-        </tr>
-      </tbody>
-  </table>
 </div>
-</section>
+
+
+
+
+        <div>
+            <h1>Beer Notes</h1>
+            <table class="batch">
+                <thead>
+                    <tr>
+                        <th>Taste</th>
+                        <th>Aftertaste</th>
+                        <th>Appearance</th>
+                        <th>Smell</th>
+                        <th>Mouth Feel</th>
+                        <th>Drinkability</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <%= finished_batch.taste%>
+                        </td>
+                        <td>
+                            <%= finished_batch.aftertaste%>
+                        </td>
+                        <td>
+                            <%= finished_batch.appearance%>
+                        </td>
+                        <td>
+                            <%= finished_batch.smell%>
+                        </td>
+                        <td>
+                            <%= finished_batch['mouth feel']%>
+                        </td>
+                        <td>
+                            <%= finished_batch.drinkability%>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+<div class="container-fluid">
+    <div class="col-md-12 well text-left brewer_notes_finished_batch">
+        <% for (i=0;i < brewer_notes.length;i++){%>
+                    <%= brewer_notes[i].notes %>
+        <%}%>
+    </div>
+</div>
+            <div class="container">
+                <div class="col-md-6">
+                    <h2>Ingredients</h2>
+                    <% for (i=0;i<ingredients.length;i++){%>
+                        <ul>
+                            <li class="finished_batch">
+                                <%=ingredients[i].ingredient_name%>
+                            </li>
+                        </ul>
+                        <%}%>
+                </div>
+                <div class="col-md-6">
+                    <h2>Equipment</h2>
+                    <% for (i=0;i<equipment.length;i++){%>
+                        <ul>
+                            <li class="finished_batch">
+                                <%=equipment[i].equipment_name%>
+                            </li>
+                        </ul>
+                        <%}%>
+                </div>
+            <div class="col-md-6">
+                <h2>Beer Size</h2>
+                <ul>
+                    <li class="finished_batch">
+                        <%=beer_stats.wort_collection %>
+
+                    </li>
+                </ul>
+            </div>
+            </div>
+        </div>
