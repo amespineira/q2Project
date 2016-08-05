@@ -21,8 +21,8 @@ button.addEventListener("click", function(event) {
   if(httpRequest.readyState === 4){
     if(httpRequest.status < 400){
       var object = JSON.parse(httpRequest.responseText)
-      long = (object.results[0].geometry.location.lng)
       lat = (object.results[0].geometry.location.lat);
+      long = (object.results[0].geometry.location.lng)
       getLocations(lat, long)
         }
       }    //here I am getting the latitude and Longitude from the location that requested.
@@ -38,11 +38,11 @@ function getLocations(lat, long){
         var object = JSON.parse(httpRequest.responseText)
         for (var i = 0; i < object.data.length; i++) {
           // console.log(object.data[i].name)
-          var localLat = object.data[i].latitude;
-          var localLong = object.data[i].longitude;
+          localLat = object.data[i].latitude;
+          localLong = object.data[i].longitude;
           console.log(localLat);
           console.log(localLong);
-          localMarkers(map)
+          localMarkers(map, localLat, localLong);
           // map.setZoom(9);
 
         }
@@ -87,15 +87,13 @@ function getLocations(lat, long){
 
 
 function initMap() {
-       var denver = {lat:39.7392, lng:-104.9903 };
+ map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 9,
+    center: {lat: 39.7392, lng: -104.9903}
+  });
+  setMarkers(map);
+}
 
-       var map = new google.maps.Map(document.getElementById('map'), {
-         scaleControl: true,
-         center: denver,
-         zoom: 10
-       });
-       setMarkers(map)
-     }
 
 function setMarkers(map) {
     shape = {
@@ -103,26 +101,31 @@ function setMarkers(map) {
     type: 'poly'
   };
     icon = {
-    url: "https://images-na.ssl-images-amazon.com/images/I/31%2BAsK5M7dL.jpg", // url
-    scaledSize: new google.maps.Size(15, 15), // scaled size
+    url: "https://gettaphunter.com/wp-content/uploads/2016/02/The-Pint.jpg", // url
+    scaledSize: new google.maps.Size(30, 30), // scaled size
     origin: new google.maps.Point(0,0), // origin
   };
 }
 
 
-function localMarkers(map){
+function localMarkers(map, lat, long){
+  console.log(lat+"******");
+  console.log(long+"******");
   var infowindow = new google.maps.InfoWindow({
     // content: contentString
   });
-var marker = new google.maps.Marker({
-    position: {lat: localLat, lng: localLong},
-    map: map,
-    icon: image,
-    shape: shape,
-    icon: icon,
-    draggable: false,
-    animation: google.maps.Animation.DROP
-  })
+
+
+  var marker = new google.maps.Marker({
+      position: {lat: lat, lng: long},
+      map: map,
+      icon: image,
+      shape: shape,
+      icon: icon,
+      draggable: false,
+      animation: google.maps.Animation.DROP
+    })
+    console.log(marker);
   marker.addListener('click', function() {
     infowindow.open(map, marker);
 
