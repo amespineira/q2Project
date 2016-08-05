@@ -19,6 +19,12 @@
   color:black;
 }
 
+.localbrew{
+  color:#fff;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+
+}
+
 #inputBeer1{
   color:black;
   margin-top:4vh;
@@ -31,6 +37,7 @@
 }
 #buttonMap1{
   color:black;
+  margin-bottom:2vh;
 }
 .text-field{
   width:80%;
@@ -61,6 +68,7 @@
 }
 .inputText{
   color:black;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
 html,
