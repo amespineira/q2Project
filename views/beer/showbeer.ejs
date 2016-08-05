@@ -1,5 +1,30 @@
 <% include ../layout %>
 <section>
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        </div>
+          <div class="modal-body">
+            <form action="/batch/create/beer/<%=beers[0].id%>" method="post">
+              <label for="start_date">Start Date</label>
+              <input type="date" name="start_date">
+              <label for="end_date">End Date<br><span style="font-size: 12px;">(recommended 2 weeks)</span></label>
+              <input type="date" name="end_date">
+              <label for="expected_yield">Expected Yield (liters)</label>
+              <input type="number" name="expected_yield">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+      </form>
+      </div>
+    </div>
+  </div>
+
   <div class="header-content">
       <div class="header-content-inner">
         <a href="/beer/create">Add New Beer</a>
@@ -28,7 +53,14 @@
             <%}%>
           </tbody>
           </table>
-          <a href=<%= '/batch/create/'+beers[0].id%>>Start a Batch</a>
+          <div class="button">
+            <input type="button" id="btnMode" class="btn" value="+ Start New Batch">
+          </div>
+        <script type="text/javascript">
+            $('#btnMode').click(function(){
+              $('#myModal').modal('show');
+            });
+        </script>
           <p>
           <a href=<%= '/beer/'+beers[0].id+'/delete'%>>Delete Recipe</a>
           </p>

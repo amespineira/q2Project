@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
     table.integer('batch_id')
     table.foreign('batch_id').references('id').inTable('batch');
     table.boolean('done')
-    table.integer('order');
+    table.integer('step_order');
 
   })
 };

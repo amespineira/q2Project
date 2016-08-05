@@ -48,20 +48,13 @@ router.post('/signin', function(req, res, next){
 
   })
 })
-router.get('/facebook', passport.authenticate('facebook'));
-router.get('/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/' }), function(req, res, next){
-  res.locals.user = req.user
-  console.log(req.user);
-  knex.raw(`SELECT * FROM users WHERE linkedin_id='${req.user._json.id}'`).then(function(matches){
-    if(matches.rows.length!=0){
-      res.redirect('/')
-    }
-    else{
-      knex.raw(`INSERT INTO users VALUES (DEFAULT, '${req.user._json.firstName}', '${req.user._json.lastName}', '${req.user._json.id}')`).then(function(thing){
-        res.redirect('/')
-      })
-    }
-  })
-});
+router.get('/twitter', passport.authenticate('twitter'));
+router.get('/twitter/callback',
+  passport.authenticate('twitter', { failureRedirect: '/login' }),
+  function(req, res) {
+    req.session.id=req.user.id
+    req.session.loggedin=true;
+    res.redirect('/');
+  });
 
 module.exports = router;
