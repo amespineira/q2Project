@@ -33,6 +33,12 @@ module.exports = {
   },
   batchInfo: function(id){
     return knex.raw(`SELECT * from batch where id = ${id};`)
+  },
+  addSteps: function(steps, batchid){
+    var curr=steps.pop()
+    return knex.raw(`INSERT INTO steps VALUES (DEFAULT, ${curr.stage}, '${curr.name}', '${curr.notes}', ${batchid}, false, ${curr.step_order})`).then(function(){
+        return (steps.length>0)? module.exports.addSteps(steps, batchid) : Promise.resolve(true);
+    })
   }
 }
 

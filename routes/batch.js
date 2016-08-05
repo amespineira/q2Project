@@ -151,13 +151,30 @@ router.post('/submit/:beerid/:batchid', function(req, res, next){
   else{
     notesOut.push(req.body.notes)
   }
+  var stepsOut=[]
+  if(Array.isArray(req.body.order)){
+    for(var i=0; i<req.body.order.length; i++){
+      stepsOut.push({
+        stage:req.body.stage[i],
+        step_order:req.body.order[i],
+        name:req.body.name[i],
+        notes:req.body.step_notes[i],
+        done:false
+      })
+    }
+  }
+  else{
+    notesOut.push(req.body.notes)
+  }
+
   Ing.createIfMissing(ingredients).then(function(){
     console.log("here");
     Ing.createBeerIngredients(ingredients2, req.params.beerid).then(function(result){
       console.log("here now");
       Queries_batch.addManyNotes(req.session.id, req.params.beerid, notesOut).then(function(){
-        console.log("here again");
-        res.redirect('/batch/'+req.params.batchid)
+        Queries_batch.addSteps(stepsOut, req.params.batchid).then(function(){
+          res.redirect('/batch/'+req.params.batchid)
+        })
       })
     })
   })
