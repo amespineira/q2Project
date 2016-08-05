@@ -15,6 +15,8 @@ router.get('/:batchId/:beerId', function(req, res, next){
         })
       })
     })
+    console.log(finished_batch.rows)
+    res.render('finished_batch/index', {finished_batch: finished_batch.rows[0]})
   })
 });
 

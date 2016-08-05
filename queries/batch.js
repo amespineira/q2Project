@@ -3,7 +3,7 @@ var knex = require('../db/knex');
 module.exports = {
   createBatch: function(body, id1, id2){
     var date = dateSplit(Date());
-    return knex.raw(`INSERT into batch values(default, ${id1}, ${id2}, '${date}', '${body.end_date}', ${body.expected_yield}, ${null}, ${null});`)
+    return knex.raw(`INSERT into batch values(default, ${id1}, ${id2}, '${date}', '${body.end_date}', ${body.expected_yield}, ${null}, 4, 1);`)
   },
   beer_id: function(id){
     return knex.raw(`SELECT beer_id from batch where id=${id}`);
@@ -20,9 +20,13 @@ module.exports = {
   addManyNotes: function(user, beer, notes){
     var promiseArray=[];
     for(var i=0; i<notes.length; i++){
-      promiseArray[i]=knex.raw(`INSERT into brewer_notes values(default, ${user}, ${beer}, '${notes[i]}');`)
+      promiseArray[i]=knex.raw(`INSERT INTO brewer_notes VALUES (DEFAULT, ${user}, ${beer}, '${notes[i]}')`)
     }
-    return Promise.all(promiseArray)
+    return Promise.all(promiseArray).then(values => {
+    })
+  },
+  steps: function(id){
+    return knex.raw(`SELECT * from steps where id = ${id}`)
   },
   getLatestBatch:function(userid){
     return knex.raw(`SELECT MAX (id) FROM batch WHERE user_id=${userid}`)

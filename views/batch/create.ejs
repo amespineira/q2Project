@@ -6,7 +6,7 @@
     <div class="containerC">
     <form action=<%='/batch/'+beerid+'/'+batchid%> method="post">
       <div class="item text-center">
-        <h4><%= beer.beer_name %> Ingredients</h4>
+        <h4>Ingredients</h4>
         <hr>
         <div class="table">
           <table>
@@ -105,7 +105,8 @@
 	      </div>
   </div>
   <div class="steps">
-
+    <input type="button" class="btn btn-default" value="Add Step +"> || <input type="button" class="btn btn-default" name="name" value="Next Stage >">
+    
   </div>
   <button type="submit" class="btn">Save Batch</button>
 </form>
