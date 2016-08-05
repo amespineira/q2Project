@@ -599,6 +599,10 @@ textarea[name=notes]{
   font-size: 14px;
   color: grey;
 }
+select {
+  color: grey;
+  text-align: center;
+}
 
 .bs-wizard {margin-top: -20px;}
 

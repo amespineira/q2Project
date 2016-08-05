@@ -26,7 +26,7 @@ module.exports = {
     })
   },
   steps: function(id){
-    return knex.raw(`SELECT * from steps where batch_id = ${id}`)
+    return knex.raw(`SELECT * from steps where batch_id = ${id} ORDER by step_order ASC`)
   },
   getLatestBatch:function(userid){
     return knex.raw(`SELECT MAX (id) FROM batch WHERE user_id=${userid}`)

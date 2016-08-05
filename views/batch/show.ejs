@@ -1,6 +1,36 @@
 <% include ../layout %>
 
 <section class="batch_show">
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Add Step to Batch</h4>
+        </div>
+          <div class="modal-body">
+            <form>
+              <label for="stage">Stage</label>
+              <select class="select-list" name="stage">
+                <option selected hidden>select stage</option>
+                <option value="1">Brew Day</option>
+                <option value="2">Fermentation Monitoring</option>
+                <option value="3">Bottling Day</option>
+                <option value="4">Drink!</option>
+              </select>
+              <label for="step_name">Step Name</label>
+              <input id="stepz" type="text" name="name">
+              <label for="step_notes">Step Notes</label>
+              <textarea id="steppy" name="notes" rows="8" cols="40"></textarea>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button id="close" type="submit" class="btn btn-primary">Submit</button>
+          </div>
+      </div>
+    </div>
+  </div>
 
   <aside class="aside_batch">
     <div class="containerC">
@@ -155,7 +185,7 @@
 	      </div>
   </div>
   <div class="steps">
-    <input type="button" id="addStep" class="btn btn-default" value="Add Step +"> || <input type='button' id="backStep" class="btn btn-default" value="< Back Stage"> || <input type="button" id="nextStep" class="btn btn-default" value="Next Stage >">
+    <input type="button" id="addStep" class="btn btn-default" value="Add Step +"> || <input type='button' id="backStep" class="btn btn-default" value="< Back Stage"> || <input type="button" id="nextStep" class="btn btn-default" value="Next Stage >"> || <input type="button" id="finishedB" class="btn btn-default" value="Finished Stage">
     <div class="stepBody">
       <% var order = [[], [], [], []] %>
       <% steps.forEach(function(step){
@@ -165,7 +195,7 @@
 
         <div class="step" id="hide1">
           <% for(var i = 0; i < order[0].length; i++ ){ %>
-            <h5>Step <%= order[0][i].order %></h5>
+            <h5>Step <%= order[0][i].step_order %></h5>
             <h3><%= order[0][i].name %></h3>
             <p><%= order[0][i].notes %></p>
             <% if(order[0][i].done === true) { %>
@@ -177,7 +207,7 @@
         </div>
         <div class="step" id="hide2">
           <% for(var i = 0; i < order[1].length; i++ ){ %>
-            <h5>Step <%= order[1][i].order %></h5>
+            <h5>Step <%= order[1][i].step_order %></h5>
             <h3><%= order[1][i].name %></h3>
             <p><%= order[1][i].notes %></p>
             <% if(order[1][i].done === true) { %>
@@ -189,7 +219,7 @@
         </div>
         <div class="step" id="hide3">
           <% for(var i = 0; i < order[2].length; i++ ){ %>
-            <h5>Step <%= order[2][i].order %></h5>
+            <h5>Step <%= order[2][i].step_order %></h5>
             <h3><%= order[2][i].name %></h3>
             <p><%= order[2][i].notes %></p>
             <% if(order[2][i].done === true) { %>
@@ -201,7 +231,7 @@
         </div>
         <div class="step" id="hide4">
           <% for(var i = 0; i < order[3].length; i++ ){ %>
-            <h5>Step <%= order[3][i].order %></h5>
+            <h5>Step <%= order[3][i].step_order %></h5>
             <h3><%= order[3][i].name %></h3>
             <p><%= order[3][i].notes %></p>
             <% if(order[3][i].done === true) { %>
@@ -224,6 +254,14 @@ $(document).ready(function(){
   $('#hide2').hide();
   $('#hide3').hide();
   $('#hide4').hide();
+
+  $('#addStep').click(function(){
+    $('#stepz').val('');
+    $('#steppy').val('');
+    $('textarea').empty();
+    $('#myModal').modal('show');
+  });
+
 var stage = <%= curr_stage %>;
 $('#nextStep').click(function(){
   stage++;
@@ -282,6 +320,15 @@ $('#backStep').click(function(){
         break;
     }
     stage--;
+  })
+
+
+  var stepNum = [1, 1, 1, 1];
+  $('#close').click(function(){
+    $('#myModal').modal('hide');
+    var test = $('select[name=stage]').val();
+    $(`#hide${test}`).append(`<input type='number' name='stage' value='${stage}' hidden><input type='number' name='order' value='${stepNum[(stage-1)]}' hidden><h3>Step ${stepNum[(stage-1)]}: <input type='text' name='name' value='${$('input[name=name]').val()}'></h3><p><input type='text' name='step_notes' value='${$('textarea').val()}'></p>`)
+    stepNum[(stage-1)]++;
   })
 
 })
