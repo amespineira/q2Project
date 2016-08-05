@@ -9,7 +9,6 @@ var passport=require('passport')
 var twitterStrat=require('passport-twitter')
 var routes = require('./routes/index');
 var auth = require('./routes/auth');
-require('dotenv').config();
 var userbouncer= require('./routes/userbouncer')
 var inventory = require('./routes/inventory')
 var equipment = require('./routes/equipment')
@@ -37,11 +36,12 @@ app.use(cookieSession({
 }))
 app.use(passport.initialize());
 app.use(passport.session());
-
+var environment = process.env.NODE_ENV || 'development';
+var config = require('./host.js')[environment];
 passport.use(new twitterStrat({
     consumerKey: '1CpCacLEGagk7ODCvJgLukVGE',
     consumerSecret: 'KN6SUAHoYLfHWBbFgVvkkMGh2pZGU4SM9jdCnViQOqSk8CKUc9',
-    callbackURL: "http://localhost:3000/auth/twitter/callback"
+    callbackURL: "http://localhost:3000/"+"auth/twitter/callback"
   },authQ.authTwit
 
 
