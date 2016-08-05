@@ -2,23 +2,38 @@ var express = require('express');
 var router = express.Router();
 var Finished = require('../queries/finished_batches');
 var Equipment = require('../queries/equipment');
-var BrewerNotes = require('../queries/brewer_notes')
-var BeerStats = require('../queries/beerStats')
-router.get('/:batchId/:beerId', function(req, res, next){
-  Finished.all(req.params.batchId).then(function(finished_batch){
-    Finished.findIngredients(req.params.beerId).then(function(ingredients){
-      Equipment.getAllEquipment(req.session.id).then(function(equipment){
-        BrewerNotes.allBrewerNotes(req.params.beerId).then(function(brewer_notes){
-          BeerStats.allBeerStats(5).then(function(beerStats){
-          res.render('finished_batch/index', {finished_batch: finished_batch.rows[0], ingredients: ingredients.rows, equipment: equipment.rows, brewer_notes: brewer_notes.rows, beer_stats: beerStats.rows[0]})
+var BrewerNotes = require('../queries/brewer_notes');
+var BeerStats = require('../queries/beerStats');
+var Ingredients = require('../queries/ingredients');
+var Inventory = require('../queries/inventory');
+var Batch = require('../queries/batch');
+
+
+router.get('/:batchId', function(req, res, next){
+  var batchId = req.params.batchId;
+  // var beerId = Batch.beer_id(batchId);
+  // var notes = BrewerNotes.allBrewerNotes(beerId);
+  // var ingredients = Finished.findIngredients(beerId);
+  // var equipment = Equipment.getBatchEquipment(batchId);
+  // var stats = BeerStats.allBeerStats(batchId);
+  // var finished = Finished.all(batchId);
+
+  Finished.all(batchId).then(function(finished_batch){
+    Batch.beer_id(batchId).then(function(beerId){
+      Finished.findIngredients(beerId.rows[0].beer_id).then(function(ingredients){
+        Equipment.getBatchEquipment(batchId).then(function(equipment){
+          BeerStats.allBeerStats(batchId).then(function(stats){
+            BrewerNotes.allBrewerNotes(beerId.rows[0].beer_id).then(function(notes){
+              res.render('finished_batch/index', {finished_batch: finished_batch.rows[0], ingredients: ingredients.rows, equipment: equipment.rows, brewer_notes: notes.rows, beer_stats: stats.rows[0]})
+            })
           })
         })
       })
     })
-    console.log(finished_batch.rows)
-    res.render('finished_batch/index', {finished_batch: finished_batch.rows[0]})
   })
 });
+
+
 
 
 module.exports = router;
