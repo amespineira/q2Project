@@ -40,7 +40,13 @@ router.post('/create', function(req, res, next){
     })
   })
 })
+router.post('/step/:id', function(req, res, next){
+  //recieving batch.id
+  Queries_batch.step(req.params.id, req.body).then(function(steps){
+    console.log(steps);
 
+  })
+})
 
 router.get('/create/:id', function(req, res, next){
   var fortnightAway = new Date(+new Date + 12096e5);
@@ -77,6 +83,9 @@ router.get('/:id', function(req, res, next){
 })
 router.post('/:beerid/:batchid', function(req, res, next){
   console.log("what the fuck is happening");
+  console.log(req.body);
+  console.log(req.params.beerid);
+  console.log(req.params.batchid);
   var ingredients=[];
   var ingredients2=[];
   if(Array.isArray(req.body.ingredientName)){

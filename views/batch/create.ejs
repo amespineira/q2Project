@@ -2,9 +2,32 @@
 
 <section class="batch_show">
 
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Add Step to Batch</h4>
+        </div>
+          <div class="modal-body">
+            <form>
+              <label for="step_name">Step Name</label>
+              <input id="stepz" type="text" name="name">
+              <label for="step_notes">Step Notes</label>
+              <textarea id="steppy" name="notes" rows="8" cols="40"></textarea>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button id="close" type="submit" class="btn btn-primary">Submit</button>
+          </div>
+      </div>
+    </div>
+  </div>
+
   <aside class="aside_batch">
     <div class="containerC">
-    <form action=<%='/batch/'+beerid+'/'+batchid%> method="post">
+    <form id="form1" action=<%='/batch/'+beerid+'/'+batchid%> method="post">
       <div class="item text-center">
         <h4>Ingredients</h4>
         <hr>
@@ -62,9 +85,11 @@
         </textarea>
 
         </div>
-        <input type=button class="btn" id="addNote" value='Add Note'></input>
+        <input type=button class="btn" id="addNote" value='Add Note'>
+        <button type='submit' class="btn" id="trigger" style="visibility: hidden;"></button>
 
       </div>
+    </form>
     </div>
 
   </aside>
@@ -74,28 +99,28 @@
   <div class="container">
             <div class="row bs-wizard" style="border-bottom:0;">
 
-                <div class="col-xs-3 bs-wizard-step active">
+                <div id="1" class="col-xs-3 bs-wizard-step">
                   <div class="text-center bs-wizard-stepnum">&nbsp</div>
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="#" class="bs-wizard-dot"></a>
                   <div class="bs-wizard-info text-center">Brew Day</div>
                 </div>
 
-                <div class="col-xs-3 bs-wizard-step disabled"><!-- complete -->
+                <div id="2" class="col-xs-3 bs-wizard-step"><!-- complete -->
                   <div class="text-center bs-wizard-stepnum">&nbsp</div>
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="#" class="bs-wizard-dot"></a>
                   <div class="bs-wizard-info text-center">Fermentation Monitoring</div>
                 </div>
 
-                <div class="col-xs-3 bs-wizard-step disabled"><!-- complete -->
+                <div id="3" class="col-xs-3 bs-wizard-step"><!-- complete -->
                   <div class="text-center bs-wizard-stepnum">&nbsp</div>
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="#" class="bs-wizard-dot"></a>
                   <div class="bs-wizard-info text-center">Bottling Day</div>
                 </div>
 
-                <div class="col-xs-3 bs-wizard-step disabled"><!-- active -->
+                <div id="4" class="col-xs-3 bs-wizard-step"><!-- active -->
                   <div class="text-center bs-wizard-stepnum">&nbsp</div>
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="#" class="bs-wizard-dot"></a>
@@ -105,15 +130,87 @@
 	      </div>
   </div>
   <div class="steps">
-    <input type="button" class="btn btn-default" value="Add Step +"> || <input type="button" class="btn btn-default" name="name" value="Next Stage >">
+    <input type="button" id="addStep" class="btn btn-default" value="Add Step +"> || <input type="button" id="nextStep" class="btn btn-default" name="name" value="Next Stage >">
     <div class="stepBody">
+      <form id="form2">
 
+        <div class="step" id="hide1">
+
+        </div>
+        <div class="step" id="hide2">
+        </div>
+        <div class="step" id="hide3">
+        </div>
+        <div class="step" id="hide4">
+        </div>
     </div>
   </div>
-  <button type="submit" class="btn">Save Batch</button>
 </form>
+<button type="button" id="saveBatch" class="btn">Save Batch</button>
   <script src="/javascripts/js/batchCreate.js"></script>
 
 </main>
 
 </section>
+
+<script type="text/javascript">
+    $(window).load(function(){
+      $('#1').addClass(`active`);
+      $('#2').addClass(`disabled`);
+      $('#3').addClass(`disabled`);
+      $('#4').addClass(`disabled`);
+      $('#hide2').hide();
+      $('#hide3').hide();
+      $('#hide4').hide();
+    })
+    $('#addStep').click(function(){
+      $('#stepz').val('');
+      $('#steppy').val('');
+      $('textarea').empty();
+      $('#myModal').modal('show');
+    });
+    var add = 1;
+    $('#nextStep').click(function(){
+      add++;
+        switch(add){
+          case 2:
+          $('#hide1').hide();
+          $('#hide2').show();
+          $('#hide3').hide();
+          $('#hide4').hide();
+          $('#1').switchClass('active', 'complete')
+          $('#2').switchClass(`disabled`, 'active');
+            break;
+          case 3:
+          $('#hide1').hide();
+          $('#hide2').hide();
+          $('#hide3').show();
+          $('#hide4').hide();
+          $('#2').switchClass(`active`, 'complete');
+          $('#3').switchClass(`disabled`, 'active');
+            break;
+          case 4:
+          $('#hide1').hide();
+          $('#hide2').hide();
+          $('#hide3').hide();
+          $('#hide4').show();
+          $('#3').switchClass(`active`, 'complete');
+          $('#4').switchClass(`disabled`, 'active');
+            break;
+        }
+      })
+      var stepNum = 1;
+      $('#close').click(function(){
+        $('#myModal').modal('hide');
+        $(`#hide${add}`).append(`<input type='number' name='stage' value='${add}' hidden><h3>Step ${stepNum}: <input type='text' name='name' value='${$('input[name=name]').val()}'></h3><p><input type='text' name='notes' value='${$('textarea').val()}'></p>`)
+        stepNum++;
+      })
+      $('#saveBatch').click(function(){
+        var test = $('#form2').html();
+        $('#form1').append(test);
+        $('#trigger').trigger('click');
+      })
+
+
+
+</script>
