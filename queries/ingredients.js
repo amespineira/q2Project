@@ -18,11 +18,11 @@ module.exports={
     return knex.raw(query).then(function(matches){
       if(matches.rows.length===0){
         knex.raw(insert).then(function(){
-          return (ingredients.length>0)? this.createIfMissing(ingredients) : Promise.resolve(true);
+          return (ingredients.length>0)? module.exports.createIfMissing(ingredients) : Promise.resolve(true);
         })
       }
       else{
-        return (ingredients.length>0)? this.createIfMissing(ingredients) : Promise.resolve(true);
+        return (ingredients.length>0)? module.exports.createIfMissing(ingredients) : Promise.resolve(true);
       }
     })
   },
@@ -33,7 +33,7 @@ module.exports={
     return  knex.raw(query).then(function(matches){
       console.log(matches);
       return knex.raw(`INSERT INTO beer_ingredients VALUES (DEFAULT, ${beerid}, ${matches.rows[0].id}, ${curr.amount})`).then(function(){
-        return (ingredients.length>0)? this.createBeerIngredients(ingredients, beerid) : Promise.resolve(true);
+        return (ingredients.length>0)? module.exports.createBeerIngredients(ingredients, beerid) : Promise.resolve(true);
       })
     })
   },
