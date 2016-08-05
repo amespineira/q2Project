@@ -96,6 +96,7 @@ router.post('/notes/:id', function(req, res, next){
     res.redirect(`/batch/${req.body.batch_id}`)
   })
 })
+
 router.get('/create/:id', function(req, res, next){
   var fortnightAway = new Date(+new Date + 12096e5);
   Batch().join('beer', 'beer.id', '=', 'batch.beer_id').where({'beer.user_id': req.session.id}).then(function(batches){
@@ -104,13 +105,28 @@ router.get('/create/:id', function(req, res, next){
 })
 
 
-
-
-router.post('/notes/:id', function(req, res, next){
-  Queries_batch.add_notes(req.params.id, req.body.beer_id, req.body.notes).then(function(){
-    res.redirect(`/batch/${req.body.batch_id}`)
+router.get('/:id', function(req, res, next){
+  Queries_batch.beer_id(req.params.id).then(function(id){
+    Promise.all([Beer.getOne(id.rows[0].beer_id),Ing.getBeersIng(id.rows[0].beer_id)]).then(function(results){
+      Queries_batch.equipment(req.params.id).then(function(equip){
+        Queries_batch.brewer_notes(id.rows[0].beer_id).then(function(notes){
+          Queries_batch.batchInfo(req.params.id).then(function(batch){
+          if(results[0].rows.length === 0){
+            res.redirect('/beer')
+          }else if (results[0].rows[0].user_id === req.session.id){
+            res.render('batch/show', {beer: results[0].rows, ing: results[1].rows, beer_id: id.rows[0].beer_id, batch_id: req.params.id,
+              equipment: equip.rows, notes: notes.rows, curr_stage: batch.rows[0].curr_stage})
+          } else {
+            res.redirect('/');
+          }
+          })
+        })
+      })
+    })
   })
 })
+
+
 router.post('/submit/:beerid/:batchid', function(req, res, next){
   console.log("what the fuck is happening");
   console.log(req.body);
@@ -166,7 +182,18 @@ router.post('/submit/:beerid/:batchid', function(req, res, next){
     })
   })
 })
-
+router.post('/create/beer/:beerid', function(req,res,next){
+  Beer.copyRecipie(req.params.beerid, req.session.id).then(function(){
+    Beer.getLatestBeer(req.session.id).then(function(latest){
+      Queries_batch.createBatch(req.body, req.session.id, latest.rows[0].max).then(function(){
+        Queries_batch.getLatestBatch(req.session.id).then(function(newBatch){
+          console.log(newBatch);
+          res.redirect('/batch/'+newBatch.rows[0].max)
+        })
+      })
+    })
+  })
+})
 router.get('/:id', function(req, res, next){
   Queries_batch.beer_id(req.params.id).then(function(id){
     Promise.all([Beer.getOne(id.rows[0].beer_id),Ing.getBeersIng(id.rows[0].beer_id)]).then(function(results){

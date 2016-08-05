@@ -28,5 +28,24 @@ module.exports={
   },
   deleteOne:function(id){
     return knex.raw(`DELETE FROM beer WHERE id=${id}`)
+  },
+  copyRecipie:function(id, userid){
+    return knex.raw(`SELECT * FROM beer WHERE id=${id}`).then(function(toCopy){
+      console.log(toCopy);
+      return knex.raw(`INSERT INTO beer VALUES (DEFAULT, ${toCopy.rows[0].user_id}, '${toCopy.rows[0].beer_name}', '${toCopy.rows[0].type}', '${toCopy.rows[0].style}')`).then(function(){
+        return knex.raw(`SELECT MAX (id) FROM beer WHERE user_id=${userid}`).then(function(newCopyId){
+          return knex.raw(`SELECT * FROM beer_ingredients WHERE beer_id=${id}`).then(function(beerIng){
+            console.log();
+            return module.exports.copyBeerIngredients(newCopyId.rows[0].max, beerIng.rows)
+          })
+        })
+      })
+    })
+  },
+  copyBeerIngredients:function(newCopyId, beerIng){
+    var curr=beerIng.pop()
+    return knex.raw(`INSERT INTO beer_ingredients VALUES (DEFAULT, ${newCopyId}, ${curr.id}, ${curr.amount})`).then(function(){
+        return (beerIng.length>0)? module.exports.copyBeerIngredients(newCopyId, beerIng) : Promise.resolve(true);
+    })
   }
 }

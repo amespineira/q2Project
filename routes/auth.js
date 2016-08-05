@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Auth=require('../queries/auth.js')
+var passport = require('passport');
+
 var bcrypt=require('bcrypt')
 /* GET users listing. */
 router.post('/signup', function(req, res, next) {
@@ -46,5 +48,13 @@ router.post('/signin', function(req, res, next){
 
   })
 })
+router.get('/twitter', passport.authenticate('twitter'));
+router.get('/twitter/callback',
+  passport.authenticate('twitter', { failureRedirect: '/login' }),
+  function(req, res) {
+    req.session.id=req.user.id
+    req.session.loggedin=true;
+    res.redirect('/');
+  });
 
 module.exports = router;
