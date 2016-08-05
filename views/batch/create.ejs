@@ -27,7 +27,7 @@
 
   <aside class="aside_batch">
     <div class="containerC">
-    <form id="form1" action=<%='/batch/'+beerid+'/'+batchid%> method="post">
+    <form id="form1" action=<%='/batch/submit/'+beerid+'/'+batchid%> method="post">
 
       <div class="item text-center">
         <h4>Ingredients</h4>
@@ -131,7 +131,7 @@
 	      </div>
   </div>
   <div class="steps">
-    <input type="button" id="addStep" class="btn btn-default" value="Add Step +"> || <input type="button" id="nextStep" class="btn btn-default" name="name" value="Next Stage >">
+    <input type="button" id="addStep" class="btn btn-default" value="Add Step +"> || <input type='button' id="backStep" class="btn btn-default" value="< Back Stage"> || <input type="button" id="nextStep" class="btn btn-default" value="Next Stage >">
     <div class="stepBody">
       <form id="form2">
 
@@ -171,10 +171,10 @@
       $('textarea').empty();
       $('#myModal').modal('show');
     });
-    var add = 1;
+    var stage = 1;
     $('#nextStep').click(function(){
-      add++;
-        switch(add){
+      stage++;
+        switch(stage){
           case 2:
           $('#hide1').hide();
           $('#hide2').show();
@@ -201,18 +201,45 @@
             break;
         }
       })
-      var stepNum = 1;
+    $('#backStep').click(function(){
+        switch(stage){
+          case 2:
+          $('#hide1').show();
+          $('#hide2').hide();
+          $('#hide3').hide();
+          $('#hide4').hide();
+          $('#1').switchClass('complete', 'active')
+          $('#2').switchClass(`active`, 'disabled');
+            break;
+          case 3:
+          $('#hide1').hide();
+          $('#hide2').show();
+          $('#hide3').hide();
+          $('#hide4').hide();
+          $('#2').switchClass('complete', 'active');
+          $('#3').switchClass('active', 'disabled');
+            break;
+          case 4:
+          $('#hide1').hide();
+          $('#hide2').hide();
+          $('#hide3').show();
+          $('#hide4').hide();
+          $('#3').switchClass('complete', 'active');
+          $('#4').switchClass('active', 'disabled');
+            break;
+        }
+        stage--;
+      })
+      var stepNum = [1, 1, 1, 1];
       $('#close').click(function(){
         $('#myModal').modal('hide');
-        $(`#hide${add}`).append(`<input type='number' name='stage' value='${add}' hidden><h3>Step ${stepNum}: <input type='text' name='name' value='${$('input[name=name]').val()}'></h3><p><input type='text' name='notes' value='${$('textarea').val()}'></p>`)
-        stepNum++;
+        $(`#hide${stage}`).append(`<input type='number' name='stage' value='${stage}' hidden><input type='number' name='order' value='${stepNum[(stage-1)]}' hidden><h3>Step ${stepNum[(stage-1)]}: <input type='text' name='name' value='${$('input[name=name]').val()}'></h3><p><input type='text' name='step_notes' value='${$('textarea').val()}'></p>`)
+        stepNum[(stage-1)]++;
       })
       $('#saveBatch').click(function(){
         var test = $('#form2').html();
         $('#form1').append(test);
         $('#trigger').trigger('click');
       })
-
-
 
 </script>

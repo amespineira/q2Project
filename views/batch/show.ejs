@@ -124,28 +124,28 @@
                   states[3]='complete'
                   break;
               }%>
-                <div class="col-xs-3 bs-wizard-step <%=states[0]%>">
+                <div id="1" class="col-xs-3 bs-wizard-step <%=states[0]%>">
                   <div class="text-center bs-wizard-stepnum">&nbsp</div>
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="#" class="bs-wizard-dot"></a>
                   <div class="bs-wizard-info text-center">Brew Day</div>
                 </div>
 
-                <div class="col-xs-3 bs-wizard-step <%=states[1]%>"><!-- complete -->
+                <div id="2" class="col-xs-3 bs-wizard-step <%=states[1]%>"><!-- complete -->
                   <div class="text-center bs-wizard-stepnum">&nbsp</div>
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="#" class="bs-wizard-dot"></a>
                   <div class="bs-wizard-info text-center">Fermentation Monitoring</div>
                 </div>
 
-                <div class="col-xs-3 bs-wizard-step <%=states[2]%>"><!-- complete -->
+                <div id="3" class="col-xs-3 bs-wizard-step <%=states[2]%>"><!-- complete -->
                   <div class="text-center bs-wizard-stepnum">&nbsp</div>
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="#" class="bs-wizard-dot"></a>
                   <div class="bs-wizard-info text-center">Bottling Day</div>
                 </div>
 
-                <div class="col-xs-3 bs-wizard-step <%=states[3]%>"><!-- active -->
+                <div id="4" class="col-xs-3 bs-wizard-step <%=states[3]%>"><!-- active -->
                   <div class="text-center bs-wizard-stepnum">&nbsp</div>
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="#" class="bs-wizard-dot"></a>
@@ -155,9 +155,134 @@
 	      </div>
   </div>
   <div class="steps">
+    <input type="button" id="addStep" class="btn btn-default" value="Add Step +"> || <input type='button' id="backStep" class="btn btn-default" value="< Back Stage"> || <input type="button" id="nextStep" class="btn btn-default" value="Next Stage >">
+    <div class="stepBody">
+      <% var order = [[], [], [], []] %>
+      <% steps.forEach(function(step){
+        order[step.stage-1].push(step);
+        })
+        %>
+
+        <div class="step" id="hide1">
+          <% for(var i = 0; i < order[0].length; i++ ){ %>
+            <h5>Step <%= order[0][i].order %></h5>
+            <h3><%= order[0][i].name %></h3>
+            <p><%= order[0][i].notes %></p>
+            <% if(order[0][i].done === true) { %>
+            <input type="checkbox" name="clean" checked>
+            <%} else { %>
+              <input type="checkbox" name="clean">
+              <% } %>
+            <% } %>
+        </div>
+        <div class="step" id="hide2">
+          <% for(var i = 0; i < order[1].length; i++ ){ %>
+            <h5>Step <%= order[1][i].order %></h5>
+            <h3><%= order[1][i].name %></h3>
+            <p><%= order[1][i].notes %></p>
+            <% if(order[1][i].done === true) { %>
+            <input type="checkbox" name="clean" checked>
+            <%} else { %>
+              <input type="checkbox" name="clean">
+              <% } %>
+            <% } %>
+        </div>
+        <div class="step" id="hide3">
+          <% for(var i = 0; i < order[2].length; i++ ){ %>
+            <h5>Step <%= order[2][i].order %></h5>
+            <h3><%= order[2][i].name %></h3>
+            <p><%= order[2][i].notes %></p>
+            <% if(order[2][i].done === true) { %>
+            <input type="checkbox" name="clean" checked>
+            <%} else { %>
+              <input type="checkbox" name="clean">
+              <% } %>
+            <% } %>
+        </div>
+        <div class="step" id="hide4">
+          <% for(var i = 0; i < order[3].length; i++ ){ %>
+            <h5>Step <%= order[3][i].order %></h5>
+            <h3><%= order[3][i].name %></h3>
+            <p><%= order[3][i].notes %></p>
+            <% if(order[3][i].done === true) { %>
+            <input type="checkbox" name="clean" checked>
+            <%} else { %>
+              <input type="checkbox" name="clean">
+              <% } %>
+            <% } %>
+        </div>
+    </div>
 
   </div>
 
 </main>
 
 </section>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#hide2').hide();
+  $('#hide3').hide();
+  $('#hide4').hide();
+var stage = <%= curr_stage %>;
+$('#nextStep').click(function(){
+  stage++;
+    switch(stage){
+      case 2:
+      $('#hide1').hide();
+      $('#hide2').show();
+      $('#hide3').hide();
+      $('#hide4').hide();
+      $('#1').switchClass('active', 'complete')
+      $('#2').switchClass(`disabled`, 'active');
+        break;
+      case 3:
+      $('#hide1').hide();
+      $('#hide2').hide();
+      $('#hide3').show();
+      $('#hide4').hide();
+      $('#2').switchClass(`active`, 'complete');
+      $('#3').switchClass(`disabled`, 'active');
+        break;
+      case 4:
+      $('#hide1').hide();
+      $('#hide2').hide();
+      $('#hide3').hide();
+      $('#hide4').show();
+      $('#3').switchClass(`active`, 'complete');
+      $('#4').switchClass(`disabled`, 'active');
+        break;
+    }
+  })
+$('#backStep').click(function(){
+    switch(stage){
+      case 2:
+      $('#hide1').show();
+      $('#hide2').hide();
+      $('#hide3').hide();
+      $('#hide4').hide();
+      $('#1').switchClass('complete', 'active')
+      $('#2').switchClass(`active`, 'disabled');
+        break;
+      case 3:
+      $('#hide1').hide();
+      $('#hide2').show();
+      $('#hide3').hide();
+      $('#hide4').hide();
+      $('#2').switchClass('complete', 'active');
+      $('#3').switchClass('active', 'disabled');
+        break;
+      case 4:
+      $('#hide1').hide();
+      $('#hide2').hide();
+      $('#hide3').show();
+      $('#hide4').hide();
+      $('#3').switchClass('complete', 'active');
+      $('#4').switchClass('active', 'disabled');
+        break;
+    }
+    stage--;
+  })
+
+})
+</script>
