@@ -3,6 +3,7 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.string('username');
     table.string('password');
+    table.string('twitter_token');
     table.string('google_token');
     table.string('facebook_token')
   })
