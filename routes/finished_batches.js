@@ -18,8 +18,10 @@ router.get('/:batchId', function(req, res, next){
         Equipment.getBatchEquipment(batchId).then(function(equipment){
           BeerStats.allBeerStats(batchId).then(function(stats){
             BrewerNotes.allBrewerNotes(beerId.rows[0].beer_id).then(function(notes){
-              console.log(finished_batch.rows[0])
-              res.render('finished_batch/index', {finished_batch: finished_batch.rows[0], ingredients: ingredients.rows, equipment: equipment.rows, brewer_notes: notes.rows, beer_stats: stats.rows[0]})
+              Batch.batchInfo(batchId).then(function(batchInfo){
+                res.render('finished_batch/index', {finished_batch: finished_batch.rows[0], ingredients: ingredients.rows, equipment: equipment.rows, brewer_notes: notes.rows, beer_stats: stats.rows[0], batch: batchInfo.rows[0]})
+
+              })
             })
           })
         })
@@ -27,6 +29,31 @@ router.get('/:batchId', function(req, res, next){
     })
   })
 });
+
+router.post('/:batchId', function(req, res, nex){
+  var stats = {
+    user_id: req.session.id,
+    batch_id: req.params.batchId,
+    wort_collection: req.body.wort_collection,
+    batch_size: req.body.batch_size,
+    efficiency: req.body.efficiency,
+    gravity: req.body.gravity,
+    beer_name: req.body.beer_name,
+    taste: req.body.taste,
+    aftertaste: req.body.aftertaste,
+    appearance: req.body.appearance,
+    smell: req.body.smell,
+    mouth_feel: req.body.mouth_feel,
+    drinkability: req.body.drinkability,
+  }
+  console.log(req.body);
+  Finished.updateBeerStats(stats).then(function(){
+    Finished.updateFinishedBatches(stats).then(function(){
+      res.redirect('/main')
+    })
+  })
+})
+
 
 
 

@@ -1,14 +1,13 @@
 <% include ../layout %>
+<div class="container-fluid" id="whole_thing">
+  <%if(finished_batch){ %>
+    <div class="jumbotron text-center" id="finished_batch_jumbotron">
+        <h1><%= finished_batch.beer_name %>- Batch #<%=finished_batch.batch_id%></h1>
+    </div>
 
-    <section>
-        <div class="jumbotron text-center">
-            <div class="container">
-                <h1><%= finished_batch.beer_name %>- Batch #<%=finished_batch.batch_id%></h1>
-            </div>
-        </div>
-        <div class="container">
-            <h1>Beer Profile</h1>
-            <table class="batch">
+    <div class="container" id="finished_batch_table">
+            <h1>Beer Flavor Profile</h1>
+            <table class="batch table-bordered" >
                 <thead>
                     <tr>
                         <th>Taste</th>
@@ -42,59 +41,62 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 text-left">
-                    <h2>Ingredients</h2>
-                    <% for (i=0;i<ingredients.length;i++){%>
-                        <ul>
-                            <li class="finished_batch">
-                                <%=ingredients[i].ingredient_name%>
-                            </li>
-                        </ul>
-                        <%}%>
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="col-md-8 text-left">
-                    <h2>Equipment</h2>
-                    <% for (i=0;i<equipment.length;i++){%>
-                        <ul>
-                            <li class="finished_batch">
-                                <%=equipment[i].equipment_name%>
-                            </li>
-                        </ul>
-                        <%}%>
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="col-md-6 text-left">
-                    <h2>Beer Size</h2>
-                    <ul>
+    </div>
+<% } %>
+    <div class="container text-center" id="finished_batch_recipe">
+        <h1>Recipe Information</h1>
+        <div class="row text-center">
+            <div class="col-md-6">
+                <h2>Ingredients</h2>
+                <% for (i=0;i<ingredients.length;i++){%>
+                    <ul class="list-unstyled">
                         <li class="finished_batch">
-                            <%=beer_stats.wort_collection %>
-
+                            <%=ingredients[i].ingredient_name%>
                         </li>
                     </ul>
-                </div>
+                <%}%>
             </div>
-
+            <div class="col-md-6">
+                <h2>Equipment</h2>
+                <% for (i=0;i<equipment.length;i++){%>
+                    <ul class="list-unstyled">
+                        <li class="finished_batch">
+                            <%=equipment[i].equipment_name%>
+                        </li>
+                    </ul>
+                <%}%>
+            </div>
         </div>
-        <div class="container text-left">
-            <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Notes</button>
-                <span class="caret"></span>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-
-                        <% for (i=0;i < brewer_notes.length;i++){%>
-                            <li style="color:black">
-                                Note <%= i+1 %>
-                            </li>
-                        <%}%>
-
+        <div class="row text-center">
+            <div class="col-md-6">
+                <h2>Wort Collection</h2>
+                <ul class="list-unstyled">
+                    <li class="finished_batch">
+                        <%=beer_stats.wort_collection %> liters
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h2>Expected/Actual Yield</h2>
+                <ul class="list-unstyled">
+                    <li>
+                        Expected:
+                        <%=batch.expected_yield%> liters
+                    </li>
+                    <li>
+                        Actual:
+                        <%=batch.actual_yield%> liters
+                    </li>
                 </ul>
             </div>
         </div>
+        <h1>Brewer Notes</h1>
+        <div class="row text-center">
+            <div class="col-md-4 col-md-offset-2 well text-left">
+                <% for (i=0;i < brewer_notes.length;i++){%>
+                    <%= brewer_notes[i].notes %>
+                    <%}%>
+                </div>
+            </div>
+    </div>
+</div>

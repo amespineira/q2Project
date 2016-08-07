@@ -1,11 +1,41 @@
 <% include ../layout %>
 
 <section>
-    <form action="/batch/<%=  %>" method="post">
-      <label for="end_date">End Date</label>
-      <input type="date" name="end_date" value="<%= Date() %>">
-      <label for="expected_yield">Expected Yield</label>
-      <input type="number" name="expected_yield">
-      <input type="submit" value=">">
+
+  <h2>Congratulations on finishing</h2>
+  <h1><%= beer.beer_name %>!</h1>
+    <form action="/finished_batches/<%= batch_id %>" method="post">
+      <div class="container">
+        <div class="col-sm-6">
+          <h3>Beer Stats</h3>
+          <hr>
+          <label for="wort_collection">Wort Collected</label>
+          <input type="number" name="wort_collection" placeholder="amount of pre-boil wort">
+          <label for="batch_size">Batch Size</label>
+          <input type="number" name="batch_size" placeholder="amount of post-boil collection">
+          <label for="efficiency">Efficiency (<a href="http://www.brewersfriend.com/brewhouse-efficiency/">calc</a>)</label>
+          <input type="number" name="efficiency">
+          <label for="gravity">Gravity (<a href="http://www.brewersfriend.com/allgrain-ogfg/">calc</a>)</label>
+          <input type="number" name="gravity">
+        </div>
+        <div class="col-sm-6">
+          <h3>Final Beer Notes</h3>
+          <hr>
+          <input type="text" name="beer_name" value="<%= beer.beer_name %>" hidden>
+          <label for="taste">Taste Notes</label>
+          <input type="text" name="taste">
+          <label for="aftertaste">After Taste</label>
+          <input type="text" name="aftertaste">
+          <label for="appearance">Appearance</label>
+          <input type="text" name="appearance">
+          <label for="smell">Smell</label>
+          <input type="text" name="smell">
+          <label for="mouth_feel">Mouth Feel</label>
+          <input type="text" name="mouth_feel">
+          <label for="drinkability">Drinkability</label>
+          <input type="text" name="drinkability">
+          <button class='btn' type="submit">Submit Beer Notes ></button>
+        </div>
+        </div>
     </form>
 </section>

@@ -12,7 +12,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+          <h4 class="modal-title" id="myModalLabel">New Batch</h4>
         </div>
           <div class="modal-body">
             <form action="/batch/create" method="post">
@@ -52,7 +52,10 @@
         </tr>
       </thead>
       <tbody>
-        <%for(var i = 0; i < batches.length; i++){ %>
+        <%for(var i = 0; i < batches.length; i++){
+          if(batches[i].curr_stage === 4){
+
+          }else{%>
           <tr>
             <td><a href="/batch/<%= batches[i].id %>"><%=  batches[i].beer_name %></a></td>
             <td><%= batches[i].start_date.toISOString().split('T')[0] %></td>
@@ -60,7 +63,8 @@
             <td><%= batches[i].expected_yield %> liters</td>
             <td><a href="/batch/delete/<%= batches[i].id %>">Delete</a></td>
           </tr>
-          <%} %>
+          <% } 
+        } %>
       </tbody>
     </table>
   </div>
@@ -69,6 +73,7 @@
   </div>
 
   <h2>Finished Batches</h2>
+
   <div class="table">
     <table class="finished_batch">
       <thead>
@@ -86,9 +91,9 @@
           for(i=0;i< finished_batches.length; i++){%>
             <tr>
               <td><a href="/finished_batches/<%=finished_batches[i].id %>"><%= finished_batches[i].beer_name%></a></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td><%= finished_batches[i].start_date.toISOString().split('T')[0] %></td>
+              <td><%= finished_batches[i].end_date.toISOString().split('T')[0] %></td>
+              <td><%= finished_batches[i].actual_yield %> liters</td>
             </tr>
           <%}
         }%>
