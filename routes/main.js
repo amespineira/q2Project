@@ -27,12 +27,17 @@ router.get('/', function(req, res, next){
 
 router.post('/steps/:batch_id/:curr_stage', function(req, res, next){
     Queries_batch.stageDone(req.params.batch_id).then(function(){
-      Queries_batch.stepsDone(req.params.curr_stage, req.params.batch_id).then(function(){  
+      Queries_batch.stepsDone(req.params.curr_stage, req.params.batch_id).then(function(){
       res.redirect(`/batch/${req.params.batch_id}`)
     })
   })
 })
 
+router.get('/form/:batch_id', function(req, res, next){
+  Queries_batch.beerName(req.params.batch_id).then(function(beer){
+    res.render('batch/form', {batch_id: req.params.batch_id, beer: beer.rows[0]})
+  })
+})
 
 
 module.exports = router;

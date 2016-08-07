@@ -51,6 +51,9 @@ module.exports = {
   },
   stepsDone: function(stage, batch){
     return knex.raw(`UPDATE steps set done = true where stage = ${stage} AND batch_id = ${batch};`)
+  },
+  beerName: function(batch){
+    return knex.raw(`SELECT beer.id AS beer_id, beer.beer_name AS beer_name from beer join batch on batch.beer_id = beer.id where batch.id = ${batch};`)
   }
 }
 

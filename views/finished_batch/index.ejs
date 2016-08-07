@@ -1,5 +1,6 @@
 <% include ../layout %>
 <div class="container-fluid" id="whole_thing">
+  <%if(finished_batch){ %>
     <div class="jumbotron text-center" id="finished_batch_jumbotron">
         <h1><%= finished_batch.beer_name %>- Batch #<%=finished_batch.batch_id%></h1>
     </div>
@@ -41,7 +42,7 @@
                 </tbody>
             </table>
     </div>
-
+<% } %>
     <div class="container text-center" id="finished_batch_recipe">
         <h1>Recipe Information</h1>
         <div class="row text-center">
