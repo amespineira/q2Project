@@ -185,7 +185,7 @@
 	      </div>
   </div>
   <div class="steps">
-    <input type="button" id="addStep" class="btn btn-default" value="Add Step +"> || <input type='button' id="backStep" class="btn btn-default" value="< Back Stage"> || <input type="button" id="nextStep" class="btn btn-default" value="Next Stage >"> || <input type="button" id="finishedB" class="btn btn-default" value="Finished Stage">
+    <input type="button" id="addStep" class="btn btn-default" value="Add Step +"> || <input type='button' id="backStep" class="btn btn-default" value="< Back Stage"> || <input type="button" id="nextStep" class="btn btn-default" value="Next Stage >"> || <input type="button" id="finishedS" class="btn btn-default" value="Finished Stage">
     <div class="stepBody">
       <%if(steps){ %>
       <% var order = [[], [], [], []] %>
@@ -324,15 +324,11 @@ $('#backStep').click(function(){
     stage--;
   })
 
-  $('#finished_batch')
-
-  var stepNum = [1, 1, 1, 1];
-  $('#close').click(function(){
-    $('#myModal').modal('hide');
-    var test = $('select[name=stage]').val();
-    $(`#hide${test}`).append(`<input type='number' name='stage' value='${stage}' hidden><input type='number' name='order' value='${stepNum[(stage-1)]}' hidden><h3>Step ${stepNum[(stage-1)]}: <input type='text' name='name' value='${$('input[name=name]').val()}'></h3><textarea type='text' name='step_notes' value='${$('textarea').val()}'>${$('textarea').val()}</textarea>`)
-    stepNum[(stage-1)]++;
+  $('#finishedS').click(function(){
+    var x = $(`#hide${stage}`).find('input');
+    console.log(x.length);
   })
+
 
 })
 </script>
