@@ -85,14 +85,34 @@
 <HR>
 <div id="search"></div>
 <div class="container content-section text-center">
+  <h2 class="localbrew">Beer and Brewery Search</h2>
+  <h3 class="localbrew">BREWBUDDY want you to discover new types of beer and breweries to expand your beer knowledge. Give it a shot, search for specifics like a Gose, Dopplebock or try search for your favorite brewery.</h3>
+</div>
+<div class="container">
+
   <div class="row">
-    <div  class="col-md-12 text-left">
-      <h2 class="localbrew">Search for a Type of Beer</h2>
-      <input id="inputBeer" type="text" name="beername" value="" placeholder="Lager, Stout ect....">
-      <input class="btn" id="buttonBeer" type="button" name="name" value="Submit">
-    </div>
+    <div class="col-md-6">
+        <input id="inputBeer" type="text" name="beername" value="" placeholder="Beer Search">
+        <input class="btn" id="buttonBeer" type="button" name="name" value="Submit">
+      </div>
+      <div class="col-md-6">
+          <input type="text" id="brewerySearch" name="breweryname" placeholder="Brewery Search" value="">
+          <input type="button" class='btn' id="breweryButton" name="name" value="Submit">
+      </div>
   </div>
 </div>
+<div class="container">
+  <div class="row">
+    <div id="breweryContainer" class="col-md-12">
+
+    </div>
+
+  </div>
+</div>
+
+
+
+
 <div class="row">
   <div id="container" class="col-md-8 text-left show-table"></div>
 </div>
@@ -107,18 +127,15 @@
     </div>
   </div>
 
-
 <div class="spacer"></div>
-
-
-
 <footer>
   <div class="container text-center">
-    <p class="footer-help-page">Copyright &copy; BrewBuddy 2016</p>
+    <p class="footer-help-page">Copyright &copy; BREWBUDDY 2016</p>
   </div>
 </footer>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnexUKDWyuPXKzbOjxIxDRGv4SN5hkn_I&callback=initMap"
     async defer></script>
+    <script src="/googleMaps/brewerySearch.js"></script>
     <script src="/googleMaps/beersearch.js"></script>
     <script src="/googleMaps/maps.js"  type="text/javascript"></script>
     <script src="/firstPageStyle/jquery.min.js"></script>

@@ -1,3 +1,4 @@
+
 #finished_batch_jumbotron{
   margin-left:20px;
   margin-right:20px;
@@ -25,10 +26,18 @@
   color:lightgrey;
   font-family: 'Helvetica Neue'
 }
+#breweryContainer{
+  color: lightgray;
+  margin-top: 10vh;
+}
+
+.spacer-help-inputs{
+    margin-top: -6vh;
+
+}
 
 .search-beer{
   color: lightgrey;
-
 }
 .show-table{
   color: lightgrey;
@@ -60,11 +69,9 @@
 }
 
 .localbrew{
-  color:#fff;
+  color: lightgray;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
-
 }
-
 #inputBeer1{
   color:black;
   margin-top:4vh;
@@ -98,17 +105,7 @@
   color:black;
 }
 /*IDS FOR THE CREATE.EJS PAGE */
-#inputBeer{
-  color:black;
-  margin-top: 10vh;
-  height:4.1vh;
-  width:15vw;
-}
-#buttonBeer{
-  color:black;
-  margin-right: 2px;
 
-}
 .inputText{
   color:black;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
