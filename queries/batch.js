@@ -36,6 +36,12 @@ module.exports = {
   },
   allStages: function(){
     return knex.raw(`SELECT * FROM batch`)
+  },
+  addStep:function(stepSpecs, batchId){
+    return knex.raw(`SELECT MAX(step_order) FROM steps WHERE batch_id=${batchId} AND stage=${stepSpecs.stage};`).then(function(max){
+      var order=max.rows[0].max+1
+      return knex.raw(`INSERT INTO steps VALUES (DEFAULT, ${stepSpecs.stage}, '${stepSpecs.name}', '${stepSpecs.notes}', ${batchId}, false, ${order})`)
+    })
   }
 }
 

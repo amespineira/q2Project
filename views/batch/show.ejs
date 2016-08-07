@@ -9,7 +9,7 @@
           <h4 class="modal-title" id="myModalLabel">Add Step to Batch</h4>
         </div>
           <div class="modal-body">
-            <form>
+            <form action="/batch/step/<%= batch_id %>" method="post">
               <label for="stage">Stage</label>
               <select class="select-list" name="stage">
                 <option selected hidden>select stage</option>
@@ -22,12 +22,13 @@
               <input id="stepz" type="text" name="name">
               <label for="step_notes">Step Notes</label>
               <textarea id="steppy" name="notes" rows="8" cols="40"></textarea>
-            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button id="close" type="submit" class="btn btn-primary">Submit</button>
           </div>
+        </form>
+
       </div>
     </div>
   </div>
@@ -327,13 +328,7 @@ $('#backStep').click(function(){
   var test = $('#testy').val();
   console.log(test);
 
-  var stepNum = [1, 1, 1, 1];
-  $('#close').click(function(){
-    $('#myModal').modal('hide');
-    var test = $('select[name=stage]').val();
-    $(`#hide${test}`).append(`<input type='number' name='stage' value='${stage}' hidden><input type='number' name='order' value='${stepNum[(stage-1)]}' hidden><h3>Step ${stepNum[(stage-1)]}: <input type='text' name='name' value='${$('input[name=name]').val()}'></h3><textarea type='text' name='step_notes' value='${$('textarea').val()}'>${$('textarea').val()}</textarea>`)
-    stepNum[(stage-1)]++;
-  })
+
 
 })
 </script>

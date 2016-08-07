@@ -43,8 +43,9 @@ router.post('/create', function(req, res, next){
 
 router.post('/step/:id', function(req, res, next){
   //recieving batch.id
-  Queries_batch.step(req.params.id, req.body).then(function(steps){
-    console.log(steps);
+  console.log(req.body);
+  Queries_batch.addStep(req.body, req.params.id).then(function(){
+    res.redirect('/batch/'+req.params.id)
 
   })
 })
