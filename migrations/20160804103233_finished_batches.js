@@ -10,7 +10,7 @@ exports.up = function(knex, Promise) {
     table.string('aftertaste');
     table.string('appearance');
     table.string('smell');
-    table.string('mouth feel');
+    table.string('mouth_feel');
     table.string('drinkability');
   })
 };
