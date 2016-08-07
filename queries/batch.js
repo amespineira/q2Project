@@ -42,6 +42,12 @@ module.exports = {
       var order=max.rows[0].max+1
       return knex.raw(`INSERT INTO steps VALUES (DEFAULT, ${stepSpecs.stage}, '${stepSpecs.name}', '${stepSpecs.notes}', ${batchId}, false, ${order})`)
     })
+  },
+  deleteBatch:function(batchId){
+    return knex.raw(`DELETE FROM batch WHERE id=${batchId}`)
+  },
+  deleteSteps:function(batchId){
+    return knex.raw(`DELETE FROM steps WHERE batch_id=${batchId}`)
   }
 }
 

@@ -48,6 +48,7 @@
           <th>Start Date</th>
           <th>End Date</th>
           <th>Expected Yield</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -57,6 +58,7 @@
             <td><%= batches[i].start_date.toISOString().split('T')[0] %></td>
             <td><%= batches[i].end_date.toISOString().split('T')[0] %></td>
             <td><%= batches[i].expected_yield %> liters</td>
+            <td><a href="/batch/delete/<%= batches[i].id %>">Delete</a></td>
           </tr>
           <%} %>
       </tbody>
