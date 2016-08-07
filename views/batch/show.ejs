@@ -152,7 +152,7 @@
                   states[0]='complete'
                   states[1]='complete'
                   states[2]='complete'
-                  states[3]='complete'
+                  states[3]='active'
                   break;
               }%>
                 <div id="1" class="col-xs-3 bs-wizard-step <%=states[0]%>">
@@ -254,9 +254,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-  $('#hide2').hide();
-  $('#hide3').hide();
-  $('#hide4').hide();
+
 
   $('#addStep').click(function(){
     $('#stepz').val('');
@@ -266,9 +264,17 @@ $(document).ready(function(){
   });
 
 var stage = <%= curr_stage %>;
+$('.step').hide();
+$(`#hide${stage}`).show();
 $('#nextStep').click(function(){
   stage++;
     switch(stage){
+      case 1:
+      $('#hide1').show();
+      $('#hide2').hide();
+      $('#hide3').hide();
+      $('#hide4').hide();
+
       case 2:
       $('#hide1').hide();
       $('#hide2').show();
@@ -326,10 +332,32 @@ $('#backStep').click(function(){
   })
 
   $('#finishedS').click(function(){
-    var x = $(`#hide${stage}`).find('input');
-    console.log(x.length);
+    var counter = 0;
+    var arr = []
+    var x = $(`#hide${stage}`).find('input[name=clean]');
+    $(x).each(function(i, val){
+      if(val.checked === false){
+        arr.push((i+1))
+        counter++;
+      }
+    })
+    if(counter > 0){
+      $(`#hide${stage}`).prepend(`<h6>You have not completed steps ${arr.join(' ')} in this stage</h6`)
+    }else if(stage < 4){
+      if(<%= curr_stage %> === stage){
+
+      $('.step h6').remove();
+      $.post('/main/steps/<%= batch_id %>/<%= curr_stage %>');
+      location.reload();
+      }else {
+        alert('You must complete Stage <%= curr_stage %>')
+      }
+    } else {
+      alert('Congratulations TIME TO DRINK!')
+      window.location.replace('/finished_batches/<%= batch_id %>');
+    }
   })
-
-
 })
+
+
 </script>

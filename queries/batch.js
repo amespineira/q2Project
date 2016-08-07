@@ -42,6 +42,15 @@ module.exports = {
       var order=max.rows[0].max+1
       return knex.raw(`INSERT INTO steps VALUES (DEFAULT, ${stepSpecs.stage}, '${stepSpecs.name}', '${stepSpecs.notes}', ${batchId}, false, ${order})`)
     })
+  },
+  curr_stage: function(batch){
+    return knex.raw(`SELECT curr_stage from batch where id = ${batch}`)
+  },
+  stageDone: function(batch){
+    return knex.raw(`UPDATE batch set curr_stage = (curr_stage + 1) where id=${batch};`)
+  },
+  stepsDone: function(stage, batch){
+    return knex.raw(`UPDATE steps set done = true where stage = ${stage} AND batch_id = ${batch};`)
   }
 }
 
