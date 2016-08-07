@@ -9,7 +9,7 @@
           <h4 class="modal-title" id="myModalLabel">Add Step to Batch</h4>
         </div>
           <div class="modal-body">
-            <form>
+            <form action="/batch/step/<%= batch_id %>" method="post">
               <label for="stage">Stage</label>
               <select class="select-list" name="stage">
                 <option selected hidden>select stage</option>
@@ -22,12 +22,13 @@
               <input id="stepz" type="text" name="name">
               <label for="step_notes">Step Notes</label>
               <textarea id="steppy" name="notes" rows="8" cols="40"></textarea>
-            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button id="close" type="submit" class="btn btn-primary">Submit</button>
           </div>
+        </form>
+
       </div>
     </div>
   </div>
