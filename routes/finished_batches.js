@@ -18,8 +18,10 @@ router.get('/:batchId', function(req, res, next){
         Equipment.getBatchEquipment(batchId).then(function(equipment){
           BeerStats.allBeerStats(batchId).then(function(stats){
             BrewerNotes.allBrewerNotes(beerId.rows[0].beer_id).then(function(notes){
-              console.log(finished_batch.rows[0])
-              res.render('finished_batch/index', {finished_batch: finished_batch.rows[0], ingredients: ingredients.rows, equipment: equipment.rows, brewer_notes: notes.rows, beer_stats: stats.rows[0]})
+              Batch.batchInfo(batchId).then(function(batchInfo){
+                res.render('finished_batch/index', {finished_batch: finished_batch.rows[0], ingredients: ingredients.rows, equipment: equipment.rows, brewer_notes: notes.rows, beer_stats: stats.rows[0], batch: batchInfo.rows[0]})
+
+              })
             })
           })
         })
