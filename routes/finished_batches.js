@@ -30,6 +30,29 @@ router.get('/:batchId', function(req, res, next){
   })
 });
 
+router.post('/:batchId', function(req, res, nex){
+  var stats = {
+    user_id: req.session.id,
+    batch_id: req.params.batch_id,
+    wort_collection: req.body.wort_collection,
+    batch_size: req.body.batch_size,
+    efficiency: req.body.efficiency,
+    gravity: req.body.gravity,
+    beer_name: req.body.beer_name,
+    taste: req.body.taste,
+    aftertaste: req.body.aftertaste,
+    smell: req.body.smell,
+    mouth_feel: req.body.mouth_feel,
+    drinkability: req.body.drinkability,
+  }
+  Finished.updateBeerStats(stats).then(function(){
+    Finished.updateFinishedBatches(stats).then(function(){
+      res.redirect('/main')
+    })
+  })
+})
+
+
 
 
 
