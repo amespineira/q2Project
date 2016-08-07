@@ -1,19 +1,20 @@
-var userInput = document.getElementById('inputBeer')
+var userInput1 = document.getElementById('inputBeer')
 var button = document.getElementById('buttonBeer');
 var col1= document.getElementById('col1')
 var col2= document.getElementById('col2')
 var col3= document.getElementById('col3')
 var httpRequest = new XMLHttpRequest();
 
-
 button.addEventListener("click", function(event) {
-    container.innerHTML = " "
+    container.innerHTML = " ";
   httpRequest.onreadystatechange = function(){
   if(httpRequest.readyState === 4){
     if(httpRequest.status < 400){
       var object = JSON.parse(httpRequest.responseText)
       var count=1
       for (var i = 0; i < object.data.length; i++) {
+        console.log(object.data[i].name);
+
       var name = document.createElement("h1")
       var desc = document.createElement("h4")
       var fgMax = document.createElement("li")
@@ -22,7 +23,10 @@ button.addEventListener("click", function(event) {
       var ibuMin = document.createElement('li')
       var abv = document.createElement('li')
       var glass = document.createElement('li')
-      var div=document.createElement('div')
+      var div = document.createElement('div')
+
+
+
       div.appendChild(name)
       name.innerHTML = object.data[i].style.name;
       div.appendChild(desc)
@@ -47,7 +51,7 @@ button.addEventListener("click", function(event) {
         case 3:
           col3.appendChild(div)
         break;
-      } 
+      }
       count++;
       if(count>3){
         count=1;
@@ -56,6 +60,6 @@ button.addEventListener("click", function(event) {
         }
       }
     }
-      httpRequest.open('GET', 'https://galvanize-cors-proxy.herokuapp.com/http://api.brewerydb.com/v2/beers?name='+userInput .value+'&key=72a6164778f5d2d0b5bf3858c894bbbf')
+      httpRequest.open('GET', 'http://api.brewerydb.com/v2/search?q='+ userInput1.value +'&key=72a6164778f5d2d0b5bf3858c894bbbf')
       httpRequest.send();
   });
