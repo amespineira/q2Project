@@ -8,12 +8,14 @@ var httpRequest = new XMLHttpRequest();
 button2.addEventListener("click", function(event) {
     breweryContainer.innerHTML = " "
     container.innerHTML = " ";
+    col1.innerHTML = " ";
+    col2.innerHTML = " ";
+    col3.innerHTML = " ";
   httpRequest.onreadystatechange = function(){
   if(httpRequest.readyState === 4){
     if(httpRequest.status < 400){
       var object = JSON.parse(httpRequest.responseText)
         for (var i = 0; i < object.data.length; i++) {
-          console.log(object.data[i].images);
           var div = document.createElement('div')
           var brewname = document.createElement("h1")
           var brewdesc = document.createElement("h3")
@@ -31,7 +33,7 @@ button2.addEventListener("click", function(event) {
           website.innerHTML = object.data[i].website;
 
           largeContainer.appendChild(brewest)
-          brewest.innerHTML = "Establish in" + " " + object.data[i].established;
+          brewest.innerHTML = "Established in" + " " + object.data[i].established;
 
           largeContainer.appendChild(brewdesc)
           brewdesc.innerHTML = object.data[i].description;
