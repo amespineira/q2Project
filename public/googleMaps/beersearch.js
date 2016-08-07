@@ -36,10 +36,7 @@ button.addEventListener("click", function(event) {
       var glass = document.createElement('li')
       div = document.createElement('div')
 
-      console.log("*****");
-      var pictures =object.data[i].labels;
-
-if
+      
 
       div.appendChild(name)
       name.innerHTML = object.data[i].name;
