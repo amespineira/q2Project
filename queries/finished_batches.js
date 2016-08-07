@@ -12,7 +12,7 @@ module.exports = {
         return knex.raw(`INSERT INTO beer_stats VALUES (DEFAULT, ${stats.batch_id}, ${stats.wort_collection}, ${stats.batch_size}, ${stats.efficiency}, ${stats.gravity} )`)
     },
     updateFinishedBatches: function(finishedBatch){
-        return knex.raw(`INSERT INTO finished_batches VALUES (DEFAULT, '${finishedBatch.beer_name}', ${finishedBatch.user_id}, ${finishedBatch.batch_id}, '${finishedBatch.taste}', '${finishedBatch.aftertaste}', '${finishedBatch.smell}', '${finishedBatch.mouth_feel}', '${finishedBatch.drinkability}')`)
+        return knex.raw(`INSERT INTO finished_batches VALUES (DEFAULT, '${finishedBatch.beer_name}', ${finishedBatch.user_id}, ${finishedBatch.batch_id}, '${finishedBatch.taste}', '${finishedBatch.aftertaste}', '${finishedBatch.appearance}', '${finishedBatch.smell}', '${finishedBatch.mouth_feel}', '${finishedBatch.drinkability}')`)
     },
 
 
