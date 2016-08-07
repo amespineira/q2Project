@@ -612,6 +612,10 @@ input[name=button]{
   width: 95%;
   margin: 0 auto;
 }
+.finished_batch {
+  width: 95%;
+  margin: 0 auto;
+}
 .aside_batch{
   background: rgba(255, 255, 255, 0.8);
   display: inline-block;
