@@ -1,4 +1,4 @@
-#finished_batch_jumbotron{
+no#finished_batch_jumbotron{
   margin-left:20px;
   margin-right:20px;
   color: lightgrey;
@@ -651,7 +651,6 @@ hr {
 .steps{
   width: 70%;
   height: 80%;
-  background: rgba(255, 255, 255, 0.5);;
   border-radius: 5px;
   margin: 0 auto;
 }
@@ -685,6 +684,7 @@ select {
   align-items: center;
   flex-direction: column;
   margin: 0 auto;
+
 }
 
 .col-sm-6 input {
@@ -693,6 +693,47 @@ select {
   text-align: center;
   border-radius: 5px;
 }
+
+.back {
+  position: absolute;
+  z-index: -5;
+  opacity: 0.5;
+}
+.buttons {
+  background: #22503B;
+  width: 100%;
+  height: 50px;
+  display: flex;
+	justify-content: center;
+  align-items: center;
+}
+
+.buttons input{
+	flex: 1;
+	width: 10%;
+	background: #D4AB2A;
+	color: white;
+	margin: 0px 20px;
+}
+
+.step h5 {
+		width: 100%;
+		height: 100%;
+		border-radius: 5px;
+		background: #95B6C3;
+		font-size: 26px;
+}
+
+.deats {
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+	background: #95B6C3;
+	padding: 5px;
+}
+
+
+
 
 .bs-wizard {margin-top: -20px;}
 
