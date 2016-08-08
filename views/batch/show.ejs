@@ -1,5 +1,6 @@
 <% include ../layout %>
 
+<img class="back" src="http://www.thebeerspotandgrill.com/wp-content/uploads/2014/05/Beerslide3.jpg" alt="beer" />
 <section class="batch_show">
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -12,7 +13,7 @@
             <form action="/batch/step/<%= batch_id %>" method="post">
               <label for="stage">Stage</label>
               <select class="select-list" name="stage">
-                <option selected hidden>select stage</option>
+                <!-- <option selected hidden>select stage</option> -->
                 <option value="1">Brew Day</option>
                 <option value="2">Fermentation Monitoring</option>
                 <option value="3">Bottling Day</option>
@@ -186,7 +187,9 @@
 	      </div>
   </div>
   <div class="steps">
-    <input type="button" id="addStep" class="btn btn-default" value="Add Step +"> || <input type='button' id="backStep" class="btn btn-default" value="< Back Stage"> || <input type="button" id="nextStep" class="btn btn-default" value="Next Stage >"> || <input type="button" id="finishedS" class="btn btn-default" value="Finished Stage">
+    <div class="buttons">
+      <input type="button" id="addStep" class="btn btn-default" value="Add Step +">  <input type='button' id="backStep" class="btn btn-default" value="< Back Stage">  <input type="button" id="nextStep" class="btn btn-default" value="Next Stage >">  <input type="button" id="finishedS" class="btn btn-default" value="Finished Stage">
+    </div>
     <div class="stepBody">
       <%if(steps){ %>
       <% var order = [[], [], [], []] %>
@@ -198,51 +201,63 @@
 
         <div class="step" id="hide1">
           <% for(var i = 0; i < order[0].length; i++ ){ %>
-            <h5>Step <%= order[0][i].step_order %></h5>
-            <h3><%= order[0][i].name %></h3>
-            <p><%= order[0][i].notes %></p>
-            <% if(order[0][i].done === true) { %>
-            <input type="checkbox" name="clean" checked>
-            <%} else { %>
-              <input type="checkbox" name="clean">
-              <% } %>
-            <% } %>
+            <h5>- Step <%= order[0][i].step_order %> -</h5>
+						<div class="deats">
+							<h3><%= order[0][i].name %></h3>
+							<hr>
+							<p><%= order[0][i].notes %></p>
+							<% if(order[0][i].done === true) { %>
+								<input type="checkbox" name="clean" checked>
+								<%} else { %>
+									<input type="checkbox" name="clean">
+									<% } %>
+									<% } %>
+						</div>
         </div>
         <div class="step" id="hide2">
           <% for(var i = 0; i < order[1].length; i++ ){ %>
             <h5>Step <%= order[1][i].step_order %></h5>
-            <h3><%= order[1][i].name %></h3>
-            <p><%= order[1][i].notes %></p>
-            <% if(order[1][i].done === true) { %>
-            <input type="checkbox" name="clean" checked>
-            <%} else { %>
-              <input type="checkbox" name="clean">
-              <% } %>
-            <% } %>
+						<div class="deats">
+							<h3><%= order[1][i].name %></h3>
+							<hr>
+							<p><%= order[1][i].notes %></p>
+							<% if(order[1][i].done === true) { %>
+								<input type="checkbox" name="clean" checked>
+								<%} else { %>
+									<input type="checkbox" name="clean">
+									<% } %>
+									<% } %>
+						</div>
         </div>
         <div class="step" id="hide3">
           <% for(var i = 0; i < order[2].length; i++ ){ %>
             <h5>Step <%= order[2][i].step_order %></h5>
-            <h3><%= order[2][i].name %></h3>
-            <p><%= order[2][i].notes %></p>
-            <% if(order[2][i].done === true) { %>
-            <input type="checkbox" name="clean" checked>
-            <%} else { %>
-              <input type="checkbox" name="clean">
-              <% } %>
-            <% } %>
+						<div class="deats">
+							<h3><%= order[2][i].name %></h3>
+							<hr>
+							<p><%= order[2][i].notes %></p>
+							<% if(order[2][i].done === true) { %>
+								<input type="checkbox" name="clean" checked>
+								<%} else { %>
+									<input type="checkbox" name="clean">
+									<% } %>
+									<% } %>
+						</div>
         </div>
         <div class="step" id="hide4">
           <% for(var i = 0; i < order[3].length; i++ ){ %>
             <h5>Step <%= order[3][i].step_order %></h5>
-            <h3><%= order[3][i].name %></h3>
-            <p><%= order[3][i].notes %></p>
-            <% if(order[3][i].done === true) { %>
-            <input type="checkbox" name="clean" checked>
-            <%} else { %>
-              <input type="checkbox" name="clean">
-              <% } %>
-            <% } %>
+						<div class="deats">
+							<h3><%= order[3][i].name %></h3>
+							<hr>
+							<p><%= order[3][i].notes %></p>
+							<% if(order[3][i].done === true) { %>
+								<input type="checkbox" name="clean" checked>
+								<%} else { %>
+									<input type="checkbox" name="clean">
+									<% } %>
+									<% } %>
+						</div>
         </div>
     </div>
 
@@ -254,14 +269,6 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-
-
-  $('#addStep').click(function(){
-    $('#stepz').val('');
-    $('#steppy').val('');
-    $('textarea').empty();
-    $('#myModal').modal('show');
-  });
 
 var stage = <%= curr_stage %>;
 $('.step').hide();
@@ -330,31 +337,41 @@ $('#backStep').click(function(){
     }
     stage--;
   })
+	$('#addStep').click(function(){
+		$('#stepz').val('');
+		$('#steppy').val('');
+		$('textarea').empty();
+		$('#myModal').modal('show');
+		$(`select option:nth-child(${stage})`).prop('selected', true);
+	});
 
   $('#finishedS').click(function(){
+		console.log(stage);
     var counter = 0;
     var arr = []
     var x = $(`#hide${stage}`).find('input[name=clean]');
-    $(x).each(function(i, val){
-      if(val.checked === false){
-        arr.push((i+1))
-        counter++;
-      }
-    })
+	    $(x).each(function(i, val){
+	      if(val.checked === false){
+	        arr.push((i+1))
+	        counter++;
+	      }
+	    })
+		console.log("didn't get here");
     if(counter > 0){
       $(`#hide${stage}`).prepend(`<h6>You have not completed steps ${arr.join(' ')} in this stage</h6`)
-    }else if(stage < 4){
+    }
+		if(stage < 4){
       if(<%= curr_stage %> === stage){
-
       $('.step h6').remove();
       $.post('/main/steps/<%= batch_id %>/<%= curr_stage %>');
-      location.reload();
+      window.location.reload();
       }else {
         alert('You must complete Stage <%= curr_stage %>')
       }
-    } else {
-      alert('Congratulations TIME TO DRINK!')
-      window.location.replace('/main/form/<%= batch_id %>');
+    } else if (stage === 4){
+			alert('Congratulations TIME TO DRINK!')
+			window.location.replace('/main/form/<%= batch_id %>');
+		}else {
     }
   })
 })
