@@ -38,7 +38,7 @@
     </div>
   </div>
 
-  <h2>Batches</h2>
+  <h2 class="batch-header">Batches</h2>
 
   <div class="table">
     <table class="batch">
@@ -52,32 +52,37 @@
         </tr>
       </thead>
       <tbody>
+
         <%for(var i = 0; i < batches.length; i++){
           if(batches[i].curr_stage === 4){
 
           }else{%>
           <tr>
+
+
+          <tr class="batch-header">
+
             <td><a href="/batch/<%= batches[i].id %>"><%=  batches[i].beer_name %></a></td>
             <td><%= batches[i].start_date.toISOString().split('T')[0] %></td>
             <td><%= batches[i].end_date.toISOString().split('T')[0] %></td>
             <td><%= batches[i].expected_yield %> liters</td>
             <td><a href="/batch/delete/<%= batches[i].id %>">Delete</a></td>
           </tr>
-          <% } 
+          <% }
         } %>
       </tbody>
     </table>
   </div>
   <div class="button">
-    <input type="button" id="btnMode" class="btn" value="+ Add new batch">
+    <input type="button" id="btnMode" class="btn btn-default" value="+ Add new batch">
   </div>
 
-  <h2>Finished Batches</h2>
+  <h2 class="batch-header">Finished Batches</h2>
 
   <div class="table">
     <table class="finished_batch">
       <thead>
-        <tr>
+        <tr class="batch-header">
           <th>Beer Name</th>
           <th>Start Date</th>
           <th>End Date</th>

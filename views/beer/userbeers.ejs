@@ -1,4 +1,5 @@
 <% include ../layout %>
+
 <section>
   <div class="header-content">
         <div class="header-content-inner">
@@ -33,5 +34,25 @@
                 </p>
               <%}%>
             </div>
+
+
+<div class="container">
+  <div class="col-md-12 text-center">
+    <h1 class="recipe-top">Start A New Beer</h1>
+    <br>
+    <a href="/beer/create">
+    <button type="button" class="btn btn-primary" name="button">Let's Begin!</button></a>
+  </div>
+</div>
+<div class="container recipe-padding">
+  <div class="col-md-12 text-center">
+    <h3 class='recipe-mid'>Your Current Beers</h3>
+      <%for(var i=0; i<beers.length; i++){%>
+      <div class="recipe-beer-list">
+      <a class="recipe-beer-list" href=<%='/beer/'+beers[i].id%>><%=beers[i].beer_name%></a>
+
     </div>
-  </section>
+      <%}%>
+
+  </div>
+</div>
