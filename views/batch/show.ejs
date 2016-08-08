@@ -368,7 +368,7 @@ $('#backStep').click(function(){
 	      }
 	    })
 		console.log("didn't get here");
-    if(counter > 0){
+    if(<%= curr_stage %> === stage && counter > 0){
       $(`#hide${stage}`).prepend(`<h6>You have not completed steps ${arr.join(' ')} in this stage</h6`)
     }
 		if(stage < 4){
