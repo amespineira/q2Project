@@ -1,6 +1,5 @@
 <% include ../layout %>
 
-<img class="back" src="http://www.thebeerspotandgrill.com/wp-content/uploads/2014/05/Beerslide3.jpg" alt="beer" />
 <section class="batch_show">
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -206,13 +205,16 @@
 							<h3><%= order[0][i].name %></h3>
 							<hr>
 							<p><%= order[0][i].notes %></p>
-							<% if(order[0][i].done === true) { %>
-								<input type="checkbox" name="clean" checked>
-								<%} else { %>
-									<input type="checkbox" name="clean">
+							<div class="check">
+								<h3>Complete: </h3>
+								<% if(order[0][i].done === true) { %>
+									<input type="checkbox" name="clean" checked>
+									<%} else { %>
+										<input type="checkbox" name="clean">
+										<% } %>
+									</div>
+								</div>
 									<% } %>
-									<% } %>
-						</div>
         </div>
         <div class="step" id="hide2">
           <% for(var i = 0; i < order[1].length; i++ ){ %>
@@ -221,13 +223,16 @@
 							<h3><%= order[1][i].name %></h3>
 							<hr>
 							<p><%= order[1][i].notes %></p>
-							<% if(order[1][i].done === true) { %>
-								<input type="checkbox" name="clean" checked>
-								<%} else { %>
-									<input type="checkbox" name="clean">
+							<div class="check">
+								<h3>Complete: </h3>
+								<% if(order[1][i].done === true) { %>
+									<input type="checkbox" name="clean" checked>
+									<%} else { %>
+										<input type="checkbox" name="clean">
+										<% } %>
+									</div>
+								</div>
 									<% } %>
-									<% } %>
-						</div>
         </div>
         <div class="step" id="hide3">
           <% for(var i = 0; i < order[2].length; i++ ){ %>
@@ -236,13 +241,16 @@
 							<h3><%= order[2][i].name %></h3>
 							<hr>
 							<p><%= order[2][i].notes %></p>
-							<% if(order[2][i].done === true) { %>
-								<input type="checkbox" name="clean" checked>
-								<%} else { %>
-									<input type="checkbox" name="clean">
+							<div class="check">
+								<h3>Complete: </h3>
+								<% if(order[2][i].done === true) { %>
+									<input type="checkbox" name="clean" checked>
+									<%} else { %>
+										<input type="checkbox" name="clean">
+										<% } %>
+									</div>
+								</div>
 									<% } %>
-									<% } %>
-						</div>
         </div>
         <div class="step" id="hide4">
           <% for(var i = 0; i < order[3].length; i++ ){ %>
@@ -251,13 +259,16 @@
 							<h3><%= order[3][i].name %></h3>
 							<hr>
 							<p><%= order[3][i].notes %></p>
+							<div class="check">
+								<h3>Complete: </h3>
 							<% if(order[3][i].done === true) { %>
 								<input type="checkbox" name="clean" checked>
 								<%} else { %>
 									<input type="checkbox" name="clean">
 									<% } %>
+									</div>
+								</div>
 									<% } %>
-						</div>
         </div>
     </div>
 

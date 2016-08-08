@@ -131,8 +131,10 @@
 	      </div>
   </div>
   <div class="steps">
-    <input type="button" id="addStep" class="btn btn-default" value="Add Step +"> || <input type='button' id="backStep" class="btn btn-default" value="< Back Stage"> || <input type="button" id="nextStep" class="btn btn-default" value="Next Stage >">
-    <div class="stepBody">
+		<div class="buttons">
+			<input type="button" id="addStep" class="btn btn-default" value="Add Step +">  <input type='button' id="backStep" class="btn btn-default" value="< Back Stage">  <input type="button" id="nextStep" class="btn btn-default" value="Next Stage >">
+		</div>
+    <div class="stepBody" id="stepBod2">
       <form id="form2">
 
         <div class="step" id="hide1">
@@ -233,7 +235,7 @@
       var stepNum = [1, 1, 1, 1];
       $('#close').click(function(){
         $('#myModal').modal('hide');
-        $(`#hide${stage}`).append(`<input type='number' name='stage' value='${stage}' hidden><input type='number' name='order' value='${stepNum[(stage-1)]}' hidden><h3>Step ${stepNum[(stage-1)]}: <input type='text' name='name' value='${$('input[name=name]').val()}'></h3><p><input type='text' name='step_notes' value='${$('textarea').val()}'></p>`)
+        $(`#hide${stage}`).append(`<input type='number' name='stage' value='${stage}' hidden><input type='number' name='order' value='${stepNum[(stage-1)]}' hidden><h5>Step ${stepNum[(stage-1)]}</h5><div class='deats'><h3><input type='text' name='name' value='${$('input[name=name]').val()}'></h3><p><input type='text' name='step_notes' value='${$('textarea').val()}'></p></div>`)
         stepNum[(stage-1)]++;
       })
       $('#saveBatch').click(function(){
