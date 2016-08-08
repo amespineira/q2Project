@@ -1,73 +1,17 @@
-/*showbeer.ejs*/
-.button-spacing{
-  margin-top: 10vh;
-}
-.table-spacing{
-  margin-top:10vh;
-}
-.bottom-spacing{
-  margin-top:30vh;
-}
-
-.list-style-mid{
-  color:black;
-  font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
-  font-size: 2em;
-}
-.show-table2{
-  color: black;
-}
-
-.search-beer2{
-  color: black;
-}
-
 #breweryContainer{
-  color: black;
+  color: lightgray;
   margin-top: 10vh;
-}
-
-.recipe-beer-list{
-  color: white;
-  font-size: 1.5em;
-
-
-}
-
-.batch-header{
-  color:black;
-  font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
-}
-
-.recipe-padding{
-  margin-top: 20vh;
-
-}
-
-.font-color-help-page.h3{
-  color:black;
-}
-
-.recipe-mid{
-  color:black;
-  font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
-  font-size: 2.8em;
-}
-
-.recipe-top{
-  margin-top: 12vh;
-  color:black;
-  font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
-  font-size: 3.5em;
 }
 
 .spacer-help-inputs{
     margin-top: -6vh;
 }
 
-
+.search-beer{
+  color: lightgrey;
+}
 .show-table{
-  color: black;
+  color: lightgrey;
   font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
   margin-left: 4vw;
 }
@@ -95,13 +39,7 @@
   color:black;
 }
 
-.localbrew1{
-  color: black;
-  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
-  font-weight: bold;
-}
-
-.localbrew2{
+.localbrew{
   color: black;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
@@ -119,6 +57,7 @@
   color:black;
   margin-bottom:2vh;
 }
+
 
 .text-field{
   width:80%;
@@ -151,7 +90,7 @@ body {
 body {
   font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
   background-image: url('../images/wheat.jpg');
-  background-size: 100% 100vh;
+  background-size: 100% 250vh;
 }
 
 hr {
@@ -166,11 +105,11 @@ a {
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
   transition: all 0.35s;
-  color: #f2d3a8;
+  color: #F05F40;
 }
 a:hover,
 a:focus {
-  /*color: #eb3812;*/
+  color: #eb3812;
 }
 h1,
 h2,
@@ -241,7 +180,7 @@ aside {
 }
 .navbar-default .nav > li.active > a,
 .navbar-default .nav > li.active > a:focus {
-  color: #F05F40;
+  color: #F05F40 !important;
   background-color: transparent;;
 }
 .navbar-default .nav > li.active > a:hover,
@@ -254,9 +193,8 @@ aside {
     background-color: #9FC4D0;
     border-color: rgba(255, 255, 255, 0.3);
   }
-/*top left brand logo*/
   .navbar-default .navbar-header .navbar-brand {
-    color: #f2d3a8;
+    color:  #f2d3a8;
   }
   .navbar-default .navbar-header .navbar-brand:hover,
   .navbar-default .navbar-header .navbar-brand:focus {

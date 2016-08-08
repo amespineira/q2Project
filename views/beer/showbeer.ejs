@@ -1,5 +1,5 @@
 <% include ../layout %>
-<section>
+
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -25,46 +25,53 @@
     </div>
   </div>
 
-  <div class="header-content">
-      <div class="header-content-inner">
-        <a href="/beer/create">Add New Beer</a>
-        <div>
-          <p>Name: <%= beers[0].beer_name%>
-          </p>
-          <p>Type: <%=beers[0].type%>
-          </p>
-          <p>Syle: <%=beers[0].style%>
-          </p>
-          <table class="table table-bordered" >
-            <tbody id="form-table">
-            <tr>
-              <th>Ingredients</th>
-              <th>Type</th>
-              <th>Amount</th>
-              <th>Units</th>
-            </tr>
-            <% for(var i=0; i<ingredients.length; i++){%>
-              <tr>
-                <td><%= ingredients[i].ingredient_name%></td>
-                <td><%= ingredients[i].ingredient_type%></td>
-                <td><%= ingredients[i].amount%></td>
-                <td><%= ingredients[i].units%></td>
-              </tr>
-            <%}%>
-          </tbody>
-          </table>
-          <div class="button">
-            <input type="button" id="btnMode" class="btn" value="+ Start New Batch">
-          </div>
-        <script type="text/javascript">
-            $('#btnMode').click(function(){
-              $('#myModal').modal('show');
-            });
-        </script>
-          <p>
-          <a href=<%= '/beer/'+beers[0].id+'/delete'%>>Delete Recipe</a>
-          </p>
-        </div>
-      </div>
+
+<div class="container">
+  <div class="col-md-12 align-left">
+    <a href="/beer/create">
+    <button type="button" class="btn btn-default button-spacing" name="button"> + Add A New Beer</button></a>
+  </div>
+</div>
+<div class="container">
+    <div class="col-md-12 text-center">
+      <p class="list-style-mid" >Beer Name: <%= beers[0].beer_name%>
+      </p>
+      <p class="list-style-mid" >Type: <%=beers[0].type%>
+      </p>
+      <p class="list-style-mid" >Syle: <%=beers[0].style%>
+      </p>
     </div>
-</section>
+</div>
+<div class="container">
+  <table class="table table-bordered table-spacing">
+      <tbody id="form-table">
+      <tr>
+        <th>Ingredients</th>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Units</th>
+      </tr>
+      <% for(var i=0; i<ingredients.length; i++){%>
+        <tr>
+          <td><%= ingredients[i].ingredient_name%></td>
+          <td><%= ingredients[i].ingredient_type%></td>
+          <td><%= ingredients[i].amount%></td>
+          <td><%= ingredients[i].units%></td>
+        </tr>
+      <%}%>
+    </tbody>
+  </table>
+</div>
+<div class="container bottom-spacing">
+  <div class="row">
+    <a href=<%= '/beer/'+beers[0].id+'/delete'%>>
+      <button type="button" class="btn btn-primary" name="button"> - Delete Recipe</button></a>
+    <a href="#">
+    <button type="button" id="btnMode" class="btn btn-default" name="button"> + Start New Batch</button></a>
+    <script type="text/javascript">
+        $('#btnMode').click(function(){
+          $('#myModal').modal('show');
+        });
+    </script>
+  </div>
+</div>
