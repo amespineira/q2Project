@@ -91,12 +91,12 @@
             </div>
         </div>
         <h1>Brewer Notes</h1>
-        <div class="row text-center">
-            <div class="col-md-4 col-md-offset-2 well text-left">
-                <% for (i=0;i < brewer_notes.length;i++){%>
-                    <%= brewer_notes[i].notes %>
-                    <%}%>
-                </div>
-            </div>
+          <div class="row text-center">
+            <% for (i=0;i < brewer_notes.length;i++){%>
+              <div class="col-md-4 col-md-offset-2 well text-left">
+                  <%= brewer_notes[i].notes %>
+              </div>
+            <%}%>
+          </div>
     </div>
 </div>
