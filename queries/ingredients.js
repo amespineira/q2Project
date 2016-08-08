@@ -31,6 +31,7 @@ module.exports={
     var curr=ingredients.pop()
     var query=`SELECT * FROM ingredients WHERE ingredient_name='${curr.name}' AND ingredient_type='${curr.type}' AND units='${curr.units}'`
     return  knex.raw(query).then(function(matches){
+      console.log(curr);
       console.log(matches);
       return knex.raw(`INSERT INTO beer_ingredients VALUES (DEFAULT, ${beerid}, ${matches.rows[0].id}, ${curr.amount})`).then(function(){
         return (ingredients.length>0)? module.exports.createBeerIngredients(ingredients, beerid) : Promise.resolve(true);

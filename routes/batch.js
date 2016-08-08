@@ -114,7 +114,7 @@ router.get('/delete/:id', function(req,res,next){
         Queries_batch.deleteBatch(req.params.id).then(function(){
           res.redirect('/')
         })
-      })   
+      })
     })
   })
 })
@@ -129,6 +129,8 @@ router.post('/submit/:beerid/:batchid', function(req, res, next){
   var ingredients2=[];
   if(Array.isArray(req.body.ingredientName)){
     for(var i=0; i<req.body.ingredientName.length; i++){
+      if(req.body.ingredientName[i]!='')
+      {
       ingredients.push({
         name:req.body.ingredientName[i],
         type:req.body.ingredientType[i],
@@ -140,9 +142,11 @@ router.post('/submit/:beerid/:batchid', function(req, res, next){
         units:req.body.ingredientUnits[i],
         amount:req.body.ingredientAmount[i],
       })
+      }
     }
   }
   else{
+    if(req.body.ingredientName!=''){
     ingredients.push({
       name:req.body.ingredientName,
       type:req.body.ingredientType,
@@ -154,6 +158,7 @@ router.post('/submit/:beerid/:batchid', function(req, res, next){
       units:req.body.ingredientUnits,
       amount:req.body.ingredientAmount,
     })
+    }
   }
   var notesOut=[]
   if(Array.isArray(req.body.notes)){
@@ -179,7 +184,14 @@ router.post('/submit/:beerid/:batchid', function(req, res, next){
   else{
     notesOut.push(req.body.notes)
   }
-
+  if(ingredients.length===0){
+    Queries_batch.addManyNotes(req.session.id, req.params.beerid, notesOut).then(function(){
+      Queries_batch.addSteps(stepsOut, req.params.batchid).then(function(){
+        res.redirect('/batch/'+req.params.batchid)
+      })
+    })
+  }
+  else{
   Ing.createIfMissing(ingredients).then(function(){
     console.log("here");
     Ing.createBeerIngredients(ingredients2, req.params.beerid).then(function(result){
@@ -191,6 +203,7 @@ router.post('/submit/:beerid/:batchid', function(req, res, next){
       })
     })
   })
+  }
 })
 router.post('/create/beer/:beerid', function(req,res,next){
   Beer.copyRecipie(req.params.beerid, req.session.id).then(function(){
