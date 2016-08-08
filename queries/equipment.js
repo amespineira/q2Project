@@ -18,5 +18,8 @@ module.exports={
   },
   getBatchEquipment: function(batchId){
     return knex.raw(`SELECT equipment_name FROM equipment WHERE batch_id=${batchId}`);
+  },
+  removeFromBatch: function(batchId){
+    return knex.raw(`UPDATE equipment SET batch_id=null WHERE batch_id=${batchId}`)
   }
 }

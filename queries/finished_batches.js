@@ -14,7 +14,8 @@ module.exports = {
     updateFinishedBatches: function(finishedBatch){
         return knex.raw(`INSERT INTO finished_batches VALUES (DEFAULT, '${finishedBatch.beer_name}', ${finishedBatch.user_id}, ${finishedBatch.batch_id}, '${finishedBatch.taste}', '${finishedBatch.aftertaste}', '${finishedBatch.appearance}', '${finishedBatch.smell}', '${finishedBatch.mouth_feel}', '${finishedBatch.drinkability}')`)
     },
-
-
+    deleteBatch:function(batchId){
+      return knex.raw(`DELETE FROM finished_batches WHERE batch_id=${batchId}`)
+    }
 
 }

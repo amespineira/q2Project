@@ -5,6 +5,8 @@ var Queries_batch = require('../queries/batch');
 var Beer = require('../queries/beer')
 var Ing=require('../queries/ingredients.js')
 var Equip=require('../queries/equipment.js')
+var Finished=require('../queries/finished_batches')
+var Notes=require('../queries/brewer_notes')
 function Batch(){
 return knex('batch');
 }
@@ -105,7 +107,17 @@ router.get('/create/:id', function(req, res, next){
   })
 })
 
-
+router.get('/delete/:id', function(req,res,next){
+  Equip.removeFromBatch(req.params.id).then(function(){
+    Finished.deleteBatch(req.params.id).then(function(){
+      Queries_batch.deleteSteps(req.params.id).then(function(){
+        Queries_batch.deleteBatch(req.params.id).then(function(){
+          res.redirect('/')
+        })
+      })   
+    })
+  })
+})
 
 
 router.post('/submit/:beerid/:batchid', function(req, res, next){
