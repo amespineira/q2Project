@@ -34,6 +34,7 @@ module.exports = {
   batchInfo: function(id){
     return knex.raw(`SELECT * from batch where id = ${id};`)
   },
+<<<<<<< HEAD
   allStages: function(){
     return knex.raw(`SELECT * FROM batch`)
   },
@@ -60,6 +61,13 @@ module.exports = {
   },
   beerName: function(batch){
     return knex.raw(`SELECT beer.id AS beer_id, beer.beer_name AS beer_name from beer join batch on batch.beer_id = beer.id where batch.id = ${batch};`)
+=======
+  addSteps: function(steps, batchid){
+    var curr=steps.pop()
+    return knex.raw(`INSERT INTO steps VALUES (DEFAULT, ${curr.stage}, '${curr.name}', '${curr.notes}', ${batchid}, false, ${curr.step_order})`).then(function(){
+        return (steps.length>0)? module.exports.addSteps(steps, batchid) : Promise.resolve(true);
+    })
+>>>>>>> stepValidation
   }
 }
 
