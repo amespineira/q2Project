@@ -1,3 +1,5 @@
-var promise= new Promise( function(resolve, reject){
-  
+var bcrypt=require('bcrypt')
+var password="test"
+bcrypt.hash(password, 10, function(err, hash) {
+  console.log(hash);
 })
